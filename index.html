@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mayi.-oi web!</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="Res/Font/Font.css">
+    <link rel="icon" href="Res/Bild/Logo/Haupt-logo.png">
+</head>
+<body>
+    <div class="Navdiv"> 
+        <button class="nav-toggle" onclick="toggleNav()" aria-label="Menü">☰</button>
+        <nav>
+            <ul id="nav-menu">
+                <li><a onclick="document.getElementById('Haupt').scrollIntoView({behavior: 'smooth'})">Startseite</a></li>
+                <li><a onclick="document.getElementById('Über').scrollIntoView({behavior: 'smooth'})">Über mir!</a></li>
+                <li><a onclick="document.getElementById('Projekt').scrollIntoView({behavior: 'smooth'})">Projekte</a></li>
+                <li><a onclick="document.getElementById('Kontakt').scrollIntoView({behavior: 'smooth'})">Le contact</a></li>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Source code</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="version">
+        <h2>Mayi.-Web!</h2>
+        <p>Version: 1.10</p>
+    </div>
+    <div class="Hauptdiv" id="Haupt">
+        <div class="Main-banner">
+            <img src="https://pancake-web-eight.vercel.app/res/Img/Hinterground/Hintergrund-Hell.png" alt="Banner">
+        </div>
+        <div class="pfp">
+            <img src="https://github.com/mayi-oi.png" alt="Profilbild">
+        </div>
+        <div class="Haupt-text">
+            <h2>Mayi.-oi</h2>
+            <p>Ein "Anfänger" Web Entwickler oder Web desinger seit 2024 lol</p>
+        </div>
+        
+        <div class="Skills" id="Über">
+            <h3>Coolen Skills</h3>
+            <p>Html und Css, Bisschen auf Java Script und Das was lol</p>
+        </div>
+        <br>
+        
+        <div class="Über">
+            <h2>Über mir!</h2>
+            <div class="Über-text">
+                <p>Hallo leute ich bin ein totally selbst lernt "Anfänger" Web Entwickler oder ein Web desinger. Ich mache random Projekt für kein ground.
+                    <br> und manchmal ich veröfftenlich auf Vercel app oder Netlify app als Open source!
+                </p>
+                <h3 style="line-height: 0; text-decoration: underline;">Was kann ich machen?</h3>
+                <p>Simple und einfache design.
+                    <br> Gutes performance.
+                    <br> Ok Java Script kenntniss (für kurze script).
+                    <br> Längere stunden (b.z 4 oder 6)
+                </p>
+                <br>
+                <h3 style="line-height: 0; text-decoration: underline;">Was kann ich nicht machen?</h3>
+                <p>Schlecht auf Moblien freundlich. (sorry)
+                    <br> Längere Java Script.
+                    <br> Nicht vielen aktiv lol
+                </p>
+                <br>
+                <h3 style="line-height: 0; text-decoration: underline;">Specs</h3>
+                <p>Gerät: Lenovo Ideapad 3 Chromebook
+                    <br> Betriebstystem: Fedora: Nobara und ChomeOS (duel booting)
+                    <br> Speicher: 128Gb emmc (So sad)
+                    <br> Extra Speicher: 256Gb sd card
+                    <br> Ram: 8Gb Lppddr4
+                </p>
+            </div>
+        </div>
+        <br>
+        
+        <div class="Projekt" id="Projekt">
+            <h2>Meine Projekte</h2>
+            <p>Hier sind meine ganze Projekt habe ich gearbeitet manchmal sind Fertig oder nicht lol.</p>
+            <div class="Projekt-text">
+                <div class="Projekt-box">
+                    <div class="Tags">
+                        <p class="aktiv">Sie sind hier!</p>
+                        <p class="sontig">Redsign!</p>
+                        <p class="Webbing">Website</p>
+                    </div>
+                    <h2>Persönlich web</h2>
+                    <p>Meine coolen persönlich web (jetzt nutzt als Portfolio lol) ist ein Simple und Einfach design.</p>
+                    <button class="Besuchen-off">Sie schon da!</button>
+                    <button class="source-code">source code ansehen!</button>
+                </div>
+
+                <div class="Projekt-box">
+                    <div class="Tags">
+                        <p class="sontig">Klassic</p>
+                        <p class="Webbing">Website</p>
+                    </div>
+                    <h2>Persönlich web [Klassic]</h2>
+                    <p>Das ist ein Klassic web vorher v1.10 und sind fast gleich den Redsign lol</p>
+                    <button class="Besuchen" onclick="window.location.href='https://pancake-web-eight.vercel.app/index.html'">Website besuchen!</button>
+                    <button class="source-code" onclick="window.location.href='https://github.com/mayi-oi/pancake-web'">source code ansehen!</button>
+                </div>
+
+                <div class="Projekt-box">
+                    <div class="Tags">
+                        <p class="sontig">Portfolio</p>
+                        <p class="Webbing">Website</p>
+                    </div>
+                    <h2>Waffle Portfolio</h2>
+                    <p>Simple und Scrollen....</p>
+                    <button class="Besuchen" onclick="window.location.href='https://waffle-portfolio.vercel.app/'">Website besuchen!</button>
+                    <button class="source-code" onclick="window.location.href='https://github.com/mayi-oi/waffle-Portfolio'">source code ansehen!</button>
+                </div>
+
+                <div class="Projekt-box">
+                    <div class="Tags">
+                        <p class="sontig">osu! skin</p>
+                        <p class="Webbing">Website</p>
+                    </div>
+                    <h2>untitled skin</h2>
+                    <p>Ist ein osu!droid und osu! skin Projekt und sind open source!</p>
+                    <button class="Besuchen" onclick="window.location.href='https://untitled-skin.netlify.app/'">Website besuchen!</button>
+                    <button class="source-code" onclick="window.location.href='https://github.com/mayi-oi/untitled.skin-Bleached-'">source code ansehen!</button>
+                </div>
+
+                <div class="Projekt-box">
+                    <div class="Tags">
+                        <p class="sontig-demo">Demo</p>
+                        <p class="Webbing">Preview</p>
+                    </div>
+                    <h2>Phishing Simulation</h2>
+                    <p>Ein Phishing Simulation für mein Präsentation!</p>
+                    <button class="Besuchen">Preview besuchen!</button>
+                    <button class="source-code" onclick="window.location.href='https://github.com/mayi-oi/bad-apple-oi'">source code ansehen!</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        
+        <div class="Side-Projekt">
+            <h2>Side quest projekt</h2>
+            <p>Sehr random projekt ich habe nie dadacht haben lol</p>
+            <div class="Side-Projekt-farbe">
+                <div class="Side-Projekt-box">
+                    <div class="Tags">
+                        <p class="sontig">Redsigning...</p>
+                        <p class="Webbing">Website</p>
+                    </div>
+                    <h2>Ev-sekundarschule: Remaped</h2>
+                    <p>Yep ist ein Remaped projekt für den Website verbessert und erm... modern und den Demo sind Herunterladen!</p>
+                    <button class="source-code" onclick="window.location.href='https://github.com/mayi-oi/Cause-3/releases/download/demo/Cause.3.zip'">Demo Herunterladen!</button>
+                </div>
+
+                <div class="Side-Projekt-box">
+                    <div class="Tags">
+                        <p class="sontig">Lokal Ki</p>
+                        <p class="Webbing">Website und App</p>
+                    </div>
+                    <h2>Phero-ki</h2>
+                    <p>Bla Bla ki kram aber ist lokal und Privat</p>
+                    <button class="Besuchen" onclick="window.location.href='https://ubiquitous-spoon-two.vercel.app/'">Website besuchen!</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        
+        <div class="Le-contact" id="Kontakt">
+            <h2>Le contact</h2>
+            <p>Bereits zur yapping? lass uns chatten! :D</p>
+            <div class="Projekt-text">
+                <div class="Le-contact-box">
+                    <form action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="ad83f555-0cef-4f23-b4e3-93bffe12f4ee">
+                        
+                        <label for="Name">Name</label>
+                        <input type="text" name="Name" placeholder="Deine name..." required autocomplete="name">
+                        
+                        <label for="mail">E-mail</label>
+                        <input type="text" name="mail" placeholder="Deine E-mail..." required>
+                        
+                        <label for="thema">Subject</label>
+                        <textarea id="thema" name="Subject" placeholder="Schreibt deine Fragen..." style="height: 100px;" required></textarea>
+                        
+                        <input type="hidden" name="redirect" value="https://waffle-portfolio.vercel.app/Danke.html">
+                        <input type="submit" value="Frage senden!">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    function toggleNav() {
+        document.getElementById('nav-menu').classList.toggle('show');
+    }
+    document.addEventListener('click', function(e) {
+        const nav = document.querySelector('.Navdiv');
+        if (!nav.contains(e.target)) {
+            document.getElementById('nav-menu').classList.remove('show');
+        }
+    });
+</script>
+</body>
+</html>
