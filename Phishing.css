@@ -1,0 +1,204 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    background-image: url(Res/Bild/Hinterground/livia-z7PAkCMyOFg-unsplash.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.Navdiv {
+    top: 0;
+    left: 0;
+    width: 100%;
+    position: fixed;
+    padding: 50px 16px 16px;
+    background-image: linear-gradient(to bottom, #0000004a, transparent);
+    cursor: default;
+    font-family: Google-sans;
+    z-index: 1008;
+}
+
+.Nav-toggle {
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 16px;
+    padding: 8px 14px;
+    font-family: Google-sans;
+    color: #ffffff40;
+    font-size: 1.7rem;
+    background-color: transparent;
+    border-radius: 14px;
+    border: none;
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.Nav-toggle:hover {
+    transform: scale(1.04);
+    color: #a15070;
+    background-color: #ff819c;
+    box-shadow: 0 0 0 2px #96425e;
+}
+
+.Navdiv ul.show {
+    display: flex;
+}
+
+.Navdiv ul {
+    display: none;
+    position: absolute;
+    list-style: none;
+    width: calc(50% - 32px);
+    flex-direction: column;
+    top: 60px;
+    left: 16px;
+    margin: 0;
+    gap: 4px;
+    padding: 12px;
+    box-shadow: 0 4px 12px #00000053;
+    border-radius: 12px;
+    backdrop-filter: blur(18px);
+    background-color: #ffd2e3b5;
+    z-index: 1000;
+    transition: all 0.45s ease;
+}
+
+.Navdiv ul:hover {
+    transition: all 0.25s ease;
+    background-color: #ffd2e4e1;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 28px #894c65ad;
+}
+
+.Navdiv li {
+    width: 100%;
+}
+
+.Navdiv li a {
+    display: block;
+    width: 69%;
+    padding: 14px;
+    border-radius: 10px;
+    color: #834760;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+
+.Navdiv li a:hover{
+    padding: 14px 20px;
+    background-color: #834764;
+    color: #ffdbe9;
+    text-decoration: underline;
+}
+
+.Hauptdiv {
+    width: 80%;
+    color: #ffffff;
+    font-family: Google-sans;
+    cursor: default;
+}
+
+.Phishing {
+    line-height: 0;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    height: 200px;
+}
+
+.Phishing img {
+    width: 12.8rem;
+}
+
+.Phishing h2 {
+    font-size: 2.4rem;
+}
+
+.Phishing a {
+    color: #ffffff;
+}
+
+.a-form {
+    padding: 32px;
+    border-radius: 18px;
+    border: solid 2px #916070;
+    background-color: #ffadc4;
+    font-size: 1rem;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    margin: 10px 0 24px;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-family: Google-sans;
+}
+
+.submit {
+    width: 100%;
+    padding: 14px;
+    background-color: transparent;
+    border: solid 2px #96425e;
+    border-radius: 12px;
+    color: #774252;
+    font-family: Google-sans;
+    font-size: 1rem;
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.submit:hover {
+    background-color: #96425e;
+    color: #ff819c;
+}
+
+.Fake-datebase {
+    display: none;
+    margin-top: 18px;
+    padding: 18px;
+    border-radius: 14px;
+    background-color: #000000b8;
+}
+
+.Fake-datebase button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    font-family: Jetbrains-mono;
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.Fake-datebase button:hover {
+    color: #ffffff;
+    box-shadow: 0 0 0 2px #ffffff;
+    background-color: #000000;
+}
+
+.Fake-datebase p {
+    padding: 24px;
+    border-radius: 8px;
+    background-color: #ffffff61;
+}
+
+@media (max-width: 768px) {
+    .Phishing {
+        line-height: 1;
+        width: 95%;
+    }
+}

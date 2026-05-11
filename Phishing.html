@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mayi.-oi web!</title>
+        <link rel="stylesheet" href="Phishing.css">
+        <link rel="stylesheet" href="Res/Font/Font.css">
+        <link rel="icon" href="Res/Bild/Logo/Haupt-logo.png">
+    </head>
+    <body>
+        <div class="Navdiv">
+            <button class="Nav-toggle" onclick="toggleNav()" aria-label="Menü">☰ </button>
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="index.html">Ich gehe Zuhause! ᕕ( ᐕ )ᕗ</a></li>
+                    <li><a>Source code （・□・；）</a></li>
+                    <li><a style="cursor: default;">Das ist nur ein Simulation demo! (ദ്ദി˙ᗜ˙)</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="Hauptdiv">
+            <div class="Phishing">
+                <!-- <img src="Res/Bild/Logo/pfp-weiß.png" alt="Cool Logo"> -->
+                <h2>Hey willkommen zurück! :D</h2>
+                <p>Hinterground vom: <a href="https://unsplash.com/de/fotos/der-mond-geht-uber-schneebedeckten-berggipfeln-auf-z7PAkCMyOFg">livia</a></p>
+                <div class="anmelden-form">
+                    <form onsubmit="event.preventDefault(); showFakeDB();">
+                        <div class="a-form">
+                            <label for="username">Nutzername</label>
+                            <input type="text" id="username" placeholder="Jason_3224" required minlength="7">
+
+                            <label for="Passwort">Passwort</label>
+                            <input type="password" id="passwort" placeholder="Johndoe@.net" required minlength="4">
+                            <button class="submit" type="submit">Einloggen jetzt!</button>
+                        </div>
+                    </form>
+                </div>
+                <br>
+                <div class="Fake-datebase" id="Fake-datebase">
+                    <h3>Goofball Nuter daten 9000 lol</h3>
+                    <p>Zeit: <span id="Hackzeit"></span></p>
+                    <p>Nutzername: <span id="user"></span></p>
+                    <p>Passwort: <span id="Passwort"></span></p>
+
+                    <button onclick="closeFakeDB()">ok lol</button>
+                </div>
+            </div>
+        </div>
+    <script>
+        function toggleNav() {
+            document.getElementById('nav-menu').classList.toggle('show');
+        }
+        document.addEventListener('click', function(e) {
+            const nav = document.querySelector('.Navdiv');
+            if (!nav.contains(e.target)) {
+                document.getElementById('nav-menu').classList.remove('show');
+            }
+        });
+
+         function showFakeDB() {
+            const user = document.getElementById('username').value;
+            const password = document.getElementById('passwort').value;
+
+            document.getElementById('Hackzeit').innerText = new Date().toLocaleString();
+            document.getElementById('user').innerText = user;
+            document.getElementById('Passwort').innerText = password;
+            document.getElementById('Fake-datebase').style.display = 'block';
+        }
+
+        function closeFakeDB() {
+            document.getElementById('Fake-datebase').style.display = 'none';
+        }
+    </script>
+    </body>
+</html>
