@@ -23,7 +23,8 @@
     </div>
     <div class="version">
         <h2>Mayi.-Web!</h2>
-        <p>Version: 1.15a</p>
+        <p>Version: 1.16</p>
+        <p>Läuf seit: <label id="Stunden">0</label> <label id="colon">:</label> <label id="minute">00</label> <label id="colon">:</label> <label id="sekunden">00</label></p>
     </div>
     <div class="Hauptdiv" id="Haupt">
         <div class="Main-banner">
@@ -57,10 +58,10 @@
                 </p>
                 <br>
                 <h3>Was kann ich nicht machen?</h3>
-                <p>Schlecht auf Moblien freundlich. (sorry)
+                <p>Schlecht auf Moblien freundlich. (sorry).
                     <br> Längere Java Script.
-                    <br> Nicht wirklich aktiv lol.
-                    <br> Vielen rechtschreibtfehler.
+                    <br> Nicht wirklich aktiv.
+                    <br> Vielen rechtschreibtfehler lol.
                 </p>
                 <br>
                 <h3>Specs</h3>
@@ -88,7 +89,7 @@
                     <h2>Persönlich web</h2>
                     <p>Meine coolen persönlich web (jetzt nutzt als Portfolio lol) ist ein Simple und Einfach design.</p>
                     <button class="Besuchen-off">Du bist schon da!</button>
-                    <button class="source-code">source code ansehen!</button>
+                    <button class="source-code" onclick="window.location.href='https://github.com/mayi-oi/Pfandkuchen'">source code ansehen!</button>
                 </div>
 
                 <div class="Projekt-box">
@@ -191,6 +192,33 @@
     </div>
 
 <script>
+    var hourLabel = document.getElementById("Stunden");
+    var minutesLabel = document.getElementById("minute");
+    var secondsLabel = document.getElementById("sekunden");
+    var totalSeconds = 0;
+    setInterval(setTime, 1000);
+
+    function setTime()
+        {
+            ++totalSeconds;
+            secondsLabel.innerHTML = pad(totalSeconds%60);
+            minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
+        }
+
+        function pad(val)
+        {
+            var valString = val + "";
+            if(valString.length < 2)
+            {
+                return "0" + valString;
+            }
+            else
+            {
+                return valString;
+            }
+        }
+
+    // Navtoggle dinge lol
     function toggleNav() {
         document.getElementById('nav-menu').classList.toggle('show');
     }

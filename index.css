@@ -269,12 +269,13 @@ body {
     font-family: Google-sans;
     text-align: right;
     line-height: 0;
-    transition: all 0.25s ease;
+    transition: all 0.38s ease;
     cursor: default;
     z-index: 1005;
 }
 
 .version:hover {
+    transition: all 0.14s ease;
     opacity: 1;
 }
 
