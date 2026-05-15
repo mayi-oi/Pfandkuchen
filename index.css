@@ -284,6 +284,11 @@ body {
     font-family: Jetbrains-mono;
 }
 
+.version label {
+    font-weight: 600;
+    font-family: Google-sans;
+}
+
 .Tags {
     display: flex;
     gap: 8px;
@@ -501,7 +506,7 @@ body {
 
 .Projekt-box:hover, .Side-Projekt-box:hover {
     transform: scale(1.01);
-    box-shadow: 0 0 0 3px var(--accent-hover);
+    box-shadow: 0 0 28px 0 var(--accent-hover);
 }
 
 .Projekt-box h2, .Side-Projekt-box h2, .Le-contact-box h2 {
@@ -640,6 +645,10 @@ label {
 
     .Haupt-text p, .Skills p, .Projekt p, .Side-Projekt p, .Le-contact p {
         line-height: 1.3;
+    }
+
+    .Projekt-box:hover, .Side-Projekt-box:hover {
+        transform: scale(1.02);
     }
 
     .Side-Projekt h2, .Le-contact-box h2, .Projekt-box h2 {
