@@ -23,7 +23,7 @@
     </div>
     <div class="version">
         <h2>Mayi.-Web!</h2>
-        <p>Version: 1.16</p>
+        <p>Version: 1.16a</p>
         <p>Läuf seit: <label id="Stunden">0</label> <label id="colon">:</label> <label id="minute">00</label> <label id="colon">:</label> <label id="sekunden">00</label></p>
     </div>
     <div class="Hauptdiv" id="Haupt">
@@ -47,6 +47,7 @@
         <div class="Über">
             <h2>Über mich!</h2>
             <div class="Über-text">
+                <p>Mein Zeitzone: <label class="clock" timezone="+2"></label></p>
                 <p>Hallo leute ich bin ein totally selbst lernt "Anfänger" Web Entwickler oder ein Web desinger. Ich mache random Projekt für kein ground.
                     <br> und manchmal ich veröfftenlich auf Vercel app oder Netlify app als Open source!
                 </p>
@@ -192,6 +193,43 @@
     </div>
 
 <script>
+    // Zeitzone
+    function dateToText(date) {
+    var hours = date.getHours()
+    var minutes = date.getMinutes();
+    if (minutes < 10) minutes = '0'+minutes;
+    if (hours < 10) hours = '0'+hours;
+    return hours + ":" + minutes; // + ":" + seconds;
+}
+    function updateClocks() {
+        for (var i = 0; i < window.arrClocks.length; i++) {
+            var clock = window.arrClocks[i];
+            var offset = window.arrOffsets[i];
+            clock.innerHTML = dateToText(new Date(new Date().getTime()+offset));
+        }
+    }
+    function startClocks() {
+        clockElements = document.getElementsByClassName('clock');
+        window.arrClocks = []
+        window.arrOffsets = [];
+        var j = 0;
+        for(var i = 0; i < clockElements.length; i++) {
+            el = clockElements[i];
+            timezone = parseInt(el.getAttribute('timezone'));
+            if (!isNaN(timezone)) {
+                var tzDifference = timezone * 60 + (new Date()).getTimezoneOffset();
+                var offset = tzDifference * 60 * 1000;
+                window.arrClocks.push(el);
+                window.arrOffsets.push(offset);
+            }
+        }
+        updateClocks();
+        clockID = setInterval(updateClocks, 1000);
+    }
+    setTimeout(startClocks, 100);
+
+
+    // Laüf zeit
     var hourLabel = document.getElementById("Stunden");
     var minutesLabel = document.getElementById("minute");
     var secondsLabel = document.getElementById("sekunden");
