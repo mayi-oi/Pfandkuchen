@@ -28,15 +28,15 @@
     
     --version-farbe: #000000;
 
-    --tag-aktiv-bg: #5a9e5f;
+    --tag-aktiv-bg: #166534;
     --tag-aktiv-text: #ffffff;
-    
+        
     --tag-sontig-bg: #0ea5e9;
     --tag-sontig-text: #ffffff;
-    
-    --tag-demo-bg: #ea580c;
+        
+    --tag-demo-bg: #c2410c;
     --tag-demo-text: #ffffff;
-    
+        
     --tag-webbing-bg: #64748b;
     --tag-webbing-text: #ffffff;
     
@@ -62,8 +62,10 @@
     --bg-submit-hover: #4B6275;
     --text-submit-hover: #82b8fb;
 
+    --transition-super-fast: all 0.1s ease;
     --transition-fast: all 0.2s ease;
     --transition-medium: all 0.32s ease;
+    --transition-slow: all 0.42s ease;
 }
 
 /* Automatisch Dark Mode wenn System auf Dunkel steht */
@@ -155,7 +157,7 @@
     --version-farbe: #ffffff;
 
    --tag-aktiv-bg: #166534;
-    --tag-aktiv-text: #ffffff;
+   --tag-aktiv-text: #ffffff;
     
     --tag-sontig-bg: #0ea5e9;
     --tag-sontig-text: #ffffff;
@@ -317,7 +319,7 @@ body {
     padding: 8px 16px;
     border-radius: 14px;
     background-color: var(--tag-demo-bg);
-    color: var(--tag-demo-text);
+    color: var(--tag-sontig-text);
     font-size: 0.85rem;
     transition: var(--transition-fast);
 }
@@ -495,7 +497,7 @@ body {
     transition: background-color 0.4s ease;
 }
 
-.Projekt-box, .Side-Projekt-box, .Le-contact-box {
+.Projekt-box, .Side-Projekt-box, .Le-contact-box, .Zeitzone-box {
     margin-bottom: 18px;
     padding: 18px;
     box-shadow: 0 0 0 2.5px var(--box-shadow);
@@ -504,9 +506,10 @@ body {
     background-color: var(--bg-body);
 }
 
-.Projekt-box:hover, .Side-Projekt-box:hover {
+.Projekt-box:hover, .Side-Projekt-box:hover, .Zeitzone-box:hover, .Le-contact-box:hover {
     transform: scale(1.01);
     box-shadow: 0 0 28px 0 var(--accent-hover);
+    transition: var(--transition-fast);
 }
 
 .Projekt-box h2, .Side-Projekt-box h2, .Le-contact-box h2 {

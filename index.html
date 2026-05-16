@@ -23,7 +23,7 @@
     </div>
     <div class="version">
         <h2>Mayi.-Web!</h2>
-        <p>Version: 1.16a</p>
+        <p>Version: 1.16b</p>
         <p>Läuf seit: <label id="Stunden">0</label> <label id="colon">:</label> <label id="minute">00</label> <label id="colon">:</label> <label id="sekunden">00</label></p>
     </div>
     <div class="Hauptdiv" id="Haupt">
@@ -47,7 +47,10 @@
         <div class="Über">
             <h2>Über mich!</h2>
             <div class="Über-text">
-                <p>Mein Zeitzone: <label class="clock" timezone="+2"></label></p>
+                <div class="Zeitzone-box">
+                    <h3>Mein coole Zeitzone!</h3>
+                    <p>Europa / Deutschland: <label class="clock" timezone="+2"></label></p>
+                </div>
                 <p>Hallo leute ich bin ein totally selbst lernt "Anfänger" Web Entwickler oder ein Web desinger. Ich mache random Projekt für kein ground.
                     <br> und manchmal ich veröfftenlich auf Vercel app oder Netlify app als Open source!
                 </p>
@@ -163,6 +166,16 @@
                     <p>Bla Bla ki kram aber ist lokal und Privat</p>
                     <button class="Besuchen" onclick="window.location.href='https://ubiquitous-spoon-two.vercel.app/'">Website besuchen!</button>
                 </div>
+
+                <div class="Side-Projekt-box">
+                    <div class="Tags">
+                        <p class="sontig">osu!droid</p>
+                        <p class="Webbing">Website</p>
+                    </div>
+                    <h2>osu!droid website remake</h2>
+                    <p>Yep du hörst richtig ich mache ein remake projekt für osu!droid web!</p>
+                    <!-- <button class="Besuchen" onclick="window.location.href='https://ubiquitous-spoon-two.vercel.app/'">Website besuchen!</button> -->
+                </div>
             </div>
         </div>
         <br>
@@ -182,7 +195,7 @@
                         <input type="text" name="mail" placeholder="Deine E-mail..." required>
                         
                         <label for="thema">Subject</label>
-                        <textarea id="thema" name="Subject" placeholder="Schreibt deine Fragen..." style="height: 100px;" required></textarea>
+                        <textarea id="thema" name="Subject" placeholder="Schreibt deine Fragen..." style="height: 120px;" required></textarea>
                         
                         <input type="hidden" name="redirect" value="https://waffle-portfolio.vercel.app/Danke.html">
                         <input type="submit" value="Frage senden!">
