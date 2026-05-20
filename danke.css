@@ -1,0 +1,48 @@
+body {
+    background-color: #d1e9ff;
+}
+
+.danke-div {
+    margin: auto;
+    width: 80%;
+    color: #5e7d99;
+    font-size: 1.3rem;
+    font-family: Google-sans;
+    line-height: 0.7;
+    text-align: center;
+    cursor: default;
+}
+
+.danke-div img {
+    width: 100px;
+}
+
+.danke-div button {
+    padding: 15px 18px;
+    background-color: transparent;
+    border-radius: 14px;
+    box-shadow: 0 0 80px #5e7d9900;
+    border: solid 2px #5e7d99;
+    color: #5e7d99;
+    font-size: 1rem;
+    font-family: Google-sans;
+    cursor: pointer;
+    transition: all 0.28s ease;
+}
+
+.danke-div button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #5e7d99;
+    background-color: #5e7d99;
+    color: #d1e9ff;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .danke-div {
+        padding: 20px;
+        width: 97%;
+        font-size: 1rem;
+        line-height: 1;
+    }
+}
