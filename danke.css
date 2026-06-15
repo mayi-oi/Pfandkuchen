@@ -3,6 +3,7 @@ body {
 }
 
 .danke-div {
+    padding: 340px 0 0 0;
     margin: auto;
     width: 80%;
     color: #5e7d99;
@@ -15,6 +16,19 @@ body {
 
 .danke-div img {
     width: 100px;
+    animation-name: drehen;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes drehen {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .danke-div button {
@@ -40,7 +54,7 @@ body {
 
 @media (max-width: 768px) {
     .danke-div {
-        padding: 20px;
+        padding: 20px 0;
         width: 97%;
         font-size: 1rem;
         line-height: 1;

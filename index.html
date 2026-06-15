@@ -1,284 +1,1133 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+    <title>Mayi.-oi web!</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mayi.-oi web!</title>
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="Res/Font/Font.css">
     <link rel="icon" href="Res/Bild/Logo/Haupt-logo.png">
+    <style>
+        #randomTitle {
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            display: inline-block;
+        }
+        #randomTitle.title-fade-out {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+    </style>
+<base target="_blank">
 </head>
+
 <body>
     <div class="Navdiv"> 
-        <button class="nav-toggle" onclick="toggleNav()" aria-label="Menü">☰</button>
+        <button class="Musik-toggle" onclick="toggleMusik()" aria-label="Musik"><img src="Res/Bild/Icon/music_note_2_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></button>
+        <button class="Nav-toggle" onclick="toggleNav()" aria-label="Menü">☰</button>
         <nav>
             <ul id="nav-menu">
-                <li><a onclick="document.getElementById('Haupt').scrollIntoView({behavior: 'smooth'})">Startseite</a></li>
-                <li><a onclick="document.getElementById('Über').scrollIntoView({behavior: 'smooth'})">Über mich!</a></li>
-                <li><a onclick="document.getElementById('Projekt').scrollIntoView({behavior: 'smooth'})">Projekte</a></li>
+                <li><a onclick="document.getElementById('haupttitle').scrollIntoView({behavior: 'smooth'})">Startseite</a></li>
+                <li><a onclick="document.getElementById('Über-sehen').scrollIntoView({behavior: 'smooth'})">Über mich!</a></li>
+                <li><a onclick="document.getElementById('social-sehen').scrollIntoView({behavior: 'smooth'})">Social media!</a></li>
+                <li><a onclick="document.getElementById('Projekt-sehen').scrollIntoView({behavior: 'smooth'})">Projekte</a></li>
                 <li><a onclick="document.getElementById('Kontakt').scrollIntoView({behavior: 'smooth'})">Le contact</a></li>
-                <li><a href="https://github.com/mayi-oi/Pfandkuchen" target="_blank">Source code</a></li>
+                <li><a data-external="https://github.com/mayi-oi/Pfandkuchen">Source code</a></li>
             </ul>
         </nav>
     </div>
-    <div class="version">
-        <h2>Mayi.-Web!</h2>
-        <p>Version: 1.16d</p>
-        <p>Läuf seit: <label id="Stunden">0</label> <label id="colon">:</label> <label id="minute">00</label> <label id="colon">:</label> <label id="sekunden">00</label></p>
-    </div>
-    <div class="Hauptdiv" id="Haupt">
-        <div class="Main-banner">
-            <img src="Res/Bild/Hinterground/Hintergrund-Hell.png" alt="Banner">
-        </div>
-        <div class="pfp">
-            <img src="https://github.com/mayi-oi.png" alt="Profilbild">
-        </div>
-        <div class="Haupt-text">
-            <h2>Mayi.-oi</h2>
-            <p>Ein "Anfänger" Web Entwickler oder Web desinger seit 2024 lol</p>
-        </div>
-        
-        <div class="Skills" id="Über">
-            <h3>Coolen Skills</h3>
-            <p>Html und Css, Bisschen auf Java Script und Das was lol</p>
-        </div>
-        <br>
-        
-        <div class="Über">
-            <h2>Über mich!</h2>
-            <div class="Über-text">
-                <div class="Zeitzone-box">
-                    <h3>Mein coole Zeitzone!</h3>
-                    <p>Europa / Deutschland: <label class="clock" timezone="+2"></label></p>
-                </div>
-                <p>Hallo leute ich bin ein totally selbst lernt "Anfänger" Web Entwickler oder ein Web desinger. Ich mache random Projekt für kein ground.
-                    <br> und manchmal ich veröfftenlich auf Vercel app oder Netlify app als Open source!
-                </p>
-                <h3>Was kann ich machen?</h3>
-                <p>Simple und einfache design.
-                    <br> Gutes performance.
-                    <br> Ok Java Script kenntniss (für kurze script).
-                    <br> Längere stunden (b.z 2 oder 4).
-                </p>
-                <br>
-                <h3>Was kann ich nicht machen?</h3>
-                <p>Schlecht auf Moblien freundlich. (sorry).
-                    <br> Längere Java Script.
-                    <br> Nicht wirklich aktiv.
-                    <br> Vielen rechtschreibtfehler lol.
-                </p>
-                <br>
-                <h3>Specs</h3>
-                <p>Gerät: Lenovo Ideapad 3 Chromebook
-                    <br> Betriebstystem: Fedora: Nobara und ChomeOS (duel booting)
-                    <br> Prozessor: Intel celerlon N4500
-                    <br> Speicher: 128Gb emmc (So sad)
-                    <br> Extra Speicher: 256Gb sd card
-                    <br id="Projekt"> Ram: 8Gb Lppddr4
-                </p>
+
+
+    <!-- Musik player overlay -->
+    <div id="musikOverlay" class="musik-overlay">
+        <div class="musik-content">
+            <div class="musik-header">
+                <h2><u>Musik Player</u></h2>
+                <button class="musik-close" onclick="toggleMusik()">✕</button>
             </div>
-        </div>
-        <br>
-        
-        <div class="Projekt" >
-            <h2>Meine Projekte</h2>
-            <p>Hier sind meine ganze Projekt habe ich gearbeitet manchmal sind Fertig oder nicht lol.</p>
-            <div class="Projekt-text">
-                <div class="Projekt-box">
-                    <div class="Tags">
-                        <p class="aktiv">Sie sind hier!</p>
-                        <p class="sontig">Redsign!</p>
-                        <p class="Webbing">Website</p>
-                    </div>
-                    <h2>Persönlich web</h2>
-                    <p>Meine coolen persönlich web (jetzt nutzt als Portfolio lol) ist ein Simple und Einfach design.</p>
-                    <button class="Besuchen-off">Du bist schon da!</button>
-                    <button class="source-code" onclick="window.open('https://github.com/mayi-oi/Pfandkuchen', '_blank')">source code ansehen!</button>
-                </div>
-
-                <div class="Projekt-box">
-                    <div class="Tags">
-                        <p class="sontig">Klassic</p>
-                        <p class="Webbing">Website</p>
-                    </div>
-                    <h2>Persönlich web [Klassic]</h2>
-                    <p>Das ist ein Klassic web vorher v1.10 und sind fast gleich den Redsign lol</p>
-                    <button class="Besuchen" onclick="window.location.href='https://pancake-web-eight.vercel.app/index.html'">Website besuchen!</button>
-                    <button class="source-code" onclick="window.open('https://pancake-web-eight.vercel.app/', '_blank')">source code ansehen!</button>
-                </div>
-
-                <div class="Projekt-box">
-                    <div class="Tags">
-                        <p class="sontig">Portfolio</p>
-                        <p class="Webbing">Website</p>
-                    </div>
-                    <h2>Waffle Portfolio</h2>
-                    <p>Simple und Scrollen....</p>
-                    <button class="Besuchen" onclick="window.location.href='https://waffle-portfolio.vercel.app/'">Website besuchen!</button>
-                    <button class="source-code" onclick="window.open('https://github.com/mayi-oi/waffle-Portfolio', '_blank')">source code ansehen!</button>
-                </div>
-
-                <div class="Projekt-box">
-                    <div class="Tags">
-                        <p class="sontig">osu! skin</p>
-                        <p class="Webbing">Website</p>
-                    </div>
-                    <h2>untitled skin</h2>
-                    <p>Ist ein osu!droid und osu! skin Projekt und sind open source!</p>
-                    <button class="Besuchen" onclick="window.location.href='https://untitled-skin.netlify.app/'">Website besuchen!</button>
-                    <button class="source-code" onclick="window.open('https://github.com/mayi-oi/untitled.skin-Bleached-', '_blank')">source code ansehen!</button>
-                </div>
-
-                <div class="Projekt-box">
-                    <div class="Tags">
-                        <p class="sontig-demo">Demo</p>
-                        <p class="Webbing">Preview</p>
-                    </div>
-                    <h2>Phishing Simulation</h2>
-                    <p>Ein Phishing Simulation für mein Präsentation!</p>
-                    <button class="Besuchen" onclick="window.location.href='Phishing.html'">Preview besuchen!</button>
-                    <button class="source-code" onclick="window.open('https://github.com/mayi-oi/Pfandkuchen/blob/main/Phishing.html', '_blank')">source code ansehen!</button>
-                </div>
+            <div class="musik-list" id="musikList"></div>
+            <div class="musik-upload-wrap">
+                <input type="file" id="musikUpload" accept=".mp3,.ogg,.wav" multiple hidden>
+                <button class="musik-upload-btn" onclick="document.getElementById('musikUpload').click()">
+                    <img src="Res/Bild/Icon/upload_1000dp_4B637F_FILL1_wght400_GRAD0_opsz48.png" alt="Upload">
+                    <span>Dein Musik hochladen!</span>
+                </button>
             </div>
-        </div>
-        <br>
-        
-        <div class="Side-Projekt">
-            <h2>Side quest projekt</h2>
-            <p>Sehr random projekt ich habe nie dadacht haben lol</p>
-            <div class="Side-Projekt-farbe">
-                <div class="Side-Projekt-box">
-                    <div class="Tags">
-                        <p class="sontig">Redsigning...</p>
-                        <p class="Webbing">Website</p>
-                    </div>
-                    <h2>Ev-sekundarschule: Remaped</h2>
-                    <p>Yep ist ein Remaped projekt für den Website verbessert und erm... modern und den Demo sind Herunterladen!</p>
-                    <button class="source-code" onclick="window.location.href='https://github.com/mayi-oi/Cause-3/releases/download/demo/Cause.3.zip'">Demo Herunterladen!</button>
-                </div>
-
-                <div class="Side-Projekt-box">
-                    <div class="Tags">
-                        <p class="sontig">Lokal Ki</p>
-                        <p class="Webbing">Website und App</p>
-                    </div>
-                    <h2>Phero-ki</h2>
-                    <p>Bla Bla ki kram aber ist lokal und Privat</p>
-                    <button class="Besuchen" onclick="window.open('https://ubiquitous-spoon-two.vercel.app/', '_blank')">Website besuchen!</button>
-                </div>
-
-                <div class="Side-Projekt-box">
-                    <div class="Tags">
-                        <p class="sontig">osu!droid</p>
-                        <p class="Webbing">Website</p>
-                    </div>
-                    <h2>osu!droid website remake</h2>
-                    <p>Yep du hörst richtig ich mache ein remake projekt für osu!droid web!</p>
-                    <!-- <button class="Besuchen" onclick="window.location.href='https://ubiquitous-spoon-two.vercel.app/'">Website besuchen!</button> -->
-                </div>
+            <div class="musik-controls">
+                <button id="musikPlayBtn" class="musik-ctrl-btn" onclick="togglePlay()">
+                    <img src="Res/Bild/Icon/play_arrow_1000dp_81AEE1_FILL1_wght400_GRAD0_opsz48.png" alt="Play" id="playIcon">
+                </button>
+                <button class="musik-ctrl-btn" onclick="toggleShuffle()">
+                    <img src="Res/Bild/Icon/shuffle_1000dp_81AEE1_FILL1_wght400_GRAD0_opsz48.png" alt="Shuffle" id="shuffleIcon">
+                </button>
             </div>
-        </div>
-        <br>
-        
-        <div class="Le-contact" id="Kontakt">
-            <h2>Le contact</h2>
-            <p>Bereits zur yapping? lass uns chatten! :D</p>
-            <div class="Projekt-text">
-                <div class="Le-contact-box">
-                    <form action="https://api.web3forms.com/submit" method="POST">
-                        <input type="hidden" name="access_key" value="ad83f555-0cef-4f23-b4e3-93bffe12f4ee">
-                        
-                        <label for="Name">Name</label>
-                        <input type="text" name="Name" placeholder="Deine name..." required autocomplete="name">
-                        
-                        <label for="mail">E-mail</label>
-                        <input type="text" name="mail" placeholder="Deine E-mail..." required>
-                        
-                        <label for="thema">Subject</label>
-                        <textarea id="thema" name="Subject" placeholder="Schreibt deine Fragen..." style="height: 120px;" minlength="3" required></textarea>
-                        
-                        <input type="hidden" name="redirect" value="https://pfandkuchen.vercel.app/danke.html">
-                        <input type="submit" value="Frage senden!">
-                    </form>
+            <div class="musik-progress-wrap">
+                <span id="currentTime">0:00</span>
+                <div class="musik-progress-bar" id="progressBar" onclick="seek(event)">
+                    <div class="musik-progress-fill" id="progressFill"></div>
                 </div>
+                <span id="totalTime">0:00</span>
             </div>
         </div>
     </div>
 
-<script>
-    // Zeitzone
-    function dateToText(date) {
-    var hours = date.getHours()
-    var minutes = date.getMinutes();
-    if (minutes < 10) minutes = '0'+minutes;
-    if (hours < 10) hours = '0'+hours;
-    return hours + ":" + minutes; // + ":" + seconds;
-}
-    function updateClocks() {
-        for (var i = 0; i < window.arrClocks.length; i++) {
-            var clock = window.arrClocks[i];
-            var offset = window.arrOffsets[i];
-            clock.innerHTML = dateToText(new Date(new Date().getTime()+offset));
+    <!-- Externel link Popup -->
+    <div id="externalPopup" class="external-popup">
+        <div class="popup-content">
+            <h2 id="popupTitle">Nooooooooooooo don't leave me! :(</h2>
+            <p id="popupText">Du bist verlassen Mayi.-web!* auf andere seite bist du sicher?</p>
+            <div class="popup-buttons">
+                <button id="popupCancel" class="popup-btn cancel-btn">Vergisst das!</button>
+                <button id="popupConfirm" class="popup-btn confirm-btn">Ich bin raus!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schlafen modus -->
+    <div id="sleepOverlay" class="sleep-overlay">
+        <div class="sleep-content" id="sleepContent">
+            <div class="sleep-emoji-wrap">
+                <span class="sleep-emoji" id="sleepEmoji">😴</span>
+                <span class="sleep-z">💤</span>
+            </div>
+            <p class="sleep-text" id="sleepText">Die Seite schläft jetzt...</p>
+        </div>
+    </div>
+
+    <div class="touchscreen-banner">Den mobilen response sind nicht fertig! :(</div>
+
+    <div class="page-wrapper" id="pageWrapper">
+        <div class="Haupttitle" id="haupttitle">
+            <canvas id="pixelCanvas"></canvas>
+            <p>Willkommen zum...</p>
+            <div class="Haupttitle-bild">
+                <h2 id="randomTitle">Mayi.-web!*</h2>
+            </div>
+            <p>Schön dass du da bist!</p>
+            <div class="portfolio-button">
+                <button onclick="window.location.href='portfoilo.html'">Wechsel zum Portfoilo!</button>
+            </div>
+            <div class="Haupttitle-button">
+                <button class="über-button" onclick="document.getElementById('Über-sehen').scrollIntoView({behavior: 'smooth'})">Über mich!</button>
+                <button class="Scoial-button" onclick="document.getElementById('social-sehen').scrollIntoView({behavior: 'smooth'})">Social media!</button>
+                <button class="projekt-button" onclick="document.getElementById('Projekt-sehen').scrollIntoView({behavior: 'smooth'})">Projekte!</button>
+                <button class="kontakt-button" onclick="document.getElementById('Kontakt').scrollIntoView({behavior: 'smooth'})">Le contact!</button>
+            </div>
+            <p style="margin-top: 20px; opacity: 0.5; font-family: jetbrains-mono; font-size: 1rem;">Version: 1.17
+                [Pfandkuchen]</p>
+        </div>
+
+        <div class="Startion-div" id="Über-sehen">
+            <div class="Über-div">
+                <h2>Über mich!</h2>
+                <p>Kurze coolen übersicht über mich!</p>
+                <div class="Über-box">
+                    <p>Hey goofball, ich bin totally selbst lernt Web "Entwickler" oder desginer. Ich mache ganz random
+                        idee für kein ground
+                        und manchmal veröffenlich auf Vercel app oder Netfily app und mein projekt sind wie immer open
+                        source! :D
+                    </p>
+
+                    <h3>Was kann ich machen?</h3>
+                    <div class="Über-pros">
+                        <ul>
+                            <li>Coole und simple design fast wie aus Google style lol</li>
+                            <li>Bisschen auf java script</li>
+                            <li>Super duper gutes leistung</li>
+                        </ul>
+                    </div>
+
+                    <h3> Was ich kann nicht machen?</h3>
+                    <div class="Über-cons" id="social-sehen">
+                        <ul>
+                            <li>Nicht wirklich aktiv</li>
+                            <li>Vielen rechtschreibtfehler</li>
+                            <li>Schlecht auf mobile freundlich lol</li>
+                        </ul>
+                    </div>
+
+                    <h3>Meine specs</h3>
+                    <p style="line-height: 0;">Gerät: Lenovo ideapad 3 chromebook</p>
+                    <div class="Über-specs">
+                        <ul>
+                            <li>Betriebtsystem: Nobara [linux] und chromeOS duelboot</li>
+                            <li>Cpu: Intel celeron N4500</li>
+                            <li>Speicher: 128GB emmc [wirklich sad] mit 258gb sd karte</li>
+                            <li>Ram: 8gb ram lppddr4</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <div class="social-div" >
+                <h2>Meine social media!</h2>
+                <p>Jetzt du kannst stalken mir für ein ground!</p>
+                <div class="social-box">
+                    <div class="social-links">
+                        <h2>Github</h2>
+                        <p>Das ist mein hauptplatz wo alle mein projekt sind da!</p>
+                        <div class="social-links-button">
+                            <button class="div-links" data-external="https://github.com/mayi-oi">Lass mich zur stalken dir!</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="social-links">
+                        <h2>Youtube</h2>
+                        <p>wow woher jemand bemarkt das lol</p>
+                        <div class="social-links-button">
+                            <button class="div-links" data-external="https://www.youtube.com/@mayi.-oi">Lass mich zur
+                                stalken dir!</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="social-links">
+                        <h2>Steam</h2>
+                        <p>Hast du spielen in den Computer?</p>
+                        <div class="social-links-button">
+                            <button class="div-links" data-external="https://steamcommunity.com/id/mayi-oi">Lass mich
+                                zur stalken dir!</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="social-links" id="Projekt-sehen">
+                        <h2>osu!</h2>
+                        <p>Oh yeah ich bin sehr profil!!!! [sehr coole emoticons]</p>
+                        <div class="social-links-button">
+                            <button class="div-links" data-external="https://osu.ppy.sh/users/32215749">Lass mich
+                                zur stalken dir!</button>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <div class="projekt-div" >
+                    <h2>wow sehr vielen projekt!</h2>
+                    <p>sehen den Projekte und besuchen!</p>
+                    <div class="projekt-box">
+                        
+                        <div class="projekt-overview">
+                            <div class="tags">
+                                <p class="aktiv-tag">Das ist du!</p>
+                                <p class="Haupt-tag">Hauptseite</p>
+                                <p class="Web-tag">website</p>
+                            </div>
+                            <h2>Mayi.-web!*</h2>
+                            <p>Mayi.-web* ist ein mein persönliches website alle dinge in eine platz!</p>
+                            <button class="Schon-da">Du bist schon da!</button>
+                        </div>
+
+                        <br>
+                        <div class="projekt-overview">
+                            <div class="tags">
+                                <p class="Klassic-tag">Klassic</p>
+                                <p class="Web-tag">website</p>
+                            </div>  
+                            <h2>Mayi.-web [klassic]</h2>
+                            <p>Den klassice website bevor version 1.10!</p>
+                            <button class="div-links" data-external="https://pancake-web-eight.vercel.app">Website besuchen!</button>
+                            <button class="div-links-source" data-external="https://github.com/mayi-oi/pancake-web">Open source ansehen!</button>
+                        </div>
+
+                        <br>
+                        <div class="projekt-overview">
+                            <div class="tags">
+                                <p class="Klassic-tag">Klassic</p>
+                                <p class="Web-tag">website</p>
+                            </div>  
+                            <h2>Waffle portfoilo</h2>
+                            <p>Den simple und scrollen design!</p>
+                            <button class="div-links" data-external="https://waffle-portfolio.vercel.app">Website besuchen!</button>
+                            <button class="div-links-source" data-external="https://github.com/mayi-oi/waffle-Portfolio">Open source ansehen!</button>
+                        </div>
+
+                        <br>
+                        <div class="projekt-overview">
+                            <div class="tags">
+                                <p class="osu-tag">osu!projekt</p>
+                                <p class="Web-tag">website</p>
+                            </div>  
+                            <h2>untitled skin</h2>
+                            <p>ist für osu!, lazer und droid skin und sind open source!</p>
+                            <button class="div-links" data-external="https://untitled-skin.netlify.app/">Website besuchen!</button>
+                            <button class="div-links-source" data-external="https://github.com/mayi-oi/untitled.skin-Bleached-">Open source ansehen!</button>
+                        </div>
+
+                        <br>
+                        <div class="projekt-overview">
+                            <div class="tags">
+                                <p class="preview-tag">preview</p>
+                                <p class="Web-tag">website</p>
+                            </div>  
+                            <h2>Phishing Simulation</h2>
+                            <p>Ein Simulation für mein Präsentation und Note 2 erschafft!</p>
+                            <button class="div-links" onclick="window.open('Phishing.html', '_blank')">Preview ansehen!</button>
+                            <button class="div-links-source" data-external="https://github.com/mayi-oi/untitled.skin-Bleached-">Open source ansehen!</button>
+                        </div>
+                    </div>                  
+                </div>
+
+                <br>
+                <div class="Side-projekt-div">
+                    <h2>Side quest projekte</h2>
+                    <p>Random projekte ich hat nie gedacht lol</p>
+                    <div class="projekt-box">
+                        <div class="projekt-overview">
+                            <div class="tags">
+                                <p class="preview-tag">Demo!</p>
+                                <p class="Web-tag">website</p>
+                            </div>
+                            <h2>Ev-sekundarschule: reworked</h2>
+                            <p>Yep ist ein Remaped projekt für den Website verbessert und erm... modern und den Demo sind Herunterladen!</p>
+                            <button class="div-links" onclick="window.open('https://github.com/mayi-oi/Cause-3/releases/download/demo/Cause.3.zip')">Herunterladen!</button>
+                        </div>
+
+                        <br>
+                        <div class="projekt-overview">
+                            <div class="tags">
+                                <p class="preview-tag">Lokal ki</p>
+                                <p class="Web-tag">website und app</p>
+                            </div>
+                            <h2>Phero-ki</h2>
+                            <p>Bla Bla ki kram aber ist lokal und Privat</p>
+                            <button class="div-links" data-external="https://ubiquitous-spoon-two.vercel.app/">Website besuchen!</button>
+                        </div>
+
+                        <br>
+                        <div class="projekt-overview">
+                            <div class="tags">
+                                <p class="osu-tag">osu!website</p>
+                                <p class="Web-tag">website</p>
+                            </div>
+                            <h2>osu!droid web remake</h2>
+                            <p>Yep du hörst richtig ich mache ein remake projekt für osu!droid web!</p>
+                           <!-- <button class="div-links" data-external="https://ubiquitous-spoon-two.vercel.app/">Website besuchen!</button> -->
+                        </div>
+                    </div>
+                    </div>
+
+                    </div>
+
+                    <br>
+                    <div class="Le-contact" id="Kontakt">
+                    <h2>Le contact</h2>
+                    <p>Bereits zur yapping? lass uns chatten! :D</p>
+                    <div class="Projekt-text">
+                        <div class="Le-contact-box">
+                            <form action="https://api.web3forms.com/submit" method="POST">
+                                <input type="hidden" name="access_key" value="ad83f555-0cef-4f23-b4e3-93bffe12f4ee">
+                                
+                                <label for="Name">Name</label>
+                                <input type="text" name="Name" placeholder="Deine name..." required autocomplete="name">
+                                
+                                <label for="mail">E-mail</label>
+                                <input type="email" name="mail" placeholder="Deine E-mail..." required>
+                                
+                                <label for="thema">Subject</label>
+                                <textarea id="thema" name="Subject" placeholder="Längeren yapping text lol" style="height: 120px;" minlength="3" required></textarea>
+                                
+                                <input type="hidden" name="redirect" value="https://pfandkuchen.vercel.app/danke.html">
+                                <input type="submit" value="Frage senden!">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+
+        <div class="Footer-div">
+            <footer>
+                <h2>Mayi.-web!*</h2>
+                <p>Web designer: Mayi.-oi 2026 | powerd by: Vercel app
+                    <br> Letzten update: Juni.15.2026
+                </p>
+                <h3>Besonders links</h3>
+                <div class="Footer-links">
+                    <a data-external="https://github.com/mayi-oi">Github konto</a>
+                    <a data-external="https://github.com/mayi-oi">Source code</a>
+                    <a href="qulle.html">Quelle</a>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+
+        function toggleNav() {
+            document.getElementById('nav-menu').classList.toggle('show');
         }
-    }
-    function startClocks() {
-        clockElements = document.getElementsByClassName('clock');
-        window.arrClocks = []
-        window.arrOffsets = [];
-        var j = 0;
-        for(var i = 0; i < clockElements.length; i++) {
-            el = clockElements[i];
-            timezone = parseInt(el.getAttribute('timezone'));
-            if (!isNaN(timezone)) {
-                var tzDifference = timezone * 60 + (new Date()).getTimezoneOffset();
-                var offset = tzDifference * 60 * 1000;
-                window.arrClocks.push(el);
-                window.arrOffsets.push(offset);
+        document.addEventListener('click', function(e) {
+            const nav = document.querySelector('.Navdiv');
+            if (!nav.contains(e.target)) {
+                document.getElementById('nav-menu').classList.remove('show');
+            }
+        });
+
+        // Musik player system
+        const musikOverlay = document.getElementById('musikOverlay');
+        const musikList = document.getElementById('musikList');
+        const musikUpload = document.getElementById('musikUpload');
+        const playIcon = document.getElementById('playIcon');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeEl = document.getElementById('currentTime');
+        const totalTimeEl = document.getElementById('totalTime');
+        const shuffleIcon = document.getElementById('shuffleIcon');
+
+        let playlist = [];
+        let currentIndex = -1;
+        let audio = null;
+        let isPlaying = false;
+        let isShuffle = false;
+        let progressInterval = null;
+
+        // Preset Musik-Dateien (aus deinem Sleep-Modus)
+        const presetTracks = [
+            { name: "Soft background", src: "Res/Musik/hinterground/everything_is_dead-soft-background-music-511236.mp3", type: "Preselected" },
+            { name: "Nastelbom Background", src: "Res/Musik/nastelbom-background-music-463062.mp3", type: "Preselected" },
+            { name: "Dark Spectrometer", src: "Res/Musik/samuelfjohanns-dark-spectrometer-11713.mp3", type: "Preselected" },
+            { name: "Space Shuttle", src: "Res/Musik/the_mountain-space-shuttle-153639.mp3", type: "Preselected" }
+        ];
+
+        function initPlaylist() {
+            playlist = [...presetTracks];
+            renderPlaylist();
+        }
+
+        function renderPlaylist() {
+            musikList.innerHTML = '';
+            playlist.forEach((track, index) => {
+                const item = document.createElement('div');
+                item.className = 'musik-item' + (index === currentIndex ? ' musik-active' : '');
+                item.innerHTML = `
+                    <div class="musik-item-info">
+                        <span class="musik-item-name">${track.name}</span>
+                        <span class="musik-item-type">${track.type}</span>
+                    </div>
+                    <button class="musik-item-play" onclick="playTrack(${index})">
+                        ${index === currentIndex && isPlaying ? '⏸' : '▶'}
+                    </button>
+                `;
+                musikList.appendChild(item);
+            });
+        }
+
+        function playTrack(index) {
+            if (index === currentIndex && isPlaying) {
+                pauseTrack();
+                return;
+            }
+
+            if (audio) {
+                audio.pause();
+                audio = null;
+            }
+
+            currentIndex = index;
+            audio = new Audio(playlist[index].src);
+            audio.volume = 0.5;
+
+            audio.addEventListener('ended', () => {
+                if (isShuffle) {
+                    playTrack(Math.floor(Math.random() * playlist.length));
+                } else {
+                    const next = (currentIndex + 1) % playlist.length;
+                    playTrack(next);
+                }
+            });
+
+            audio.addEventListener('loadedmetadata', () => {
+                totalTimeEl.textContent = formatTime(audio.duration);
+            });
+
+            audio.play().then(() => {
+                isPlaying = true;
+                updatePlayIcon();
+                renderPlaylist();
+                startProgress();
+            }).catch(e => console.log('Play failed:', e));
+        }
+
+        function pauseTrack() {
+            if (audio) {
+                audio.pause();
+                isPlaying = false;
+                updatePlayIcon();
+                renderPlaylist();
+                stopProgress();
             }
         }
-        updateClocks();
-        clockID = setInterval(updateClocks, 1000);
-    }
-    setTimeout(startClocks, 100);
 
-
-    // Laüf zeit
-    var hourLabel = document.getElementById("Stunden");
-    var minutesLabel = document.getElementById("minute");
-    var secondsLabel = document.getElementById("sekunden");
-    var totalSeconds = 0;
-    setInterval(setTime, 1000);
-
-    function setTime()
-        {
-            ++totalSeconds;
-            secondsLabel.innerHTML = pad(totalSeconds%60);
-            minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
-        }
-
-        function pad(val)
-        {
-            var valString = val + "";
-            if(valString.length < 2)
-            {
-                return "0" + valString;
+        function togglePlay() {
+            if (currentIndex === -1) {
+                if (playlist.length > 0) playTrack(0);
+                return;
             }
-            else
-            {
-                return valString;
+            if (isPlaying) {
+                pauseTrack();
+            } else {
+                audio.play().then(() => {
+                    isPlaying = true;
+                    updatePlayIcon();
+                    renderPlaylist();
+                    startProgress();
+                });
             }
         }
 
-    // Navtoggle dinge lol
-    function toggleNav() {
-        document.getElementById('nav-menu').classList.toggle('show');
-    }
-    document.addEventListener('click', function(e) {
-        const nav = document.querySelector('.Navdiv');
-        if (!nav.contains(e.target)) {
-            document.getElementById('nav-menu').classList.remove('show');
+        function updatePlayIcon() {
+            playIcon.src = isPlaying
+                ? "Res/Bild/Icon/pause_1000dp_81AEE1_FILL1_wght400_GRAD0_opsz48.png"
+                : "Res/Bild/Icon/play_arrow_1000dp_81AEE1_FILL1_wght400_GRAD0_opsz48.png";
         }
-    });
-</script>
+
+        function toggleShuffle() {
+            isShuffle = !isShuffle;
+            shuffleIcon.style.opacity = isShuffle ? '1' : '0.5';
+            shuffleIcon.style.filter = isShuffle ? 'drop-shadow(0 0 8px #81AEE1)' : 'none';
+        }
+
+        function startProgress() {
+            stopProgress();
+            progressInterval = setInterval(() => {
+                if (!audio) return;
+                const pct = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = pct + '%';
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+            }, 200);
+        }
+
+        function stopProgress() {
+            clearInterval(progressInterval);
+        }
+
+        function seek(e) {
+            if (!audio || !audio.duration) return;
+            const rect = e.currentTarget.getBoundingClientRect();
+            const pct = (e.clientX - rect.left) / rect.width;
+            audio.currentTime = pct * audio.duration;
+            progressFill.style.width = (pct * 100) + '%';
+        }
+
+        function formatTime(sec) {
+            if (isNaN(sec)) return "0:00";
+            const m = Math.floor(sec / 60);
+            const s = Math.floor(sec % 60);
+            return m + ":" + (s < 10 ? "0" + s : s);
+        }
+
+        // Nutzer-Upload
+        musikUpload.addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            files.forEach(file => {
+                const url = URL.createObjectURL(file);
+                const name = file.name.replace(/\\.[^/.]+$/, "");
+                playlist.push({ name: name, src: url, type: "Nutzer hochgeladen" });
+            });
+            renderPlaylist();
+            musikUpload.value = '';
+        });
+
+        function toggleMusik() {
+            musikOverlay.classList.toggle('musik-active');
+        }
+
+        musikOverlay.addEventListener('click', (e) => {
+            if (e.target === musikOverlay) toggleMusik();
+        });
+
+        // Init
+        initPlaylist();
+
+        // external link popup
+        const popup = document.getElementById('externalPopup');
+        const popupConfirm = document.getElementById('popupConfirm');
+        const popupCancel = document.getElementById('popupCancel');
+        const popupTitle = document.getElementById('popupTitle');
+        const popupText = document.getElementById('popupText');
+        let pendingUrl = null;
+
+        const popupTitles = [
+            "Nooooooooooooo don't leave me! :(",
+            "( ˃̣̣̥﹏˂̣̣̥ ✿) Bitte nicht gehen...",
+            "(´-ω-`) Warum verlässt du mich?",
+            "ｍ（．＿．）ｍ Ich flehe dich an...",
+            "( ´•︵•` ) So traurig gerade...",
+            "(╥﹏╥) Komm schon, bleib hier!",
+            "(っ˘̩╭╮˘̩)っ Nicht weggehen!",
+            "Huh? verlassen du früher? Hmph! ( ,,⩌⤙⩌,,)",
+            "Ab-aber du bist gerade hier stimt? ( ⌯•᷄ ᴗ •᷅⌯)ﾉﾞ",
+            "(ಥ﹏ಥ) Ich werde dich vermissen..."
+        ];
+
+        const popupTexts = [
+            "Du bist verlassen Mayi.-web!* auf andere seite bist du sicher?",
+            "Bist du wirklich sicher? Die Pixel werden einsam ohne dich...",
+            "Wenn du gehst, werde ich hier allein mit meinen Bugs sein...",
+            "Aber... aber... hier ist es doch so schön! Kein Grund zu fliehen!",
+            "Mayi.-web!* weint gerade intern. Bist du dir sicher?",
+            "Die anderen Websites sind doch langweilig im Vergleich! Bleib!",
+            "Wenn du klickst, passiert etwas Schreckliches... (nicht wirklich lol)",
+            "Hast du nichts Besseres zu tun? Schau dir noch meine Specs an!",
+            "Nur noch eine Sekunde... okay, vielleicht zwei...",
+            "Error 404: Motivation to leave not found. Bitte bleiben.",
+            "Dein Computer wird traurig sein wenn du gehst...",
+            "Du bist nicht sigma wann du verlasst! (¬⤙¬,,)",
+            "Pfandkuchen sagt: 'Bitte nicht gehen!' 🍰"
+        ];
+
+        const popupSounds = [
+            new Audio('Res/Soundeffekt/externol-link/violin-sound-sad.mp3'),
+            new Audio('Res/Soundeffekt/externol-link/vine-boom.mp3'),
+            new Audio('Res/Soundeffekt/externol-link/metal-pipe-falling-sound-effect.mp3'),
+            new Audio('Res/Soundeffekt/externol-link/SE_49mm_01.wav.mp3'),
+            new Audio('Res/Soundeffekt/externol-link/SE_Artillery_01a.wav.mp3'),
+            new Audio('Res/Soundeffekt/externol-link/green-whats-your-problem-audiotrimmer.mp3'),
+            new Audio('Res/Soundeffekt/externol-link/michael-dont-leave-me-here.mp3')
+        ];
+
+        function playPopupSound() {
+            const sound = popupSounds[Math.floor(Math.random() * popupSounds.length)];
+            sound.currentTime = 0;
+            sound.volume = 0.4;
+            sound.play().catch(e => console.log('Popup sound failed:', e));
+        }
+
+        function showPopup(url) {
+            pendingUrl = url;
+
+            popupTitle.textContent = popupTitles[Math.floor(Math.random() * popupTitles.length)];
+            popupText.textContent = popupTexts[Math.floor(Math.random() * popupTexts.length)];
+
+            playPopupSound();
+
+            popup.classList.add('popup-active');
+        }
+
+        function hidePopup() {
+            popup.classList.remove('popup-active');
+            pendingUrl = null;
+        }
+
+        popupConfirm.addEventListener('click', () => {
+            if (pendingUrl) {
+                window.open(pendingUrl, '_blank');
+            }
+            hidePopup();
+        });
+
+        popupCancel.addEventListener('click', hidePopup);
+
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup) hidePopup();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && popup.classList.contains('popup-active')) {
+                hidePopup();
+            }
+        });
+
+        document.querySelectorAll('[data-external]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const url = btn.getAttribute('data-external');
+                showPopup(url);
+            });
+        });
+
+        // Goofy mincraft cave sound system ripoff lol
+        class CaveSoundSystem {
+            constructor() {
+                this.audioContext = null;
+                this.initialized = false;
+                this.isPlaying = false;
+
+                this.sounds = [
+                    'Res/Soundeffekt/random-soundeffekt/city_siren_loop2.wav',
+                    'Res/Soundeffekt/random-soundeffekt/Erika_LogIn_2_1.ogg.mp3',
+                    'Res/Soundeffekt/random-soundeffekt/Erika_Title.ogg.mp3',
+                    'Res/Soundeffekt/random-soundeffekt/Miyo_Battle_Move_2.ogg.mp3',
+                    'Res/Soundeffekt/random-soundeffekt/Miyo_Cafe_monolog_5.ogg.mp3',
+                    'Res/Soundeffekt/random-soundeffekt/my-mommy-said-no-more-skibidi-toilet.mp3',
+                    'Res/Soundeffekt/random-soundeffekt/moan_loop1.wav',
+                    'Res/Soundeffekt/random-soundeffekt/town_moan1.wav'
+                ];
+
+                this.chance = 1 / 24;
+                this.checkInterval = 12000;
+                this.volume = 0.18;
+                this.echoDelay = 0.35;
+                this.echoFeedback = 0.45;
+                this.echoLowpass = 900;
+            }
+
+            init() {
+                if (this.initialized) return;
+                try {
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    this.initialized = true;
+                    this.startLoop();
+                    console.log('Very spooky sound sind aktiv!');
+                } catch (e) {
+                    console.log('Web Audio API nicht verfügbar:', e);
+                }
+            }
+
+            startLoop() {
+                setInterval(() => this.tryPlay(), this.checkInterval);
+            }
+
+            tryPlay() {
+                if (this.isPlaying || !this.audioContext) return;
+                const roll = Math.random();
+                if (roll > this.chance) return;
+                this.playRandom();
+            }
+
+            async playRandom() {
+                this.isPlaying = true;
+                const file = this.sounds[Math.floor(Math.random() * this.sounds.length)];
+
+                try {
+                    const response = await fetch(file);
+                    const arrayBuffer = await response.arrayBuffer();
+                    const audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
+
+                    const source = this.audioContext.createBufferSource();
+                    source.buffer = audioBuffer;
+
+                    const masterGain = this.audioContext.createGain();
+                    masterGain.gain.value = this.volume;
+
+                    const delay = this.audioContext.createDelay();
+                    delay.delayTime.value = this.echoDelay;
+
+                    const feedback = this.audioContext.createGain();
+                    feedback.gain.value = this.echoFeedback;
+
+                    const lowpass = this.audioContext.createBiquadFilter();
+                    lowpass.type = 'lowpass';
+                    lowpass.frequency.value = this.echoLowpass;
+                    lowpass.Q.value = 0.5;
+
+                    source.connect(masterGain);
+                    masterGain.connect(this.audioContext.destination);
+
+                    source.connect(delay);
+                    delay.connect(lowpass);
+                    lowpass.connect(feedback);
+                    feedback.connect(delay);
+                    feedback.connect(masterGain);
+
+                    source.start();
+
+                    source.onended = () => {
+                        this.isPlaying = false;
+                    };
+
+                    console.log('Random sind abgespielt:', file.split('/').pop());
+
+                } catch (e) {
+                    console.log('Könnte nicht abgespielt!:', e);
+                    this.isPlaying = false;
+                }
+            }
+        }
+
+        const caveSystem = new CaveSoundSystem();
+
+        let caveInitDone = false;
+        function initCaveOnInteraction() {
+            if (caveInitDone) return;
+            caveInitDone = true;
+            caveSystem.init();
+        }
+
+        ['click', 'mousemove', 'keydown', 'touchstart'].forEach(evt => {
+            document.addEventListener(evt, initCaveOnInteraction, { once: true });
+        });
+
+        // Schlafen modus
+        const sleepOverlay = document.getElementById('sleepOverlay');
+        const sleepText = document.getElementById('sleepText');
+        const sleepEmoji = document.getElementById('sleepEmoji');
+        const pageWrapper = document.getElementById('pageWrapper');
+
+        const sleepMessages = [
+            "Die Seite schläft jetzt...",
+            "zzzzzzzzzz...",
+            "Warte auf dich...",
+            "Dreaming of pixels...",
+            "System im Energiesparmodus...",
+            "Nur noch 5 Minuten...",
+            "Der Entwickler ist auch müde...",
+            "Keine Aktivität erkannt...",
+            "Schlafenszeit für den Browser!",
+            "Hier ist es gemütlich...",
+            "Mayi.-web macht ein Nickerchen...",
+            "Wach mich auf! Klick irgendwo!",
+            "404: User not found...",
+            "Ich zähle Pixel bis ich schlafe...",
+            "Offline-Modus aktiviert..."
+        ];
+
+        const sleepEmojis = [
+            "😴",
+            "(－.－)...zzz",
+            "(＿ ＿*) Z z z",
+            "⋆.˚ ☾ .⭒˚  (-.-) ᶻᶻᶻ",
+            "🛌",
+            "💤",
+            "🌙",
+            "(-_-) zzz",
+            "🥱",
+            "ʕ•ᴥ•ʔ ...zzz",
+            "⊂(￣(ｴ)￣)⊃ zzz",
+            "ᕙ(⇀‸↼‶)ᕗ zzz"
+        ];
+
+        const musicTracks = [
+            new Audio('Res/Musik/nastelbom-background-music-463062.mp3'),
+            new Audio('Res/Musik/samuelfjohanns-dark-spectrometer-11713.mp3'),
+            new Audio('Res/Musik/the_mountain-space-shuttle-153639.mp3')
+        ];
+
+        let currentTrack = null;
+        let fadeInterval = null;
+        const MUSIC_VOLUME = 0.12;
+
+        function fadeInMusic(audio, targetVol, duration) {
+            clearInterval(fadeInterval);
+            audio.volume = 0;
+            audio.loop = true;
+            audio.currentTime = 0;
+            audio.play().catch(e => console.log('Music play failed:', e));
+
+            const steps = duration / 50;
+            const stepSize = targetVol / steps;
+
+            fadeInterval = setInterval(() => {
+                if (audio.volume < targetVol - 0.005) {
+                    audio.volume = Math.min(targetVol, audio.volume + stepSize);
+                } else {
+                    audio.volume = targetVol;
+                    clearInterval(fadeInterval);
+                }
+            }, 50);
+        }
+
+        function fadeOutMusic(audio, duration) {
+            if (!audio) return;
+            clearInterval(fadeInterval);
+
+            const steps = duration / 50;
+            const stepSize = audio.volume / steps;
+
+            fadeInterval = setInterval(() => {
+                if (audio.volume > 0.005) {
+                    audio.volume = Math.max(0, audio.volume - stepSize);
+                } else {
+                    audio.volume = 0;
+                    audio.pause();
+                    audio.currentTime = 0;
+                    clearInterval(fadeInterval);
+                }
+            }, 50);
+        }
+
+        let inactivityTimer;
+        let isSleeping = false;
+        const INACTIVITY_DELAY = 80000;
+
+        function goToSleep() {
+            if (isSleeping) return;
+            isSleeping = true;
+
+            sleepText.textContent = sleepMessages[Math.floor(Math.random() * sleepMessages.length)];
+            sleepEmoji.textContent = sleepEmojis[Math.floor(Math.random() * sleepEmojis.length)];
+
+            currentTrack = musicTracks[Math.floor(Math.random() * musicTracks.length)];
+            fadeInMusic(currentTrack, MUSIC_VOLUME, 2500);
+
+            sleepOverlay.classList.add('sleep-active');
+            pageWrapper.classList.add('wrapper-sleeping');
+        }
+
+        function wakeUp() {
+            if (!isSleeping) {
+                resetTimer();
+                return;
+            }
+
+            isSleeping = false;
+
+            if (currentTrack) {
+                fadeOutMusic(currentTrack, 1500);
+                currentTrack = null;
+            }
+
+            sleepOverlay.classList.remove('sleep-active');
+            pageWrapper.classList.remove('wrapper-sleeping');
+            resetTimer();
+        }
+
+        function resetTimer() {
+            clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(goToSleep, INACTIVITY_DELAY);
+        }
+
+        const wakeEvents = ['mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll', 'click'];
+        wakeEvents.forEach(event => {
+            document.addEventListener(event, wakeUp, { passive: true });
+        });
+
+        resetTimer();
+
+        // Boom boom pow!
+        const explosionSound = new Audio('Res/Soundeffekt/roblox-explosion-sound.mp3');
+        explosionSound.volume = 0.7;
+
+        // Cool pixel animation!
+        const canvas = document.getElementById('pixelCanvas');
+        const ctx = canvas.getContext('2d');
+        const haupttitle = document.getElementById('haupttitle');
+
+        const colors = ['#c9d8ff', '#8fa1cf', '#63739a', '#ffffff', '#5f6f96', '#44547d', '#a8bce8'];
+        const PIXEL_SIZE = 4;
+
+        let width, height;
+        let mouseX = -1000, mouseY = -1000;
+        let clickX = 0, clickY = 0;
+        let clickTimer = 0;
+        let shakeTimer = 0;
+        let shakeIntensity = 0;
+
+        function resize() {
+            const rect = canvas.parentElement.getBoundingClientRect();
+            width = rect.width;
+            height = rect.height;
+            canvas.width = width;
+            canvas.height = height;
+        }
+
+        resize();
+        window.addEventListener('resize', resize);
+
+        class PixelParticle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.floor(Math.random() * (width / PIXEL_SIZE)) * PIXEL_SIZE;
+                this.y = Math.floor(Math.random() * (height / PIXEL_SIZE)) * PIXEL_SIZE;
+                this.size = [2, 4, 4, 6][Math.floor(Math.random() * 4)];
+                this.baseColor = colors[Math.floor(Math.random() * colors.length)];
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.4 + 0.1;
+                this.targetOpacity = this.opacity;
+                this.baseOpacity = this.opacity;
+                this.life = Math.random() * 300 + 200;
+                this.maxLife = this.life;
+                this.pulse = Math.random() * Math.PI * 2;
+            }
+
+            update() {
+                this.pulse += 0.03;
+
+                this.x += this.speedX + Math.sin(this.pulse) * 0.2;
+                this.y += this.speedY + Math.cos(this.pulse * 0.7) * 0.2;
+
+                this.x = Math.floor(this.x / PIXEL_SIZE) * PIXEL_SIZE;
+                this.y = Math.floor(this.y / PIXEL_SIZE) * PIXEL_SIZE;
+
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < 120) {
+                    const force = (120 - dist) / 120;
+                    this.targetOpacity = Math.min(0.9, this.baseOpacity + force * 0.5);
+                    this.x -= (dx / dist) * force * 1.5;
+                    this.y -= (dy / dist) * force * 1.5;
+                } else {
+                    this.targetOpacity = this.baseOpacity;
+                }
+
+                if (clickTimer > 0) {
+                    const cdx = this.x - clickX;
+                    const cdy = this.y - clickY;
+                    const cdist = Math.sqrt(cdx * cdx + cdy * cdy);
+                    if (cdist < 250 && cdist > 0) {
+                        const force = (250 - cdist) / 250;
+                        this.x += (cdx / cdist) * force * 15;
+                        this.y += (cdy / cdist) * force * 15;
+                        this.targetOpacity = 1;
+                    }
+                }
+
+                if (this.targetOpacity > this.opacity) this.opacity += 0.02;
+                if (this.targetOpacity < this.opacity) this.opacity -= 0.02;
+
+                this.life--;
+
+                if (this.life <= 0 || this.x < -20 || this.x > width + 20 || this.y < -20 || this.y > height + 20) {
+                    this.reset();
+                    this.opacity = 0;
+                    this.targetOpacity = Math.random() * 0.4 + 0.2;
+                    this.baseOpacity = this.targetOpacity;
+                }
+            }
+
+            draw() {
+                ctx.fillStyle = this.baseColor;
+                ctx.globalAlpha = Math.max(0, Math.min(1, this.opacity));
+                ctx.fillRect(this.x, this.y, this.size, this.size);
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        const particles = [];
+        const PARTICLE_COUNT = 1720;
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+            particles.push(new PixelParticle());
+        }
+
+        haupttitle.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+        });
+
+        haupttitle.addEventListener('mouseleave', () => {
+            mouseX = -1000;
+            mouseY = -1000;
+        });
+
+        haupttitle.addEventListener('mousedown', (e) => {
+            if (e.target.tagName === 'BUTTON' || e.target.closest('button')) return;
+
+            const rect = canvas.getBoundingClientRect();
+            clickX = e.clientX - rect.left;
+            clickY = e.clientY - rect.top;
+            clickTimer = 25;
+
+            explosionSound.currentTime = 0;
+            explosionSound.play().catch(e => {
+                console.log('Sound konnte nicht abgespielt werden:', e);
+            });
+
+            shakeTimer = 800;
+            shakeIntensity = 48;
+        });
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            if (clickTimer > 0) clickTimer--;
+
+            if (shakeTimer > 0) {
+                shakeTimer--;
+                const shakeX = (Math.random() - 0.5) * shakeIntensity;
+                const shakeY = (Math.random() - 0.5) * shakeIntensity;
+                shakeIntensity *= 0.85;
+                ctx.save();
+                ctx.translate(shakeX, shakeY);
+            }
+
+            ctx.strokeStyle = 'rgba(201, 216, 255, 1)';
+            ctx.lineWidth = 3;
+            for (let x = 0; x < width; x += PIXEL_SIZE * 4) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, height);
+                ctx.stroke();
+            }
+            for (let y = 0; y < height; y += PIXEL_SIZE * 4) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(width, y);
+                ctx.stroke();
+            }
+
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            if (mouseX > -100) {
+                ctx.fillStyle = 'rgba(201, 216, 255, 0.08)';
+                ctx.beginPath();
+                ctx.arc(mouseX, mouseY, 80, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            if (shakeTimer > 0) {
+                ctx.restore();
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // random title ding lol
+        const titleElement = document.getElementById('randomTitle');
+
+        const normalTitles = [
+            "Mayi.-web!*",
+            "Mayi.-ウェブ!*",
+            "Mayi.-웹!*",
+            "Mayi.-веб!*",
+            "Mayi.-网站!*",
+            "Mayi.-ويب!*",
+            "Mayi.-वेब!*",
+            "Mayi.-site!*",
+            "Mayi.-web!*",
+            "Mayi.-sito!*",
+            "Mayi.-sivu!*",
+            "桜井ミヨ"
+        ];
+
+        const randomTitles = [
+            "Pfandkuchen.-web!*",
+            "untitled.-web!*",
+            "Mayo-inc!",
+            "*!bew-iyaM",
+            "Maya-website?*",
+            "Mayonnaise-web!*",
+            "Mäyi.-web!*",
+            "Mayi.-wow!*",
+            "Mayo-web!*",
+            "Mayi.-web?!*",
+            "Mäyä-wëb!*",
+            "Mayi.-net!*",
+            "Mai-web!*",
+            "Mayi.-site!*",
+            "Miyo.-Sakurai!*"
+        ];
+
+        function setTitleWithFade(newText) {
+            titleElement.classList.add('title-fade-out');
+            setTimeout(() => {
+                titleElement.textContent = newText;
+                titleElement.classList.remove('title-fade-out');
+            }, 250);
+        }
+
+        function cycleRandomTitle() {
+            const randomTitle = randomTitles[Math.floor(Math.random() * randomTitles.length)];
+            setTitleWithFade(randomTitle);
+
+            setTimeout(() => {
+                const normalTitle = normalTitles[Math.floor(Math.random() * normalTitles.length)];
+                setTitleWithFade(normalTitle);
+            }, 3000);
+        }
+
+        setInterval(cycleRandomTitle, 8000);
+    </script>
 </body>
-</html>
