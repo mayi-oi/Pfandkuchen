@@ -36,6 +36,38 @@
         </nav>
     </div>
 
+    <!-- Qulle overlay -->
+     <div class="Quelleoverlay" id="Quelle-overlay">
+        <div class="Quelle-content">
+            <div class="Quelle-header">
+                <h2>Coolen quelle!</h2>
+                <button class="Quelle-close" onclick="toggleQuelle()">x</button>
+            </div>
+            <div class="Quelle-box">
+                <div class="Quelle-text">
+                    <h2>Musik hinterground!</h2>
+                    <p>Background music</p>
+                    <p>Vom: nastelbom</p>
+                    <br>
+                    <p>Dark Spectrometer</p>
+                    <p>Vom: samuelf johanns</p>
+                    <br>
+                    <p>Soft background</p>
+                    <p>Vom: everything is dead</p>
+                    <br>
+                    <p>Space shuttle</p>
+                    <p>Vom: The_Mountain</p>
+                    <br>
+                    <h2>Soundeffekt!</h2>
+                    <p>Eriak und Miyo voice lines</p>
+                    <p>Vom: Blue archive</p>
+                    <br>
+                    <p>City siren, moan loop und town moan!</p>
+                    <p>Vom: Half life 2</p>
+                </div>
+            </div>
+        </div>
+     </div>
 
     <!-- Musik player overlay -->
     <div id="musikOverlay" class="musik-overlay">
@@ -112,7 +144,7 @@
                 <button class="projekt-button" onclick="document.getElementById('Projekt-sehen').scrollIntoView({behavior: 'smooth'})">Projekte!</button>
                 <button class="kontakt-button" onclick="document.getElementById('Kontakt').scrollIntoView({behavior: 'smooth'})">Le contact!</button>
             </div>
-            <p style="margin-top: 20px; opacity: 0.5; font-family: jetbrains-mono; font-size: 1rem;">Version: 1.17
+            <p style="margin-top: 20px; opacity: 0.5; font-family: jetbrains-mono; font-size: 1rem;">Version: 1.17a
                 [Pfandkuchen]</p>
         </div>
 
@@ -341,13 +373,13 @@
             <footer>
                 <h2>Mayi.-web!*</h2>
                 <p>Web designer: Mayi.-oi 2026 | powerd by: Vercel app
-                    <br> Letzten update: Juni.15.2026
+                    <br> Letzten update: Juni.18.2026
                 </p>
                 <h3>Besonders links</h3>
                 <div class="Footer-links">
                     <a data-external="https://github.com/mayi-oi">Github konto</a>
                     <a data-external="https://github.com/mayi-oi">Source code</a>
-                    <a href="qulle.html">Quelle</a>
+                    <a class="Quelle-toggle" onclick="toggleQuelle()">Quelle</a>
                 </div>
             </footer>
         </div>
@@ -363,6 +395,13 @@
             if (!nav.contains(e.target)) {
                 document.getElementById('nav-menu').classList.remove('show');
             }
+        });
+
+        function toggleQuelle() {
+            document.querySelector('.Quelleoverlay').classList.toggle('Quelle-active');
+        }
+        document.getElementById('Quelle-overlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('Quelle-overlay')) toggleQuelle();
         });
 
         // Musik player system
@@ -1079,6 +1118,7 @@
 
         const normalTitles = [
             "Mayi.-web!*",
+            "Mayi.-app!*",
             "Mayi.-ウェブ!*",
             "Mayi.-웹!*",
             "Mayi.-веб!*",
