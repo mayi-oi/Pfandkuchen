@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Mayi.-web!</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="musikplayer.css">
+    <link rel="stylesheet" href="Res/Font/Font.css">
+    <base target="_blank">
+<base target="_blank">
+</head>
+<body>
+    <!-- Warung popup -->
+    <div class="Warungoverlay" id="Warung-overlay">
+        <div class="Warung-content">
+            <div class="Warung-icon-header">
+                <img src="Res/Bild/Icon/warning_24dp_FF8E8E_FILL1_wght400_GRAD0_opsz24.svg" alt="Oh neinnnnnnn">
+            </div>
+            <div class="Warung-header">
+                <h2>Bevor du gehst... (͠≖~≖  ͡ )</h2>
+            </div>
+            <div class="Warung-text">
+                <p style="color: #ffffff;">Diese projekt sind wirklich neu und leer aus und <br> mobilen sind nicht geplant, bitte einfach warten für nächsten update!</p>
+            </div>
+            <div class="Warung-button">
+                <button class="verstanden-button" onclick="closeWarung()">Ich habe verstanden! ദ്ദി(˵ •̀ ᴗ - ˵ ) </button>
+                <button class="verlassen-button" onclick="window.location.href='index.html'">Ich bin einfach raus! 三三ᕕ( ᐛ )ᕗ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Einstellung -->
+    <div class="Settingsoverlay" id="Settings-overlay">
+        <div class="Settings-content">
+            <div class="Settings-header">
+                <h2>Einstellung</h2>
+            </div>
+            <div class="Settings-box">
+
+                <div class="Settings-button">
+                    <h2>Source code!</h2>
+                    <p>Schau dir den Code auf Github an!</p>
+                    <button class="link-button" onclick="window.open('https://github.com/mayi-oi/Pfandkuchen', '_blank')">Github besuchen!</button>
+                </div>
+
+                <div class="Settings-button">
+                    <h2>Wenige flashing lights</h2>
+                    <p>Reduziert intensive Lichteffekte</p>
+                    <button class="Buttontoggle" id="toggle-lights" onclick="toggleSetting('lights')">Aus</button>
+                </div>
+
+                <div class="Settings-button">
+                    <h2>Fps und Ram zeigen</h2>
+                    <p>Zeigt Performance-Stats an</p>
+                    <button class="Buttontoggle" id="toggle-fps" onclick="toggleSetting('fps')">Aus</button>
+                </div>
+
+                <div class="Settings-button">
+                    <h2>Material you</h2>
+                    <p>Android-style dynamische Farben</p>
+                    <button class="Buttontoggle" id="toggle-material" onclick="toggleSetting('material')">Aus</button>
+                </div>
+
+                <div class="Settings-button">
+                    <h2>Debug</h2>
+                    <p>Entwickler-Informationen anzeigen</p>
+                    <button class="Buttontoggle" id="toggle-debug" onclick="toggleSetting('debug')">Aus</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Musik Player Overlay -->
+    <div class="Musikoverlay" id="Musik-overlay">
+        <div class="Musik-content">
+            <div class="Musik-header">
+                <h2>Musik player</h2>
+            </div>
+            <div class="Musik-body">
+                <!-- Album Cover -->
+                <div class="Musik-cover-wrap">
+                    <div class="Musik-cover" id="album-cover">
+                        <img src="Res/Bild/Icon/Musikplayer/music_note_2_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" id="cover-img" alt="Cover">
+                    </div>
+                </div>
+
+                <!-- Song Info -->
+                <div class="Musik-info">
+                    <h3 id="song-title">Wähle einen Song</h3>
+                    <p id="song-artist">-</p>
+                </div>
+
+                <!-- Controls -->
+                <div class="Musik-controls">
+                    <button class="Musik-btn-shuffle" id="btn-shuffle" onclick="toggleShuffle()" title="Shuffle">
+                        <img src="Res/Bild/Icon/Musikplayer/shuffle_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Shuffle">
+                    </button>
+                    <button class="Musik-btn-prev" onclick="prevSong()" title="Zurück">
+                        <img src="Res/Bild/Icon/Musikplayer/skip_previous_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Zurück">
+                    </button>
+                    <button class="Musik-btn-play" id="btn-play" onclick="togglePlay()" title="Play/Pause">
+                        <img src="Res/Bild/Icon/Musikplayer/play_arrow_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24 (1).svg" id="play-icon" alt="Play">
+                    </button>
+                    <button class="Musik-btn-next" onclick="nextSong()" title="Weiter">
+                        <img src="Res/Bild/Icon/Musikplayer/skip_next_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Weiter">
+                    </button>
+                    <button class="Musik-btn-repeat" id="btn-repeat" onclick="toggleRepeat()" title="Repeat">
+                        <img src="Res/Bild/Icon/Musikplayer/repeat_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Repeat">
+                    </button>
+                </div>
+
+                <!-- Volume -->
+                <div class="Musik-volume-wrap">
+                    <img src="Res/Bild/Icon/Musikplayer/volume_down_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Leise">
+                    <div class="Musik-volume-bar" id="volume-bar" onclick="setVolume(event)">
+                        <div class="Musik-volume-fill" id="volume-fill"></div>
+                    </div>
+                    <img src="Res/Bild/Icon/Musikplayer/volume_up_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Laut">
+                </div>
+                
+                <!-- Playlist -->
+                <div class="Musik-playlist">
+                    <h4>Playlist</h4>
+                    <div class="Musik-playlist-box" id="playlist-box">
+                        <!-- Wird per JS gefüllt -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="Uploadoverlay" id="Upload-overlay">
+        <div class="Upload-content">
+            <div class="Upload-header">
+                <h2>Musik hochladen</h2>
+            </div>
+            <div class="Upload-body">
+                <div class="Upload-dropzone" id="dropzone">
+                    <img src="Res/Bild/Icon/Musikplayer/upload_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Upload">
+                    <p class="Upload-drop-text">Ziehe MP3-Dateien hier rein!</p>
+                    <p class="Upload-drop-sub">oder klicke zum Auswählen</p>
+                    <input type="file" id="file-input" accept="audio/mp3,audio/mpeg,audio/wav,audio/ogg,audio/flac" multiple>
+                </div>
+                <div class="Upload-liste" id="upload-liste">
+                    <p class="Upload-leer">Noch keine Songs hochgeladen ( ͡° ͜ʖ ͡°)</p>
+                </div>
+            </div>
+            <div class="Upload-footer">
+                <button class="Upload-schliessen" onclick="Uploadtoggle()">Schließen</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Debug Overlay -->
+    <div class="debug-overlay" id="debug-overlay">
+        <div class="debug-header">
+            <h3>Debug Panel</h3>
+            <button class="debug-close" onclick="toggleDebugPanel()">✕</button>
+        </div>
+
+        <!-- 🎵 Audio -->
+        <div class="debug-section">
+            <div class="debug-section-title">🎵 Audio</div>
+            <div class="debug-row"><span class="debug-label">Titel</span><span class="debug-value" id="debug-title">-</span></div>
+            <div class="debug-row"><span class="debug-label">Künstler</span><span class="debug-value" id="debug-artist">-</span></div>
+            <div class="debug-row"><span class="debug-label">Status</span><span class="debug-value" id="debug-status">⏹ Stopped</span></div>
+            <div class="debug-row"><span class="debug-label">Fortschritt</span><span class="debug-value" id="debug-progress">0:00 / 0:00</span></div>
+            <div class="debug-bar-wrap"><div class="debug-bar-fill low" id="debug-progress-bar" style="width: 0%"></div></div>
+            <div class="debug-row" style="margin-top: 8px;"><span class="debug-label">Lautstärke</span><span class="debug-value" id="debug-volume">70%</span></div>
+            <div class="debug-bar-wrap"><div class="debug-bar-fill low" id="debug-volume-bar" style="width: 70%"></div></div>
+            <div class="debug-visualizer" id="debug-visualizer"></div>
+        </div>
+
+        <!-- ⚡ Performance -->
+        <div class="debug-section">
+            <div class="debug-section-title">⚡ Performance</div>
+            <div class="debug-row"><span class="debug-label">FPS</span><span class="debug-value good" id="debug-fps">0</span></div>
+            <div class="debug-row"><span class="debug-label">RAM (JS)</span><span class="debug-value" id="debug-ram">0 MB</span></div>
+            <div class="debug-row"><span class="debug-label">RAM (Gesamt)</span><span class="debug-value" id="debug-ram-total">0 MB</span></div>
+            <div class="debug-row"><span class="debug-label">DOM Nodes</span><span class="debug-value" id="debug-dom">0</span></div>
+            <div class="debug-row"><span class="debug-label">Event Listener</span><span class="debug-value" id="debug-listeners">0</span></div>
+        </div>
+
+        <!-- 🌐 Browser -->
+        <div class="debug-section">
+            <div class="debug-section-title">🌐 Browser</div>
+            <div class="debug-row"><span class="debug-label">Engine</span><span class="debug-value" id="debug-engine">-</span></div>
+            <div class="debug-row"><span class="debug-label">Viewport</span><span class="debug-value" id="debug-viewport">-</span></div>
+            <div class="debug-row"><span class="debug-label">Pixel Ratio</span><span class="debug-value" id="debug-pixel">-</span></div>
+            <div class="debug-row"><span class="debug-label">Touch</span><span class="debug-value" id="debug-touch">-</span></div>
+            <div class="debug-row"><span class="debug-label">Online</span><span class="debug-value" id="debug-online">-</span></div>
+        </div>
+
+        <!-- 🎨 Material You -->
+        <div class="debug-section">
+            <div class="debug-section-title">🎨 Material You</div>
+            <div class="debug-row"><span class="debug-label">Aktiv</span><span class="debug-value" id="debug-material">Aus</span></div>
+            <div class="debug-row"><span class="debug-label">Primär</span><span class="debug-value" id="debug-color-primary"><span style="width: 12px; height: 12px; border-radius: 4px; background: var(--my-primary, #a2bdff); display: inline-block;"></span><span id="debug-color-primary-text">#a2bdff</span></span></div>
+            <div class="debug-row"><span class="debug-label">Surface</span><span class="debug-value" id="debug-color-surface"><span style="width: 12px; height: 12px; border-radius: 4px; background: var(--my-surface, #5f6f96); display: inline-block;"></span><span id="debug-color-surface-text">#5f6f96</span></span></div>
+        </div>
+
+        <!-- ⚙️ Settings -->
+        <div class="debug-section">
+            <div class="debug-section-title">⚙️ Settings</div>
+            <div class="debug-settings-grid" id="debug-settings-grid"></div>
+        </div>
+
+        <!-- 📋 Console -->
+        <div class="debug-section">
+            <div class="debug-section-title">📋 Console</div>
+            <div class="debug-console" id="debug-console">
+                <div class="debug-log-entry"><span class="debug-log-time">--:--</span><span class="debug-log-info">Debug Panel gestartet...</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mini Stats -->
+    <div class="debug-nav-stats" id="debug-nav-stats">
+        <span id="debug-nav-fps">FPS: 0</span> | <span id="debug-nav-ram">RAM: 0MB</span>
+    </div>
+
+    <!-- Hauptnav -->
+    <div class="Nav-hauptbutton">
+        <div class="Nav-flexbutton">
+            <button class="leave-toggle" onclick="window.location.href='index.html'"><img src="Res/Bild/Icon/keyboard_arrow_left_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></button>
+            <button class="Musikplayer-toggle" id="nav-musik-btn" onclick="Musiktoggle()"><img src="Res/Bild/Icon/music_note_2_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></button>
+            <button class="Upload-toggle" onclick="Uploadtoggle()"><img src="Res/Bild/Icon/Musikplayer/upload_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></button>
+            <button class="Desgin-toggle" onclick="Designtoggle()"><img src="Res/Bild/Icon/brush_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></button>
+            <button class="Einstellung-toggle" onclick="Settingstoggle()"><img src="Res/Bild/Icon/settings_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></button>
+        </div>
+        <div class="Musik-progress-wrap">
+            <span class="Aktivzeit" id="aktiv-zeit">0:00</span>
+            <div class="Musik-PorgressBar" id="Progressbar" onclick="seek(event)">
+                <div class="Musik-PorgressBar-fill" id="Progressbar-fill"></div>
+                <span class="Musiktitle" id="nav-musik-title">Kein Song</span>
+            </div>
+            <span class="Totalzeit" id="total-zeit">0:00</span>
+        </div>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="audio-player" preload="metadata"></audio>
+
+        <script>
+
+        const songs = [
+            {
+                title: "Good night lofi",
+                artist: "Fassound",
+                src: "Res/Musik/fassounds-good-night-lofi-cozy-chill-music-160166.mp3",
+                cover: "Res/Bild/Cover/dreaming.jpg"
+            },
+            {
+                title: "Background music",
+                artist: "Nastelbom",
+                src: "/Res/Musik/nastelbom-background-music-463062.mp3",
+                cover: "Res/Bild/Cover/dreaming.jpg"
+            },
+            {
+                title: "Space shuttle",
+                artist: "The_mountain",
+                src: "Res/Musik/the_mountain-space-shuttle-153639.mp3",
+                cover: "Res/Bild/Cover/dreaming.jpg"
+            },
+            {
+                title: "Dark spectrometer",
+                artist: "Samuelfijohans",
+                src: "Res/Musik/samuelfjohanns-dark-spectrometer-11713.mp3",
+                cover: "Res/Bild/Cover/dreaming.jpg"
+            },
+        ];
+
+        let currentSongIndex = 0;
+        let isPlaying = false;
+        let isShuffle = false;
+        let repeatMode = 0;
+        let settings = {
+            lights: false,
+            fps: false,
+            material: false,
+            debug: false
+        };
+
+
+        const audio = document.getElementById('audio-player');
+        const playIcon = document.getElementById('play-icon');
+        const btnPlay = document.getElementById('btn-play');
+        const btnShuffle = document.getElementById('btn-shuffle');
+        const btnRepeat = document.getElementById('btn-repeat');
+        const progressBar = document.getElementById('Progressbar');
+        const progressFill = document.getElementById('Progressbar-fill');
+        const volumeBar = document.getElementById('volume-bar');
+        const volumeFill = document.getElementById('volume-fill');
+        const songTitle = document.getElementById('song-title');
+        const songArtist = document.getElementById('song-artist');
+        const coverImg = document.getElementById('cover-img');
+        const albumCover = document.getElementById('album-cover');
+        const aktivZeit = document.getElementById('aktiv-zeit');
+        const totalZeit = document.getElementById('total-zeit');
+        const navMusikTitle = document.getElementById('nav-musik-title');
+        const playlistBox = document.getElementById('playlist-box');
+        const navMusikBtn = document.getElementById('nav-musik-btn');
+        const dropzone = document.getElementById('dropzone');
+        const fileInput = document.getElementById('file-input');
+        const uploadListe = document.getElementById('upload-liste');
+
+        // (SVG Data-URI Fallbacks)
+
+        const icons = {
+            play: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23ffffff'%3E%3Cpath d='M320-200v-560l440 280-440 280Z'/%3E%3C/svg%3E",
+            pause: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23ffffff'%3E%3Cpath d='M520-200v-560h240v560H520Zm-320 0v-560h240v560H200Z'/%3E%3C/svg%3E",
+            shuffle: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23ffffff'%3E%3Cpath d='M560-160v-80h104L537-367l57-57 126 126v-102h80v240H560Zm-344 0-56-56 504-504H560v-80h240v240h-80v-104L216-160Zm151-377L160-728l56-56 207 207-56 56Z'/%3E%3C/svg%3E",
+            shuffleOn: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23a2bdff'%3E%3Cpath d='M560-160v-80h104L537-367l57-57 126 126v-102h80v240H560Zm-344 0-56-56 504-504H560v-80h240v240h-80v-104L216-160Zm151-377L160-728l56-56 207 207-56 56Z'/%3E%3C/svg%3E",
+            repeat: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23ffffff'%3E%3Cpath d='M280-80 120-240l160-160 56 58-62 62h406v-160h80v240H274l62 62-56 58Zm-80-440v-240h486l-62-62 56-58 160 160-160 160-56-58 62-62H280v160h-80Z'/%3E%3C/svg%3E",
+            repeatOn: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23a2bdff'%3E%3Cpath d='M280-80 120-240l160-160 56 58-62 62h406v-160h80v240H274l62 62-56 58Zm-80-440v-240h486l-62-62 56-58 160 160-160 160-56-58 62-62H280v160h-80Z'/%3E%3C/svg%3E",
+            repeatOne: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23ff8e8e'%3E%3Cpath d='M280-80 120-240l160-160 56 58-62 62h406v-160h80v240H274l62 62-56 58Zm-80-440v-240h486l-62-62 56-58 160 160-160 160-56-58 62-62H280v160h-80Zm240-120v-80h80v80h-80Z'/%3E%3C/svg%3E",
+            music: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23ffffff'%3E%3Cpath d='M400-120q-66 0-113-47t-47-113q0-66 47-113t113-47q23 0 42.5 5.5T480-418v-422h240v160H560v400q0 66-47 113t-113 47Z'/%3E%3C/svg%3E"
+        };
+
+
+        function rgbToHsl(r, g, b) {
+            r /= 255; g /= 255; b /= 255;
+            const max = Math.max(r, g, b), min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+            if (max === min) { h = s = 0; }
+            else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+                    case g: h = ((b - r) / d + 2) / 6; break;
+                    case b: h = ((r - g) / d + 4) / 6; break;
+                }
+            }
+            return { h: h || 0, s: s || 0, l: l };
+        }
+
+        function hslToRgb(h, s, l) {
+            let r, g, b;
+            if (s === 0) { r = g = b = l; }
+            else {
+                const hue2rgb = (p, q, t) => {
+                    if (t < 0) t += 1;
+                    if (t > 1) t -= 1;
+                    if (t < 1/6) return p + (q - p) * 6 * t;
+                    if (t < 1/2) return q;
+                    if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                    return p;
+                };
+                const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                const p = 2 * l - q;
+                r = hue2rgb(p, q, h + 1/3);
+                g = hue2rgb(p, q, h);
+                b = hue2rgb(p, q, h - 1/3);
+            }
+            return { r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255) };
+        }
+
+        function rgbToHex(r, g, b) {
+            return '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+        }
+
+        function extractColorsFromCover(imgSrc) {
+            return new Promise((resolve) => {
+                const img = new Image();
+
+                if (imgSrc.startsWith('http') && !imgSrc.includes(window.location.host)) {
+                    img.crossOrigin = "Anonymous";
+                }
+
+                img.onload = () => {
+                    try {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        canvas.width = 64;
+                        canvas.height = 64;
+                        ctx.drawImage(img, 0, 0, 64, 64);
+
+                        const imageData = ctx.getImageData(0, 0, 64, 64).data;
+                        let r = 0, g = 0, b = 0, count = 0;
+
+                        for (let i = 0; i < imageData.length; i += 4) {
+                            const brightness = (imageData[i] + imageData[i+1] + imageData[i+2]) / 3;
+                            if (brightness > 20 && brightness < 240) {
+                                r += imageData[i];
+                                g += imageData[i+1];
+                                b += imageData[i+2];
+                                count++;
+                            }
+                        }
+
+                        if (count === 0) count = 1;
+
+                        const primary = {
+                            r: Math.round(r / count),
+                            g: Math.round(g / count),
+                            b: Math.round(b / count)
+                        };
+
+                        const hsl = rgbToHsl(primary.r, primary.g, primary.b);
+
+                        const primaryColor = hslToRgb(hsl.h, Math.min(hsl.s * 1.2, 0.8), 0.75);
+                        const darkColor = hslToRgb(hsl.h, hsl.s * 0.6, 0.25);
+                        const surfaceColor = hslToRgb(hsl.h, hsl.s * 0.5, 0.45);
+                        const surfaceDarkColor = hslToRgb(hsl.h, hsl.s * 0.4, 0.2);
+                        const accentColor = hslToRgb(hsl.h, hsl.s * 0.7, 0.6);
+
+                        resolve({
+                            primary: rgbToHex(primaryColor.r, primaryColor.g, primaryColor.b),
+                            primaryDark: rgbToHex(darkColor.r, darkColor.g, darkColor.b),
+                            surface: rgbToHex(surfaceColor.r, surfaceColor.g, surfaceColor.b),
+                            surfaceDark: rgbToHex(surfaceDarkColor.r, surfaceDarkColor.g, surfaceDarkColor.b),
+                            accent: rgbToHex(accentColor.r, accentColor.g, accentColor.b)
+                        });
+                    } catch (e) {
+                        resolve(null);
+                    }
+                };
+
+                img.onerror = () => resolve(null);
+                img.src = imgSrc;
+            });
+        }
+
+        async function applyMaterialYouColors() {
+            if (!settings.material) return;
+
+            const currentSong = songs[currentSongIndex];
+            if (!currentSong || !currentSong.cover) {
+                document.documentElement.style.setProperty('--my-primary', '#a2bdff');
+                document.documentElement.style.setProperty('--my-primary-dark', '#3e4b71');
+                document.documentElement.style.setProperty('--my-surface', '#5f6f96');
+                document.documentElement.style.setProperty('--my-surface-dark', '#3e4a69');
+                document.documentElement.style.setProperty('--my-accent', '#8fa1cf');
+                return;
+            }
+
+            const colors = await extractColorsFromCover(currentSong.cover);
+            if (!colors) return;
+
+            document.documentElement.style.setProperty('--my-primary', colors.primary);
+            document.documentElement.style.setProperty('--my-primary-dark', colors.primaryDark);
+            document.documentElement.style.setProperty('--my-surface', colors.surface);
+            document.documentElement.style.setProperty('--my-surface-dark', colors.surfaceDark);
+            document.documentElement.style.setProperty('--my-accent', colors.accent);
+
+            if (settings.debug) {
+                console.log('🎨 Material You Farben:', colors);
+            }
+        }
+
+        // Musik player
+
+        function init() {
+            renderPlaylist();
+            loadSong(currentSongIndex);
+            audio.volume = 0.7;
+            updateVolumeVisual(0.7);
+
+            audio.addEventListener('timeupdate', updateProgress);
+            audio.addEventListener('loadedmetadata', updateDuration);
+            audio.addEventListener('ended', handleSongEnd);
+            audio.addEventListener('error', handleAudioError);
+            document.addEventListener('keydown', handleKeydown);
+            loadSettings();
+            initDebug();
+        }
+
+        //  PLaylist
+
+        function renderPlaylist() {
+            playlistBox.innerHTML = '';
+            songs.forEach((song, index) => {
+                const item = document.createElement('div');
+                item.className = 'Musik-playlist-item' + (index === currentSongIndex ? ' active' : '');
+                item.onclick = () => playSong(index);
+                item.innerHTML = `
+                    <span class="playlist-num">${String(index + 1).padStart(2, '0')}</span>
+                    <div class="playlist-info">
+                        <span class="playlist-title">${song.title}</span>
+                        <span class="playlist-artist">${song.artist}</span>
+                    </div>
+                    ${index === currentSongIndex && isPlaying ? '<span class="playlist-playing">▶</span>' : ''}
+                `;
+                playlistBox.appendChild(item);
+            });
+        }
+
+
+        // Musik steurung
+
+        function loadSong(index) {
+            const song = songs[index];
+            audio.src = song.src;
+            songTitle.textContent = song.title;
+            songArtist.textContent = song.artist;
+            navMusikTitle.textContent = song.title;
+            albumCover.setAttribute('data-title', song.title);
+
+            const img = new Image();
+            img.onload = () => { 
+                coverImg.src = song.cover; 
+                applyMaterialYouColors();
+            };
+            img.onerror = () => { 
+                coverImg.src = icons.music; 
+            };
+            img.src = song.cover;
+
+            updatePlaylistActive();
+        }
+
+        function playSong(index) {
+            currentSongIndex = index;
+            loadSong(index);
+            play();
+        }
+
+        function togglePlay() {
+            if (isPlaying) pause(); else play();
+        }
+
+        function play() {
+            audio.play().then(() => {
+                isPlaying = true;
+                playIcon.src = icons.pause;
+                btnPlay.classList.add('playing');
+                albumCover.classList.add('playing');
+                updatePlaylistActive();
+            }).catch(err => {
+                console.warn('Play failed:', err);
+            });
+        }
+
+        function pause() {
+            audio.pause();
+            isPlaying = false;
+            playIcon.src = icons.play;
+            btnPlay.classList.remove('playing');
+            albumCover.classList.remove('playing');
+            updatePlaylistActive();
+        }
+
+        function nextSong() {
+            if (isShuffle) {
+                currentSongIndex = Math.floor(Math.random() * songs.length);
+            } else {
+                currentSongIndex = (currentSongIndex + 1) % songs.length;
+            }
+            loadSong(currentSongIndex);
+            if (isPlaying) play();
+        }
+
+        function prevSong() {
+            if (audio.currentTime > 3) {
+                audio.currentTime = 0;
+            } else {
+                currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+                loadSong(currentSongIndex);
+                if (isPlaying) play();
+            }
+        }
+
+        function handleSongEnd() {
+            if (repeatMode === 2) {
+                audio.currentTime = 0;
+                play();
+            } else if (repeatMode === 1 || isShuffle) {
+                nextSong();
+            } else if (currentSongIndex < songs.length - 1) {
+                nextSong();
+            } else {
+                pause();
+                audio.currentTime = 0;
+                updateProgress();
+            }
+        }
+
+        function handleAudioError() {
+            console.warn('Audio konnte nicht geladen werden:', songs[currentSongIndex].src);
+            setTimeout(() => nextSong(), 500);
+        }
+
+        function toggleShuffle() {
+            isShuffle = !isShuffle;
+            const img = btnShuffle.querySelector('img');
+            img.src = isShuffle ? icons.shuffleOn : icons.shuffle;
+            btnShuffle.classList.toggle('active', isShuffle);
+        }
+
+        function toggleRepeat() {
+            repeatMode = (repeatMode + 1) % 3;
+            const img = btnRepeat.querySelector('img');
+            btnRepeat.classList.remove('active', 'one');
+            if (repeatMode === 0) img.src = icons.repeat;
+            else if (repeatMode === 1) { img.src = icons.repeatOn; btnRepeat.classList.add('active'); }
+            else { img.src = icons.repeatOne; btnRepeat.classList.add('active', 'one'); }
+        }
+
+
+        function updateProgress() {
+            if (!audio.duration) return;
+            const percent = (audio.currentTime / audio.duration) * 100;
+            progressFill.style.width = percent + '%';
+            aktivZeit.textContent = formatTime(audio.currentTime);
+        }
+
+        function updateDuration() {
+            totalZeit.textContent = formatTime(audio.duration || 0);
+        }
+
+        function seek(event) {
+            if (!audio.duration) return;
+            const rect = progressBar.getBoundingClientRect();
+            const percent = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+            audio.currentTime = percent * audio.duration;
+            updateProgress();
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return '0:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${String(secs).padStart(2, '0')}`;
+        }
+
+        function setVolume(event) {
+            const rect = volumeBar.getBoundingClientRect();
+            const percent = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+            audio.volume = percent;
+            updateVolumeVisual(percent);
+        }
+
+        function updateVolumeVisual(percent) {
+            volumeFill.style.width = (percent * 100) + '%';
+        }
+
+        function updatePlaylistActive() {
+            const items = playlistBox.querySelectorAll('.Musik-playlist-item');
+            items.forEach((item, index) => {
+                item.classList.toggle('active', index === currentSongIndex);
+                const playingIndicator = item.querySelector('.playlist-playing');
+                if (playingIndicator) {
+                    playingIndicator.textContent = (index === currentSongIndex && isPlaying) ? '▶' : '';
+                }
+            });
+        }
+
+        function handleKeydown(e) {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            switch(e.code) {
+                case 'Space': e.preventDefault(); togglePlay(); break;
+                case 'ArrowRight': e.preventDefault(); nextSong(); break;
+                case 'ArrowLeft': e.preventDefault(); prevSong(); break;
+                case 'ArrowUp': e.preventDefault(); audio.volume = Math.min(1, audio.volume + 0.1); updateVolumeVisual(audio.volume); break;
+                case 'ArrowDown': e.preventDefault(); audio.volume = Math.max(0, audio.volume - 0.1); updateVolumeVisual(audio.volume); break;
+                case 'KeyM': Musiktoggle(); break;
+                case 'KeyS': Settingstoggle(); break;
+            }
+        }
+
+        dropzone.addEventListener('click', () => fileInput.click());
+        dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
+        dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
+        fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
+
+        function handleFiles(files) {
+            Array.from(files).forEach(file => {
+                if (!file.type.startsWith('audio/')) return;
+                processAudioFile(file);
+            });
+        }
+
+        function processAudioFile(file) {
+            const url = URL.createObjectURL(file);
+            jsmediatags.read(file, {
+                onSuccess: (tag) => {
+                    const tags = tag.tags;
+                    const newSong = {
+                        title: tags.title || file.name.replace(/\.[^/.]+$/, ""),
+                        artist: tags.artist || "Unbekannt",
+                        src: url,
+                        cover: null,
+                        isUpload: true
+                    };
+                    if (tags.picture) {
+                        const { data, format } = tags.picture;
+                        const byteArray = new Uint8Array(data);
+                        const blob = new Blob([byteArray], { type: format });
+                        newSong.cover = URL.createObjectURL(blob);
+                    }
+                    addUploadedSong(newSong);
+                },
+                onError: () => {
+                    addUploadedSong({
+                        title: file.name.replace(/\.[^/.]+$/, ""),
+                        artist: "Unbekannt",
+                        src: url,
+                        cover: null,
+                        isUpload: true
+                    });
+                }
+            });
+        }
+
+        function addUploadedSong(song) {
+            songs.push(song);
+            renderPlaylist();
+            renderUploadListe();
+            if (songs.length === 1 || !isPlaying) {
+                currentSongIndex = songs.length - 1;
+                loadSong(currentSongIndex);
+                play();
+            }
+        }
+
+        function renderUploadListe() {
+            const uploads = songs.filter(s => s.isUpload);
+            uploadListe.innerHTML = '';
+            if (uploads.length === 0) {
+                uploadListe.innerHTML = '<p class="Upload-leer">Noch keine Songs hochgeladen ( ͡° ͜ʖ ͡°)</p>';
+                return;
+            }
+            uploads.forEach((song) => {
+                const realIndex = songs.indexOf(song);
+                const item = document.createElement('div');
+                item.className = 'Upload-item';
+                item.innerHTML = `
+                    <div class="Upload-item-cover">
+                        ${song.cover ? `<img src="${song.cover}" alt="Cover">` : '<span>🎵</span>'}
+                    </div>
+                    <div class="Upload-item-info">
+                        <span class="Upload-item-title">${song.title}</span>
+                        <span class="Upload-item-artist">${song.artist}</span>
+                    </div>
+                    <div class="Upload-item-actions">
+                        <button class="Upload-item-play" onclick="playSong(${realIndex})" title="Abspielen">▶</button>
+                        <button class="Upload-item-delete" onclick="deleteUpload(${realIndex})" title="Löschen">✕</button>
+                    </div>
+                `;
+                uploadListe.appendChild(item);
+            });
+        }
+
+        function deleteUpload(index) {
+            const song = songs[index];
+            if (song.src && song.src.startsWith('blob:')) URL.revokeObjectURL(song.src);
+            if (song.cover && song.cover.startsWith('blob:')) URL.revokeObjectURL(song.cover);
+            songs.splice(index, 1);
+            if (currentSongIndex >= index && currentSongIndex > 0) currentSongIndex--;
+            if (currentSongIndex >= songs.length) currentSongIndex = Math.max(0, songs.length - 1);
+            if (songs.length > 0) {
+                loadSong(currentSongIndex);
+                if (isPlaying) play();
+            } else {
+                pause(); audio.src = '';
+                songTitle.textContent = 'Wähle einen Song';
+                songArtist.textContent = '-';
+                navMusikTitle.textContent = 'Kein Song';
+                coverImg.src = icons.music;
+            }
+            renderPlaylist();
+            renderUploadListe();
+        }
+
+        function Uploadtoggle() {
+            document.querySelector('.Uploadoverlay').classList.toggle('Upload-active');
+            renderUploadListe();
+        }
+
+        document.getElementById('Upload-overlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('Upload-overlay')) Uploadtoggle();
+        });
+
+        (function() {
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js';
+            script.onload = () => { window.jsmediatags = window.jsmediatags || window.JsMediaTags; };
+            document.head.appendChild(script);
+        })();
+
+        function closeWarung() {
+            document.querySelector('.Warungoverlay').classList.toggle('Warung-active');
+        }
+
+        function Settingstoggle() {
+            document.querySelector('.Settingsoverlay').classList.toggle('Settings-active');
+        }
+
+        function Musiktoggle() {
+            document.querySelector('.Musikoverlay').classList.toggle('Musik-active');
+            navMusikBtn.classList.toggle('active');
+        }
+
+        function Designtoggle() {
+            alert('Design-Overlay kommt bald! (◕‿◕)');
+        }
+
+        document.getElementById('Settings-overlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('Settings-overlay')) Settingstoggle();
+        });
+
+        document.getElementById('Musik-overlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('Musik-overlay')) Musiktoggle();
+        });
+
+        function toggleSetting(key) {
+            settings[key] = !settings[key];
+            const btn = document.getElementById('toggle-' + key);
+            btn.textContent = settings[key] ? 'An' : 'Aus';
+            btn.classList.toggle('active', settings[key]);
+            localStorage.setItem('mayi-settings', JSON.stringify(settings));
+            applySettings(key);
+        }
+
+        function applySettings(key) {
+            switch(key) {
+                case 'lights':
+                    document.body.classList.toggle('reduced-lights', settings.lights);
+                    break;
+                case 'fps':
+                    toggleFpsDisplay();
+                    break;
+                case 'material':
+                    document.body.classList.toggle('material-you', settings.material);
+                    if (settings.material) applyMaterialYouColors();
+                    break;
+                case 'debug':
+                    document.body.classList.toggle('debug-mode', settings.debug);
+                    break;
+            }
+        }
+
+        function loadSettings() {
+            const saved = localStorage.getItem('mayi-settings');
+            if (saved) {
+                settings = JSON.parse(saved);
+                Object.keys(settings).forEach(key => {
+                    const btn = document.getElementById('toggle-' + key);
+                    if (btn) {
+                        btn.textContent = settings[key] ? 'An' : 'Aus';
+                        btn.classList.toggle('active', settings[key]);
+                        applySettings(key);
+                    }
+                });
+            }
+        }
+
+
+        let fpsDisplay = null;
+        let fpsFrameCount = 0;
+        let fpsLastTime = performance.now();
+
+        function toggleFpsDisplay() {
+            if (settings.fps) {
+                if (!fpsDisplay) {
+                    fpsDisplay = document.createElement('div');
+                    fpsDisplay.className = 'fps-display';
+                    document.body.appendChild(fpsDisplay);
+                }
+                fpsDisplay.style.display = 'block';
+                requestAnimationFrame(updateFps);
+            } else if (fpsDisplay) {
+                fpsDisplay.style.display = 'none';
+            }
+        }
+
+        function updateFps() {
+            if (!settings.fps) return;
+            fpsFrameCount++;
+            const now = performance.now();
+            if (now - fpsLastTime >= 1000) {
+                const fps = Math.round((fpsFrameCount * 1000) / (now - fpsLastTime));
+                const memory = performance.memory ? Math.round(performance.memory.usedJSHeapSize / 1048576) : 0;
+                fpsDisplay.textContent = `FPS: ${fps} | RAM: ${memory}MB`;
+                fpsFrameCount = 0;
+                fpsLastTime = now;
+            }
+            requestAnimationFrame(updateFps);
+        }
+
+
+        let debugPanelVisible = true;
+        let debugLogs = [];
+        const MAX_LOGS = 50;
+
+        function initDebug() {
+            // Visualizer Bars erstellen
+            const vizContainer = document.getElementById('debug-visualizer');
+            for (let i = 0; i < 20; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'debug-viz-bar';
+                bar.style.height = '2px';
+                vizContainer.appendChild(bar);
+            }
+
+            // Browser Info
+            document.getElementById('debug-engine').textContent = 
+                navigator.userAgent.includes('Chrome') ? 'Blink (Chrome)' :
+                navigator.userAgent.includes('Firefox') ? 'Gecko (Firefox)' :
+                navigator.userAgent.includes('Safari') ? 'WebKit (Safari)' : 'Unknown';
+            
+            updateDebugBrowserInfo();
+            window.addEventListener('resize', updateDebugBrowserInfo);
+            
+            // Online/Offline
+            window.addEventListener('online', () => debugLog('🌐 Online!', 'info'));
+            window.addEventListener('offline', () => debugLog('🌐 Offline!', 'warn'));
+            
+            // Settings Grid
+            renderDebugSettings();
+            
+            // Start Update Loop
+            requestAnimationFrame(debugUpdateLoop);
+        }
+
+        function updateDebugBrowserInfo() {
+            document.getElementById('debug-viewport').textContent = `${window.innerWidth}x${window.innerHeight}`;
+            document.getElementById('debug-pixel').textContent = window.devicePixelRatio.toFixed(2);
+            document.getElementById('debug-touch').textContent = 'ontouchstart' in window ? '✅ Ja' : '❌ Nein';
+            document.getElementById('debug-online').textContent = navigator.onLine ? '🟢 Online' : '🔴 Offline';
+        }
+
+        function debugUpdateLoop() {
+            if (!settings.debug) {
+                requestAnimationFrame(debugUpdateLoop);
+                return;
+            }
+
+            // FPS
+            fpsFrameCount++;
+            const now = performance.now();
+            if (now - fpsLastTime >= 1000) {
+                const fps = Math.round((fpsFrameCount * 1000) / (now - fpsLastTime));
+                document.getElementById('debug-fps').textContent = fps;
+                document.getElementById('debug-nav-fps').textContent = `FPS: ${fps}`;
+                
+                const fpsEl = document.getElementById('debug-fps');
+                fpsEl.className = fps >= 55 ? 'debug-value good' : fps >= 30 ? 'debug-value warn' : 'debug-value error';
+                
+                fpsFrameCount = 0;
+                fpsLastTime = now;
+            }
+
+            // RAM
+            if (performance.memory) {
+                const used = Math.round(performance.memory.usedJSHeapSize / 1048576);
+                const total = Math.round(performance.memory.totalJSHeapSize / 1048576);
+                const limit = Math.round(performance.memory.jsHeapSizeLimit / 1048576);
+                
+                document.getElementById('debug-ram').textContent = `${used} MB`;
+                document.getElementById('debug-ram-total').textContent = `${total} / ${limit} MB`;
+                document.getElementById('debug-nav-ram').textContent = `RAM: ${used}MB`;
+                
+                const ramPercent = used / limit;
+                const ramEl = document.getElementById('debug-ram');
+                ramEl.className = ramPercent < 0.5 ? 'debug-value good' : ramPercent < 0.8 ? 'debug-value warn' : 'debug-value error';
+            }
+
+            // DOM Nodes
+            document.getElementById('debug-dom').textContent = document.getElementsByTagName('*').length;
+            document.getElementById('debug-listeners').textContent = '~20';
+
+            // Audio Info
+            if (songs[currentSongIndex]) {
+                document.getElementById('debug-title').textContent = songs[currentSongIndex].title;
+                document.getElementById('debug-artist').textContent = songs[currentSongIndex].artist;
+            }
+            
+            document.getElementById('debug-status').textContent = isPlaying ? '▶ Playing' : '⏹ Stopped';
+            document.getElementById('debug-status').className = isPlaying ? 'debug-value good' : 'debug-value info';
+            
+            document.getElementById('debug-progress').textContent = 
+                `${formatTime(audio.currentTime)} / ${formatTime(audio.duration || 0)}`;
+            
+            const progressPercent = audio.duration ? (audio.currentTime / audio.duration * 100) : 0;
+            document.getElementById('debug-progress-bar').style.width = `${progressPercent}%`;
+            
+            document.getElementById('debug-volume').textContent = `${Math.round(audio.volume * 100)}%`;
+            document.getElementById('debug-volume-bar').style.width = `${audio.volume * 100}%`;
+
+            // Visualizer (simuliert)
+            if (isPlaying) {
+                const bars = document.querySelectorAll('.debug-viz-bar');
+                bars.forEach(bar => {
+                    bar.style.height = `${Math.random() * 36 + 2}px`;
+                });
+            }
+
+            // Material You
+            document.getElementById('debug-material').textContent = settings.material ? '✅ An' : '❌ Aus';
+            if (settings.material) {
+                const primary = getComputedStyle(document.documentElement).getPropertyValue('--my-primary').trim() || '#a2bdff';
+                const surface = getComputedStyle(document.documentElement).getPropertyValue('--my-surface').trim() || '#5f6f96';
+                document.getElementById('debug-color-primary-text').textContent = primary;
+                document.getElementById('debug-color-surface-text').textContent = surface;
+            }
+
+            requestAnimationFrame(debugUpdateLoop);
+        }
+
+        function debugLog(message, type = 'info') {
+            const consoleEl = document.getElementById('debug-console');
+            const time = new Date().toLocaleTimeString('de-DE', { hour12: false });
+            
+            const entry = document.createElement('div');
+            entry.className = 'debug-log-entry';
+            entry.innerHTML = `<span class="debug-log-time">${time}</span><span class="debug-log-${type}">${message}</span>`;
+            
+            consoleEl.insertBefore(entry, consoleEl.firstChild);
+            
+            while (consoleEl.children.length > MAX_LOGS) {
+                consoleEl.removeChild(consoleEl.lastChild);
+            }
+        }
+
+        function renderDebugSettings() {
+            const grid = document.getElementById('debug-settings-grid');
+            const settingNames = {
+                lights: 'Reduced Lights',
+                fps: 'FPS Display',
+                material: 'Material You',
+                debug: 'Debug Mode'
+            };
+            
+            grid.innerHTML = '';
+            Object.keys(settings).forEach(key => {
+                const item = document.createElement('div');
+                item.className = 'debug-setting-item';
+                item.innerHTML = `
+                    <span class="debug-setting-dot ${settings[key] ? 'on' : 'off'}"></span>
+                    <span>${settingNames[key] || key}</span>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        function toggleDebugPanel() {
+            debugPanelVisible = !debugPanelVisible;
+            document.getElementById('debug-overlay').style.display = debugPanelVisible ? 'block' : 'none';
+        }
+
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
