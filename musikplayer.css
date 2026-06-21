@@ -11,7 +11,6 @@ body.material-you {
     transition: background-color 0.8s ease, color 0.8s ease;
 }
 
-/* Dynamische Farben werden per CSS-Variablen gesetzt */
 body.material-you {
     --my-primary: #a2bdff;
     --my-primary-dark: #3e4b71;
@@ -22,12 +21,10 @@ body.material-you {
     --my-text-secondary: #c9d8ff;
 }
 
-/* Background */
 body.material-you {
     background-color: var(--my-surface-dark);
 }
 
-/* Overlays */
 body.material-you .Musik-content,
 body.material-you .Settings-content,
 body.material-you .Upload-content {
@@ -42,7 +39,6 @@ body.material-you .Uploadoverlay.Upload-active {
     background: rgba(0, 0, 0, 0.4);
 }
 
-/* Buttons */
 body.material-you .verstanden-button {
     background-color: var(--my-primary);
     color: var(--my-primary-dark);
@@ -83,7 +79,6 @@ body.material-you .Nav-flexbutton button.active {
     box-shadow: 0 0 18px var(--my-primary);
 }
 
-/* Playlist */
 body.material-you .Musik-playlist-box,
 body.material-you .Upload-liste {
     background: var(--my-surface-dark);
@@ -102,7 +97,6 @@ body.material-you .Upload-item-play:hover {
     box-shadow: 0 0 10px var(--my-primary);
 }
 
-/* Settings */
 body.material-you .Settings-box {
     background: var(--my-surface-dark);
 }
@@ -159,7 +153,6 @@ body.material-you .Upload-schliessen:hover {
     box-shadow: 0 0 14px var(--my-primary-dark);
 }
 
-/* Progress Bar */
 body.material-you .Musik-PorgressBar:hover {
     flex: 0.35;
 }
@@ -172,7 +165,6 @@ body.material-you .Musik-cover.playing {
     box-shadow: 0 0 30px var(--my-primary);
 }
 
-/* Song Info */
 body.material-you .Musik-info h3 {
     color: var(--my-text);
 }
@@ -197,14 +189,12 @@ body.material-you .Upload-item-artist {
     color: var(--my-primary);
 }
 
-/* Header */
 body.material-you .Musik-header h2,
 body.material-you .Settings-header h2,
 body.material-you .Upload-header h2 {
     color: var(--my-text);
 }
 
-/* Warung */
 body.material-you .Warung-header {
     color: #ff8e8e;
 }
@@ -429,7 +419,357 @@ body.material-you .Warung-button .verstanden-button {
 .Settings-button:hover {
     padding: 32px 18px;
     box-shadow: 0 0 18px #bacdff;
-} 
+}
+
+.Designoverlay {
+    z-index: 16000;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: #42537d00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.Designoverlay.Design-active {
+    background: rgba(25, 30, 50, 0.355);
+    opacity: 1;
+    pointer-events: all;
+}
+
+.Designoverlay.Design-active .Design-content {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+.Design-content {
+    background: #5f6f96;
+    border: 2px solid #8fa1cf;
+    border-radius: 28px;
+    padding: 32px 36px;
+    width: 90%;
+    max-width: 520px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    color: #c9d8ff;
+    transform: scale(0.95) translateY(-10px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 0 50px rgba(99, 115, 154, 0.5);
+    overflow-y: auto;
+}
+
+.Design-header h2 {
+    margin: 0 0 20px 0;
+    font-size: 1.85rem;
+    color: #ffffff;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.Design-upload-section {
+    margin-bottom: 20px;
+    background: #3e4a69;
+    border-radius: 14px;
+    padding: 16px;
+}
+
+.Design-upload-section h3 {
+    margin: 0 0 12px 0;
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+.Design-upload-section p {
+    margin: 0 0 12px 0;
+    font-size: 0.85rem;
+    color: #a2bdff;
+    opacity: 0.8;
+}
+
+.Design-dropzone {
+    border: 2px dashed #8fa1cf;
+    border-radius: 14px;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(62, 74, 105, 0.3);
+}
+
+.Design-dropzone:hover {
+    border-color: #a2bdff;
+    background: rgba(162, 189, 255, 0.1);
+}
+
+.Design-dropzone.dragover {
+    border-color: #a2bdff;
+    background: rgba(162, 189, 255, 0.2);
+    transform: scale(1.02);
+}
+
+.Design-dropzone img {
+    width: 36px; height: 36px;
+    margin-bottom: 8px;
+    opacity: 0.7;
+}
+
+.Design-dropzone p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #ffffff;
+}
+
+.Design-dropzone input[type="file"] {
+    display: none;
+}
+
+.Design-preview {
+    margin-top: 12px;
+    border-radius: 10px;
+    overflow: hidden;
+    max-height: 150px;
+    display: none;
+}
+
+.Design-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.Design-preview.active {
+    display: block;
+}
+
+.Design-schliessen {
+    width: 100%;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 14px;
+    background-color: #bacdff;
+    color: #5f6f96;
+    font-family: Google-sans;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.Design-schliessen:hover {
+    padding: 14px 48px;
+    background-color: #3e4b71;
+    color: #a2bdff;
+    box-shadow: 0 0 14px #3e4b71;
+}
+
+.Window-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.Window-container.active {
+    pointer-events: all;
+}
+
+.Design-window {
+    position: absolute;
+    min-width: 120px;
+    min-height: 80px;
+    background: rgba(25, 30, 50, 0.7);
+    border: 2px solid #8fa1cf;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    cursor: move;
+    user-select: none;
+    transition: box-shadow 0.2s ease, transform 0.1s ease;
+    backdrop-filter: blur(8px);
+}
+
+.Design-window:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    border-color: #a2bdff;
+}
+
+.Design-window.dragging {
+    opacity: 0.9;
+    transform: scale(1.02);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+    z-index: 1000 !important;
+}
+
+.Design-window.resizing {
+    opacity: 0.9;
+}
+
+.Window-titlebar {
+    height: 32px;
+    background: rgba(62, 74, 105, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    cursor: move;
+    border-bottom: 1px solid rgba(143, 161, 207, 0.2);
+}
+
+.Window-title {
+    font-size: 0.75rem;
+    color: #c9d8ff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 60%;
+}
+
+.Window-controls {
+    display: flex;
+    gap: 6px;
+}
+
+.Window-btn {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.Window-btn-close {
+    background: #ff8e8e;
+}
+
+.Window-btn-close:hover {
+    background: #ff5555;
+    transform: scale(1.2);
+    box-shadow: 0 0 8px #ff8e8e;
+}
+
+.Window-btn-minimize {
+    background: #ffcc00;
+}
+
+.Window-btn-minimize:hover {
+    background: #ffaa00;
+    transform: scale(1.2);
+}
+
+.Window-content {
+    width: 100%;
+    height: calc(100% - 32px);
+    overflow: hidden;
+    position: relative;
+}
+
+.Window-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    user-select: none;
+}
+
+.Window-resize {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 20px; height: 20px;
+    cursor: se-resize;
+    background: linear-gradient(135deg, transparent 50%, rgba(162, 189, 255, 0.5) 50%);
+    border-radius: 0 0 14px 0;
+    transition: background 0.2s ease;
+}
+
+.Window-resize:hover {
+    background: linear-gradient(135deg, transparent 50%, rgba(162, 189, 255, 0.8) 50%);
+}
+
+/* Text/Code Window Content */
+.Window-text-content {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding: 12px 16px;
+    box-sizing: border-box;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: #c9d8ff;
+    background: rgba(25, 30, 50, 0.85);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    tab-size: 4;
+}
+
+.Window-text-content::-webkit-scrollbar {
+    display: block;
+    width: 6px;
+}
+
+.Window-text-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.Window-text-content::-webkit-scrollbar-thumb {
+    background: #8fa1cf;
+    border-radius: 3px;
+}
+
+.Design-bg-preview {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    background-size: cover;
+    background-position: center;
+}
+
+.Design-bg-preview.active {
+    opacity: 1;
+}
+
+body.has-custom-bg {
+    background-image: none !important;
+    background-color: transparent !important;
+}
+
+body.has-custom-bg .Design-bg-preview {
+    opacity: 1;
+}
+
+.Design-toggle {
+    padding: 12px;
+    border: none;
+    border-radius: 100%;
+    opacity: 0.4;
+    background-color: #3e4b712b;
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.Design-toggle:hover {
+    opacity: 1;
+    transform: rotate(12deg);
+    background-color: #91b0ff;
+    box-shadow: 0 0 18px #91b0ff;
+}
+
+.Design-toggle.active {
+    opacity: 1 !important;
+    background-color: #91b0ff !important;
+    box-shadow: 0 0 18px #91b0ff;
+    transform: rotate(12deg);
+}
 
 .Nav-hauptbutton {
     top: 0;
@@ -547,7 +887,6 @@ body.material-you .Warung-button .verstanden-button {
     text-align: center;
 }
 
-/* ─── Album Cover ─── */
 .Musik-cover-wrap {
     display: flex;
     justify-content: center;
@@ -578,7 +917,6 @@ body.material-you .Warung-button .verstanden-button {
     transition: all 0.3s ease;
 }
 
-/* Wenn kein Cover-Bild da ist - Musik-Icon zentriert */
 .Musik-cover:has(img[src*="music_note"]) {
     background: linear-gradient(135deg, #3e4a69 0%, #5f6f96 100%);
 }
@@ -600,7 +938,6 @@ body.material-you .Warung-button .verstanden-button {
     50% { transform: scale(1.02); }
 }
 
-/* Overlay-Text auf dem Cover (wie auf deinem Bild!) */
 .Musik-cover::after {
     content: attr(data-title);
     position: absolute;
@@ -619,17 +956,6 @@ body.material-you .Warung-button .verstanden-button {
     opacity: 1;
 }
 
-.Musik-cover.playing {
-    animation: coverPulse 3s ease-in-out infinite;
-    box-shadow: 0 0 30px rgba(162, 189, 255, 0.4);
-}
-
-@keyframes coverPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.03); }
-}
-
-/* ─── Song Info ─── */
 .Musik-info {
     text-align: center;
     margin-bottom: 24px;
@@ -651,7 +977,6 @@ body.material-you .Warung-button .verstanden-button {
     opacity: 0.8;
 }
 
-/* ─── Controls ─── */
 .Musik-controls {
     display: flex;
     justify-content: center;
@@ -730,7 +1055,6 @@ body.material-you .Warung-button .verstanden-button {
     background: rgba(255, 142, 142, 0.25) !important;
 }
 
-/* ─── Volume ─── */
 .Musik-volume-wrap {
     display: flex;
     align-items: center;
@@ -763,7 +1087,6 @@ body.material-you .Warung-button .verstanden-button {
     transition: width 0.1s ease;
 }
 
-/* ─── Playlist ─── */
 .Musik-playlist h4 {
     margin: 0 0 12px 0;
     font-size: 1.1rem;
@@ -843,7 +1166,6 @@ body.material-you .Warung-button .verstanden-button {
     50% { opacity: 0.3; }
 }
 
-/* ─── Nav Button Active State ─── */
 .Nav-flexbutton button.active {
     opacity: 1 !important;
     background-color: #91b0ff !important;
@@ -851,7 +1173,6 @@ body.material-you .Warung-button .verstanden-button {
     transform: rotate(12deg);
 }
 
-/* ─── Progress Bar Verbesserungen ─── */
 .Musik-PorgressBar {
     flex: 0.2;
     border-radius: 14px;
@@ -1123,15 +1444,12 @@ body.material-you .Warung-button .verstanden-button {
     box-shadow: 0 0 18px #91b0ff;
 }
 
-
-/* ─── Einstellungen Toggle Active ─── */
 .Buttontoggle.active {
     background-color: #a2bdff !important;
     color: #3e4b71 !important;
     box-shadow: 0 0 14px #a2bdff;
 }
 
-/* ─── FPS Display ─── */
 .fps-display {
     position: fixed;
     bottom: 16px;
@@ -1147,7 +1465,6 @@ body.material-you .Warung-button .verstanden-button {
     backdrop-filter: blur(8px);
 }
 
-/* ─── Reduced Lights Mode ─── */
 body.reduced-lights .Musik-cover.playing {
     animation: none;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -1161,14 +1478,12 @@ body.reduced-lights .playlist-playing {
     animation: none;
 }
 
-/* ─── Material You Mode ─── */
 body.material-you {
     --primary: #a2bdff;
     --secondary: #8fa1cf;
     --surface: #5f6f96;
 }
 
-/* Debug Overlay */
 .debug-overlay {
     position: fixed;
     top: 16px;
@@ -1231,33 +1546,14 @@ body.debug-mode .debug-nav-stats { display: block; }
 .debug-setting-dot { width: 8px; height: 8px; border-radius: 50%; background: #3e4a69; transition: background 0.2s ease; }
 .debug-setting-dot.on { background: #a2bdff; box-shadow: 0 0 6px #a2bdff; }
 
-/* ─── Responsive ─── */
 @media (max-width: 520px) {
-    .Musik-content {
-        padding: 24px 20px;
-        width: 95%;
-    }
-
-    .Musik-cover {
-        width: 160px;
-        height: 160px;
-    }
-
-    .Musik-controls {
-        gap: 8px;
-    }
-
-    .Musik-btn-play {
-        width: 56px !important;
-        height: 56px !important;
-    }
-
-    .Settings-content {
-        padding: 24px 20px;
-    }
+    .Musik-content { padding: 24px 20px; width: 95%; }
+    .Musik-cover { width: 160px; height: 160px; }
+    .Musik-controls { gap: 8px; }
+    .Musik-btn-play { width: 56px !important; height: 56px !important; }
+    .Settings-content { padding: 24px 20px; }
 }
 
-/* ─── Scrollbar für Playlist ─── */
 .Musik-playlist-box::-webkit-scrollbar {
     display: block;
     width: 4px;
