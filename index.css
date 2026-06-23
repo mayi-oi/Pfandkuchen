@@ -923,6 +923,13 @@ body {
     color: #ffffff;
 }
 
+.desktop-tag {
+    padding: 8px 18px;
+    border-radius: 12px;
+    background-color: #ff8383;
+    color: #8e4949;
+}
+
 .div-links {
     width: 100%;
     box-sizing: border-box;
