@@ -11,18 +11,11 @@
 <base target="_blank">
 </head>
 <body>
-    <!-- Warung popup -->
     <div class="Warungoverlay" id="Warung-overlay">
         <div class="Warung-content">
-            <div class="Warung-icon-header">
-                <img src="Res/Bild/Icon/warning_24dp_FF8E8E_FILL1_wght400_GRAD0_opsz24.svg" alt="Oh neinnnnnnn">
-            </div>
-            <div class="Warung-header">
-                <h2>Bevor du gehst... (͠≖~≖  ͡ )</h2>
-            </div>
-            <div class="Warung-text">
-                <p style="color: #ffffff;">Diese projekt sind wirklich neu und leer aus und <br> mobilen sind nicht geplant, bitte einfach warten für nächsten update!</p>
-            </div>
+            <div class="Warung-icon-header"><img src="Res/Bild/Icon/warning_24dp_FF8E8E_FILL1_wght400_GRAD0_opsz24.svg" alt="Oh neinnnnnnn"></div>
+            <div class="Warung-header"><h2>Bevor du gehst... (͠≖~≖  ͡ )</h2></div>
+            <div class="Warung-text"><p style="color: #ffffff;">Diese projekt sind wirklich neu und leer aus und <br> mobilen sind nicht geplant, bitte einfach warten für nächsten update!</p></div>
             <div class="Warung-button">
                 <button class="verstanden-button" onclick="closeWarung()">Ich habe verstanden! ദ്ദി(˵ •̀ ᴗ - ˵ ) </button>
                 <button class="verlassen-button" onclick="window.location.href='index.html'">Ich bin einfach raus! 三三ᕕ( ᐛ )ᕗ</button>
@@ -30,91 +23,76 @@
         </div>
     </div>
 
-    <!-- Einstellung -->
+
+    <!-- Einstellungen overlay-->
     <div class="Settingsoverlay" id="Settings-overlay">
         <div class="Settings-content">
-            <div class="Settings-header">
-                <h2>Einstellungen</h2>
+            <div class="Settings-topbar">
+                <div class="Settings-title-wrap"><h2>Einstellungen ∑(O_O;)</h2><p class="Settings-uebersicht-label">version: 1.20</p></div>
+                <div class="Settings-topbar-actions">
+                    <button class="Musik-panel-upload" onclick="window.open('https://github.com/mayi-oi/Pfandkuchen/releases', '_blank')"><img src="Res/Bild/Icon/description_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Upload"><span>Changelog ansehen!</span></button>
+                    <button class="Settings-icon-btn" onclick="window.open('https://github.com/mayi-oi/Pfandkuchen', '_blank')" title="Github"><img src="Res/Bild/Icon/github-fill.svg" alt="Github"></button>
+                    <button class="Settings-icon-btn close-btn" onclick="Settingstoggle()" title="Schließen"><img src="Res/Bild/Icon/close_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Schließen"></button>
+                </div>
             </div>
-            <div class="Settings-box">
-                <div class="Settings-button">
-                    <h2>Source code!</h2>
-                    <p>Schau dir den Code auf Github an!</p>
-                    <button class="link-button" onclick="window.open('https://github.com/mayi-oi/Pfandkuchen', '_blank')">Github besuchen!</button>
+            <div class="Settings-body">
+                <div class="Settings-sidebar" id="settings-sidebar">
+                    <button class="Settings-sidebar-item" data-setting="lights" onclick="selectSetting('lights')"><span>Wenig flashing</span><div class="Settings-sidebar-indicator"></div></button>
+                    <button class="Settings-sidebar-item" data-setting="fps" onclick="selectSetting('fps')"><span>Fps und ram</span><div class="Settings-sidebar-indicator"></div></button>
+                    <button class="Settings-sidebar-item" data-setting="material" onclick="selectSetting('material')"><span>Material you</span><div class="Settings-sidebar-indicator"></div></button>
+                    <button class="Settings-sidebar-item active" data-setting="debug" onclick="selectSetting('debug')"><span>Debug console</span><div class="Settings-sidebar-indicator"></div></button>
                 </div>
-                <div class="Settings-button">
-                    <h2>Wenige flashing lights</h2>
-                    <p>Reduziert intensive Lichteffekte</p>
-                    <button class="Buttontoggle" id="toggle-lights" onclick="toggleSetting('lights')">Aus</button>
-                </div>
-                <div class="Settings-button">
-                    <h2>Fps und Ram zeigen</h2>
-                    <p>Zeigt Performance-Stats an</p>
-                    <button class="Buttontoggle" id="toggle-fps" onclick="toggleSetting('fps')">Aus</button>
-                </div>
-                <div class="Settings-button">
-                    <h2>Material you</h2>
-                    <p>Android-style dynamische Farben</p>
-                    <button class="Buttontoggle" id="toggle-material" onclick="toggleSetting('material')">Aus</button>
-                </div>
-                <div class="Settings-button">
-                    <h2>Debug</h2>
-                    <p>Entwickler-Informationen anzeigen</p>
-                    <button class="Buttontoggle" id="toggle-debug" onclick="toggleSetting('debug')">Aus</button>
+                <div class="Settings-panel" id="settings-panel">
+                    <h3 class="Settings-panel-title" id="panel-title">Debug console</h3>
+                    <p class="Settings-panel-desc" id="panel-desc">Für super duber cool Personen kann verstehen!</p>
+                    <div class="Settings-panel-action" id="panel-action">
+                        <div class="Settings-toggle-switch"><span>Aus</span><button class="Settings-switch" onclick="toggleSettingFromPanel('debug')"></button></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Musik Player Overlay -->
+    <!-- Musik player overlay -->
     <div class="Musikoverlay" id="Musik-overlay">
         <div class="Musik-content">
-            <div class="Musik-header"><h2>Musik player</h2></div>
+            <div class="Musik-header">
+                <h2>Musik player 乁( • ω •乁)</h2>
+                <div class="Musik-header-actions">
+                    <button class="Musik-panel-upload" onclick="Uploadtoggle()" title="Musik hochladen"><img src="Res/Bild/Icon/Musikplayer/upload_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Upload"><span>Hochladen dein Musik!</span></button>
+                    <button class="Musik-panel-close" onclick="Musiktoggle()" title="Schließen">✕</button>
+                </div>
+            </div>
             <div class="Musik-body">
-                <div class="Musik-cover-wrap">
-                    <div class="Musik-cover" id="album-cover">
-                        <img src="Res/Bild/Icon/Musikplayer/music_note_2_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" id="cover-img" alt="Cover">
+                <div class="Musik-left">
+                    <div class="Musik-cover-wrap"><div class="Musik-cover" id="album-cover"><img src="Res/Bild/Icon/Musikplayer/music_note_2_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" id="cover-img" alt="Cover"></div></div>
+                    <div class="Musik-info"><h3 id="song-title">Wähle einen Song</h3><p id="song-artist">-</p></div>
+                    <div class="Musik-controls">
+                        <button class="Musik-btn-shuffle" id="btn-shuffle" onclick="toggleShuffle()" title="Shuffle"><img src="Res/Bild/Icon/Musikplayer/shuffle_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Shuffle"></button>
+                        <button class="Musik-btn-prev" onclick="prevSong()" title="Zurück"><img src="Res/Bild/Icon/Musikplayer/skip_previous_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Zurück"></button>
+                        <button class="Musik-btn-play" id="btn-play" onclick="togglePlay()" title="Play/Pause"><img src="Res/Bild/Icon/Musikplayer/play_arrow_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24 (1).svg" id="play-icon" alt="Play"></button>
+                        <button class="Musik-btn-next" onclick="nextSong()" title="Weiter"><img src="Res/Bild/Icon/Musikplayer/skip_next_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Weiter"></button>
+                        <button class="Musik-btn-repeat" id="btn-repeat" onclick="toggleRepeat()" title="Repeat"><img src="Res/Bild/Icon/Musikplayer/repeat_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Repeat"></button>
+                    </div>
+                    <div class="Musik-volume-wrap">
+                        <img src="Res/Bild/Icon/Musikplayer/volume_down_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Leise">
+                        <div class="Musik-volume-bar" id="volume-bar" onclick="setVolume(event)"><div class="Musik-volume-fill" id="volume-fill"></div></div>
+                        <img src="Res/Bild/Icon/Musikplayer/volume_up_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Laut">
+                    </div>
+                    <div class="Musik-panel-progress">
+                        <span class="Aktivzeit" id="panel-aktiv-zeit">0:00</span>
+                        <div class="Musik-PorgressBar" id="panel-Progressbar" onclick="seekPanel(event)"><div class="Musik-PorgressBar-fill" id="panel-Progressbar-fill"></div></div>
+                        <span class="Totalzeit" id="panel-total-zeit">0:00</span>
                     </div>
                 </div>
-                <div class="Musik-info">
-                    <h3 id="song-title">Wähle einen Song</h3>
-                    <p id="song-artist">-</p>
-                </div>
-                <div class="Musik-controls">
-                    <button class="Musik-btn-shuffle" id="btn-shuffle" onclick="toggleShuffle()" title="Shuffle">
-                        <img src="Res/Bild/Icon/Musikplayer/shuffle_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Shuffle">
-                    </button>
-                    <button class="Musik-btn-prev" onclick="prevSong()" title="Zurück">
-                        <img src="Res/Bild/Icon/Musikplayer/skip_previous_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Zurück">
-                    </button>
-                    <button class="Musik-btn-play" id="btn-play" onclick="togglePlay()" title="Play/Pause">
-                        <img src="Res/Bild/Icon/Musikplayer/play_arrow_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24 (1).svg" id="play-icon" alt="Play">
-                    </button>
-                    <button class="Musik-btn-next" onclick="nextSong()" title="Weiter">
-                        <img src="Res/Bild/Icon/Musikplayer/skip_next_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Weiter">
-                    </button>
-                    <button class="Musik-btn-repeat" id="btn-repeat" onclick="toggleRepeat()" title="Repeat">
-                        <img src="Res/Bild/Icon/Musikplayer/repeat_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Repeat">
-                    </button>
-                </div>
-                <div class="Musik-volume-wrap">
-                    <img src="Res/Bild/Icon/Musikplayer/volume_down_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Leise">
-                    <div class="Musik-volume-bar" id="volume-bar" onclick="setVolume(event)">
-                        <div class="Musik-volume-fill" id="volume-fill"></div>
-                    </div>
-                    <img src="Res/Bild/Icon/Musikplayer/volume_up_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Laut">
-                </div>
-                <div class="Musik-playlist">
-                    <h4>Playlist</h4>
-                    <div class="Musik-playlist-box" id="playlist-box"></div>
-                </div>
+                <div class="Musik-right"><h4>Playlist</h4><div class="Musik-playlist-box" id="playlist-box"></div></div>
             </div>
         </div>
     </div>
 
     <div class="Uploadoverlay" id="Upload-overlay">
         <div class="Upload-content">
-            <div class="Upload-header"><h2>Musik hochladen</h2></div>
+            <div class="Upload-header"><h2>Musik hochladen (*ﾉ・ω・)ﾉ♫</h2></div>
             <div class="Upload-body">
                 <div class="Upload-dropzone" id="dropzone">
                     <img src="Res/Bild/Icon/Musikplayer/upload_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Upload">
@@ -122,22 +100,14 @@
                     <p class="Upload-drop-sub">oder klicke zum Auswählen</p>
                     <input type="file" id="file-input" accept="audio/mp3,audio/mpeg,audio/wav,audio/ogg,audio/flac" multiple>
                 </div>
-                <div class="Upload-liste" id="upload-liste">
-                    <p class="Upload-leer">Noch keine Songs hochgeladen ( ͡° ͜ʖ ͡°)</p>
-                </div>
+                <div class="Upload-liste" id="upload-liste"><p class="Upload-leer">Noch keine Songs hochgeladen ( ͡° ͜ʖ ͡°)</p></div>
             </div>
-            <div class="Upload-footer">
-                <button class="Upload-schliessen" onclick="Uploadtoggle()">Schließen</button>
-            </div>
+            <div class="Upload-footer"><button class="Upload-schliessen" onclick="Uploadtoggle()">Schließen</button></div>
         </div>
     </div>
 
-    <!-- Debug Overlay -->
     <div class="debug-overlay" id="debug-overlay">
-        <div class="debug-header">
-            <h3>Debug Panel</h3>
-            <button class="debug-close" onclick="toggleDebugPanel()">✕</button>
-        </div>
+        <div class="debug-header"><h3>Debug Panel</h3><button class="debug-close" onclick="toggleDebugPanel()">✕</button></div>
         <div class="debug-section">
             <div class="debug-section-title">🎵 Audio</div>
             <div class="debug-row"><span class="debug-label">Titel</span><span class="debug-value" id="debug-title">-</span></div>
@@ -177,66 +147,120 @@
         </div>
         <div class="debug-section">
             <div class="debug-section-title">📋 Console</div>
-            <div class="debug-console" id="debug-console">
-                <div class="debug-log-entry"><span class="debug-log-time">--:--</span><span class="debug-log-info">Debug Panel gestartet...</span></div>
-            </div>
+            <div class="debug-console" id="debug-console"><div class="debug-log-entry"><span class="debug-log-time">--:--</span><span class="debug-log-info">Debug Panel gestartet...</span></div></div>
         </div>
     </div>
 
-    <div class="debug-nav-stats" id="debug-nav-stats">
-        <span id="debug-nav-fps">FPS: 0</span> | <span id="debug-nav-ram">RAM: 0MB</span>
-    </div>
+    <div class="debug-nav-stats" id="debug-nav-stats"><span id="debug-nav-fps">FPS: 0</span> | <span id="debug-nav-ram">RAM: 0MB</span></div>
 
-    <!-- Design Overlay -->
+    <!-- Design studio redesign -->
     <div class="Designoverlay" id="Design-overlay">
         <div class="Design-content">
-            <div class="Design-header"><h2>Design Studio</h2></div>
-            <div class="Design-upload-section">
-                <h3>Hintergrund</h3>
-                <p>Lade ein Bild für den Hintergrund hoch!</p>
-                <div class="Design-dropzone" id="bg-dropzone">
-                    <img src="Res/Bild/Icon/Musikplayer/upload_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Upload">
-                    <p>Bild hier reinziehen oder klicken</p>
-                    <input type="file" id="bg-file-input" accept="image/*">
-                </div>
-                <div class="Design-preview" id="bg-preview">
-                    <img src="" alt="Vorschau" id="bg-preview-img">
+            <div class="Design-header">
+                <h2>Design Studio ◪_◪</h2>
+                <div class="Design-header-actions">
+                    <button class="Design-icon-btn" id="design-material-btn" onclick="toggleMaterialYou()" title="Material You">
+                        <img src="Res/Bild/Icon/Design studio/palette_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Material You">
+                    </button>
+                    <button class="Design-close-btn" onclick="Designtoggle()" title="Schließen (Esc)">✕</button>
                 </div>
             </div>
-            <div class="Design-upload-section">
-                <h3>Window (Alle formate!)</h3>
-                <p>Lade Bilder, Videos, GIFs, Text, Code, oder was auch immer!</p>
-                <div class="Design-dropzone" id="cover-dropzone">
-                    <img src="Res/Bild/Icon/Musikplayer/upload_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Upload">
-                    <p>Datei hier reinziehen oder klicken</p>
-                    <input type="file" id="cover-file-input">
+            <div class="Design-grid">
+                <!-- Left Column -->
+                <div class="Design-left">
+                    <!-- Hintergrund Card -->
+                    <div class="Design-card">
+                        <h3>Hintergrund</h3>
+                        <p>Lade dein liebsten Hintergrund hoch – Bild oder Video!</p>
+
+                        <!-- BG Type Toggle -->
+                        <div class="Design-bg-toggle">
+                            <button class="Design-bg-type-btn active" data-type="image" onclick="setBgType('image')">
+                                <span><img src="Res/Bild/Icon/Design studio/image_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></span> Bild
+                            </button>
+                            <button class="Design-bg-type-btn" data-type="video" onclick="setBgType('video')">
+                                <span><img src="Res/Bild/Icon/Design studio/video_file_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></span> Live
+                            </button>
+                        </div>
+
+                        <div class="Design-dropzone" id="bg-dropzone">
+                            <img src="Res/Bild/Icon/Musikplayer/upload_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Upload">
+                            <p id="bg-drop-text">Bild hier reinziehen oder klicken</p>
+                            <input type="file" id="bg-file-input" accept="image/*">
+                        </div>
+
+                        <!-- Bild Preview -->
+                        <div class="Design-preview" id="bg-preview-img-container">
+                            <img src="Res/Bild/Icon/Design studio/preview_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Vorschau" id="bg-preview-img">
+                        </div>
+
+                        <!-- Video Preview -->
+                        <div class="Design-preview" id="bg-preview-video-container">
+                            <video id="bg-preview-video" loop muted playsinline></video>
+                        </div>
+
+                        <!-- Video Controls (nur bei Video) -->
+                        <div class="Design-video-controls" id="bg-video-controls">
+                            <button class="Design-video-btn" onclick="toggleBgVideoMute()" id="bg-mute-btn"><img src="Res/Bild/Icon/Musikplayer/volume_up_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" style="width:18px;height:18px;filter:invert(1);"></button>
+                            <button class="Design-video-btn" onclick="toggleBgVideoPlay()" id="bg-play-btn"><img src="Res/Bild/Icon/Musikplayer/pause_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" style="width:18px;height:18px;filter:invert(1);"></button>
+                            <span id="bg-video-label">Live Hintergrund</span>
+                        </div>
+                    </div>
+
+                    <!-- Window Card -->
+                    <div class="Design-card">
+                        <h3>Window (Alle Formate!)</h3>
+                        <p>Lade deine Bilder, Videos, GIFs und mehr!</p>
+                        <div class="Design-dropzone" id="cover-dropzone">
+                            <img src="Res/Bild/Icon/Musikplayer/upload_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Upload">
+                            <p>Datei hier reinziehen oder klicken</p>
+                            <input type="file" id="cover-file-input">
+                        </div>
+                        <div class="Design-preview" id="cover-preview">
+                            <img src="Res/Bild/Icon/Design studio/preview_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Vorschau" id="cover-preview-img">
+                        </div>
+                    </div>
                 </div>
-                <div class="Design-preview" id="cover-preview">
-                    <img src="" alt="Vorschau" id="cover-preview-img">
+
+                <!-- Right Column -->
+                <div class="Design-right">
+                    <div class="Design-info-card">
+                        <h3>Window System</h3>
+                        <p>Dateien werden als Fenster auf dem Bildschirm angezeigt!</p>
+                        <p>Drag = Bewegen | Resize = Größe ändern | X = Schließen</p>
+                        <p class="Design-info-small">Unterstützt: Text, Code, Office und mehr!</p>
+                    </div>
+                    <div class="Design-actions">
+                        <button class="Design-action-btn" onclick="loadLocalFont()" title="Lokale Schriftart laden">
+                            <span class="Design-action-icon"><img src="Res/Bild/Icon/Design studio/font_download_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></span>
+                            <span>Lokal Schriftart laden</span>
+                        </button>
+                        <button class="Design-action-btn" onclick="saveDesign()" title="Einstellungen speichern">
+                            <span class="Design-action-icon"><img src="Res/Bild/Icon/Design studio/save_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></span>
+                            <span>Speicher jetzt!</span>
+                        </button>
+                        <button class="Design-action-btn Design-action-btn-reset" onclick="resetDesign()" title="Design zurücksetzen">
+                            <span class="Design-action-icon"><img src="Res/Bild/Icon/Design studio/delete_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></span>
+                            <span>Zurücksetzen</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div class="Design-upload-section">
-                <h3>Fenster</h3>
-                <p>Dateien werden als Fenster auf dem Bildschirm angezeigt!</p>
-                <p style="font-size: 0.8rem; opacity: 0.7;">Drag = Bewegen | Resize = Größe ändern | X = Schließen</p>
-                <p style="font-size: 0.75rem; opacity: 0.5; margin-top: 8px;">
-                    Unterstützt: Bilder, Videos, Audio, Text, Code, PDF, Office, Archive, 3D, Fonts und mehr!
-                </p>
-            </div>
-            <div class="Design-footer">
-                <button class="Design-schliessen" onclick="Designtoggle()">Schließen</button>
             </div>
         </div>
     </div>
 
     <div class="Window-container" id="Window-container"></div>
+
+    <!-- Background Layers -->
     <div class="Design-bg-preview" id="Design-bg-preview"></div>
+    <div class="Design-bg-video-layer" id="Design-bg-video-layer">
+        <video id="bg-video-element" loop muted playsinline></video>
+    </div>
 
     <div class="Nav-hauptbutton">
         <div class="Nav-flexbutton">
-            <button class="leave-toggle" onclick="window.location.href='index.html'"><img src="Res/Bild/Icon/keyboard_arrow_left_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></button>
+            <button class="leave-toggle" onclick="window.location.href='index.html'"><img src="Res/Bild/Icon/close_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></button>
             <button class="Musikplayer-toggle" id="nav-musik-btn" onclick="Musiktoggle()"><img src="Res/Bild/Icon/music_note_2_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></button>
-            <button class="Upload-toggle" onclick="Uploadtoggle()"><img src="Res/Bild/Icon/Musikplayer/upload_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></button>
             <button class="Design-toggle" id="design-toggle-btn" onclick="Designtoggle()"><img src="Res/Bild/Icon/brush_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></button>
             <button class="Einstellung-toggle" onclick="Settingstoggle()"><img src="Res/Bild/Icon/settings_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></button>
         </div>
@@ -253,149 +277,111 @@
     <audio id="audio-player" preload="metadata"></audio>
 
     <script>
+        // ===== Einstellungen daten =====
+        const settingsData = {
+            lights: { title: 'Wenig flashing', desc: 'Reduziert intensive Lichteffekte.', type: 'toggle', key: 'lights' },
+            fps: { title: 'Fps und ram', desc: 'Zeigt Performance-Stats.', type: 'toggle', key: 'fps' },
+            material: { title: 'Material you', desc: 'Dynamische Farben vom Album-Cover.', type: 'toggle', key: 'material' },
+            debug: { title: 'Debug console', desc: 'Für super duber cool Personen!', type: 'toggle', key: 'debug' }
+        };
+        let currentSetting = 'debug';
+        let settings = { lights: false, fps: false, material: false, debug: false };
 
-        let windows = [];
-        let windowIdCounter = 0;
-        let draggedWindow = null;
-        let resizedWindow = null;
-        let dragOffsetX = 0, dragOffsetY = 0;
-        let resizeStartX = 0, resizeStartY = 0;
-        let resizeStartWidth = 0, resizeStartHeight = 0;
+        // ===== state =====
+        let currentSongIndex = 0, isPlaying = false, isShuffle = false, repeatMode = 0;
+        let bgType = 'image'; // 'image' or 'video'
+        let bgVideoMuted = true;
+        let bgVideoPlaying = true;
 
-        const windowContainer = document.getElementById('Window-container');
+        // ===== Dom refs =====
+        const audio = document.getElementById('audio-player');
+        const playIcon = document.getElementById('play-icon');
+        const btnPlay = document.getElementById('btn-play');
+        const btnShuffle = document.getElementById('btn-shuffle');
+        const btnRepeat = document.getElementById('btn-repeat');
+        const progressBar = document.getElementById('Progressbar');
+        const progressFill = document.getElementById('Progressbar-fill');
+        const panelProgressBar = document.getElementById('panel-Progressbar');
+        const panelProgressFill = document.getElementById('panel-Progressbar-fill');
+        const volumeBar = document.getElementById('volume-bar');
+        const volumeFill = document.getElementById('volume-fill');
+        const songTitle = document.getElementById('song-title');
+        const songArtist = document.getElementById('song-artist');
+        const coverImg = document.getElementById('cover-img');
+        const albumCover = document.getElementById('album-cover');
+        const aktivZeit = document.getElementById('aktiv-zeit');
+        const totalZeit = document.getElementById('total-zeit');
+        const panelAktivZeit = document.getElementById('panel-aktiv-zeit');
+        const panelTotalZeit = document.getElementById('panel-total-zeit');
+        const navMusikTitle = document.getElementById('nav-musik-title');
+        const playlistBox = document.getElementById('playlist-box');
+        const navMusikBtn = document.getElementById('nav-musik-btn');
+        const dropzone = document.getElementById('dropzone');
+        const fileInput = document.getElementById('file-input');
+        const uploadListe = document.getElementById('upload-liste');
         const bgPreview = document.getElementById('Design-bg-preview');
+        const bgVideoLayer = document.getElementById('Design-bg-video-layer');
+        const bgVideoElement = document.getElementById('bg-video-element');
+        const bgPreviewImg = document.getElementById('bg-preview-img');
+        const bgPreviewImgContainer = document.getElementById('bg-preview-img-container');
+        const bgPreviewVideoContainer = document.getElementById('bg-preview-video-container');
+        const bgPreviewVideo = document.getElementById('bg-preview-video');
+        const bgVideoControls = document.getElementById('bg-video-controls');
+        const bgDropText = document.getElementById('bg-drop-text');
+        const bgFileInput = document.getElementById('bg-file-input');
+        const bgDropzone = document.getElementById('bg-dropzone');
+        const windowContainer = document.getElementById('Window-container');
 
-        function Designtoggle() {
-            document.querySelector('.Designoverlay').classList.toggle('Design-active');
-            document.querySelector('.Design-toggle').classList.toggle('active');
-        }
+        // ===== icons =====
+        const icons = {
+            play: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23ffffff'%3E%3Cpath d='M320-200v-560l440 280-440 280Z'/%3E%3C/svg%3E",
+            pause: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23ffffff'%3E%3Cpath d='M520-200v-560h240v560H520Zm-320 0v-560h240v560H200Z'/%3E%3C/svg%3E",
+            shuffle: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23ffffff'%3E%3Cpath d='M560-160v-80h104L537-367l57-57 126 126v-102h80v240H560Zm-344 0-56-56 504-504H560v-80h240v240h-80v-104L216-160Zm151-377L160-728l56-56 207 207-56 56Z'/%3E%3C/svg%3E",
+            shuffleOn: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23a2bdff'%3E%3Cpath d='M560-160v-80h104L537-367l57-57 126 126v-102h80v240H560Zm-344 0-56-56 504-504H560v-80h240v240h-80v-104L216-160Zm151-377L160-728l56-56 207 207-56 56Z'/%3E%3C/svg%3E",
+            repeat: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23ffffff'%3E%3Cpath d='M280-80 120-240l160-160 56 58-62 62h406v-160h80v240H274l62 62-56 58Zm-80-440v-240h486l-62-62 56-58 160 160-160 160-56-58 62-62H280v160h-80Z'/%3E%3C/svg%3E",
+            repeatOn: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23a2bdff'%3E%3Cpath d='M280-80 120-240l160-160 56 58-62 62h406v-160h80v240H274l62 62-56 58Zm-80-440v-240h486l-62-62 56-58 160 160-160 160-56-58 62-62H280v160h-80Z'/%3E%3C/svg%3E",
+            repeatOne: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23ff8e8e'%3E%3Cpath d='M280-80 120-240l160-160 56 58-62 62h406v-160h80v240H274l62 62-56 58Zm-80-440v-240h486l-62-62 56-58 160 160-160 160-56-58 62-62H280v160h-80Zm240-120v-80h80v80h-80Z'/%3E%3C/svg%3E",
+            music: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23ffffff'%3E%3Cpath d='M400-120q-66 0-113-47t-47-113q0-66 47-113t113-47q23 0 42.5 5.5T480-418v-422h240v160H560v400q0 66-47 113t-113 47Z'/%3E%3C/svg%3E"
+        };
+
+        const songs = [
+            { title: "Good night lofi", artist: "Fassound", src: "Res/Musik/fassounds-good-night-lofi-cozy-chill-music-160166.mp3", cover: "Res/Bild/Cover/dreaming.jpg" },
+            { title: "Background music", artist: "Nastelbom", src: "/Res/Musik/nastelbom-background-music-463062.mp3", cover: "Res/Bild/Cover/dreaming.jpg" },
+            { title: "Space shuttle", artist: "The_mountain", src: "Res/Musik/the_mountain-space-shuttle-153639.mp3", cover: "Res/Bild/Cover/dreaming.jpg" },
+            { title: "Dark spectrometer", artist: "Samuelfijohans", src: "Res/Musik/samuelfjohanns-dark-spectrometer-11713.mp3", cover: "Res/Bild/Cover/dreaming.jpg" },
+        ];
+
+        // ===== window system =====
+        let windows = [], windowIdCounter = 0;
+        let draggedWindow = null, resizedWindow = null;
+        let dragOffsetX = 0, dragOffsetY = 0;
+        let resizeStartX = 0, resizeStartY = 0, resizeStartWidth = 0, resizeStartHeight = 0;
 
         function getFileType(file) {
             const ext = file.name.split('.').pop().toLowerCase();
             const type = file.type;
-
-            // Bilder
-            if (type.startsWith('image/') || ['jpg','jpeg','png','gif','webp','svg','bmp','ico','tiff','avif','heic','heif','raw','cr2','nef','dng'].includes(ext)) {
-                return 'image';
-            }
-            // Videos
-            if (type.startsWith('video/') || ['mp4','webm','mov','avi','mkv','flv','wmv','m4v','ogv'].includes(ext)) {
-                return 'video';
-            }
-            // Audio
-            if (type.startsWith('audio/') || ['mp3','wav','ogg','flac','aac','m4a','wma','opus'].includes(ext)) {
-                return 'audio';
-            }
-            // Text
-            if (type.startsWith('text/') || ['txt','md','json','xml','csv','log','ini','conf','cfg','yaml','yml','toml'].includes(ext)) {
-                return 'text';
-            }
-            // Code
-            if (['html','htm','css','js','java','py','c','cpp','h','hpp','cs','php','sql','rb','go','rs','swift','kt','scala','r','m','mm','pl','sh','bat','ps1','lua','dart','ts','tsx','jsx','vue','svelte','scss','sass','less','coffee','elm','erl','ex','clj','groovy','dockerfile','makefile','cmake','gradle','pom','ant','jenkinsfile','gitignore','gitattributes','editorconfig','eslint','prettierrc','babelrc','webpack','vite','rollup','gulpfile','gruntfile'].includes(ext)) {
-                return 'code';
-            }
-            // PDF
-            if (type === 'application/pdf' || ext === 'pdf') {
-                return 'pdf';
-            }
-            // Office
-            if (['doc','docx','xls','xlsx','ppt','pptx','odt','ods','odp','rtf'].includes(ext)) {
-                return 'office';
-            }
-            // Archive
-            if (['zip','rar','7z','tar','gz','bz2','xz','lz','lzma','cab','iso','dmg','deb','rpm','msi','exe','apk'].includes(ext)) {
-                return 'archive';
-            }
-            // 3D
-            if (['obj','fbx','gltf','glb','stl','dae','3ds','blend','max','ma','mb','skp','dwg','dxf'].includes(ext)) {
-                return '3d';
-            }
-            // Font
-            if (['ttf','otf','woff','woff2','eot'].includes(ext)) {
-                return 'font';
-            }
-            // Default
+            if (type.startsWith('image/') || ['jpg','jpeg','png','gif','webp','svg','bmp','ico','tiff','avif','heic','heif','raw','cr2','nef','dng'].includes(ext)) return 'image';
+            if (type.startsWith('video/') || ['mp4','webm','mov','avi','mkv','flv','wmv','m4v','ogv'].includes(ext)) return 'video';
+            if (type.startsWith('audio/') || ['mp3','wav','ogg','flac','aac','m4a','wma','opus'].includes(ext)) return 'audio';
+            if (type.startsWith('text/') || ['txt','md','json','xml','csv','log','ini','conf','cfg','yaml','yml','toml'].includes(ext)) return 'text';
+            if (['html','htm','css','js','java','py','c','cpp','h','hpp','cs','php','sql','rb','go','rs','swift','kt','scala','r','m','mm','pl','sh','bat','ps1','lua','dart','ts','tsx','jsx','vue','svelte','scss','sass','less','coffee','elm','erl','ex','clj','groovy','dockerfile','makefile','cmake','gradle','pom','ant','jenkinsfile','gitignore','gitattributes','editorconfig','eslint','prettierrc','babelrc','webpack','vite','rollup','gulpfile','gruntfile'].includes(ext)) return 'code';
+            if (type === 'application/pdf' || ext === 'pdf') return 'pdf';
+            if (['doc','docx','xls','xlsx','ppt','pptx','odt','ods','odp','rtf'].includes(ext)) return 'office';
+            if (['zip','rar','7z','tar','gz','bz2','xz','lz','lzma','cab','iso','dmg','deb','rpm','msi','exe','apk'].includes(ext)) return 'archive';
+            if (['obj','fbx','gltf','glb','stl','dae','3ds','blend','max','ma','mb','skp','dwg','dxf'].includes(ext)) return '3d';
+            if (['ttf','otf','woff','woff2','eot'].includes(ext)) return 'font';
             return 'binary';
         }
 
         function getFileIcon(type) {
-            const icons = {
-                image: '🖼️', video: '🎬', audio: '🎵', text: '📄',
-                code: '💻', pdf: '📕', office: '📊', archive: '📦',
-                '3d': '🎨', font: '🔤', binary: '📎'
-            };
+            const icons = { image: '🖼️', video: '🎬', audio: '🎵', text: '📄', code: '💻', pdf: '📕', office: '📊', archive: '📦', '3d': '🎨', font: '🔤', binary: '📎' };
             return icons[type] || '📎';
         }
 
         function getFileColor(type) {
-            const colors = {
-                image: '#a2bdff', video: '#ff8e8e', audio: '#a2bdff', text: '#c9d8ff',
-                code: '#91b0ff', pdf: '#ff8e8e', office: '#8fa1cf', archive: '#647aaf',
-                '3d': '#bacdff', font: '#a2bdff', binary: '#5f6f96'
-            };
+            const colors = { image: '#a2bdff', video: '#ff8e8e', audio: '#a2bdff', text: '#c9d8ff', code: '#91b0ff', pdf: '#ff8e8e', office: '#8fa1cf', archive: '#647aaf', '3d': '#bacdff', font: '#a2bdff', binary: '#5f6f96' };
             return colors[type] || '#5f6f96';
         }
-
-        const bgDropzone = document.getElementById('bg-dropzone');
-        const bgFileInput = document.getElementById('bg-file-input');
-        const bgPreviewImg = document.getElementById('bg-preview-img');
-        const bgPreviewDiv = document.getElementById('bg-preview');
-
-        bgDropzone.addEventListener('click', () => bgFileInput.click());
-        bgDropzone.addEventListener('dragover', (e) => { e.preventDefault(); bgDropzone.classList.add('dragover'); });
-        bgDropzone.addEventListener('dragleave', () => bgDropzone.classList.remove('dragover'));
-        bgDropzone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            bgDropzone.classList.remove('dragover');
-            handleBgFile(e.dataTransfer.files[0]);
-        });
-        bgFileInput.addEventListener('change', (e) => handleBgFile(e.target.files[0]));
-
-        function handleBgFile(file) {
-            if (!file || !file.type.startsWith('image/')) return;
-            const url = URL.createObjectURL(file);
-            bgPreviewImg.src = url;
-            bgPreviewDiv.classList.add('active');
-            bgPreview.style.backgroundImage = `url(${url})`;
-            bgPreview.classList.add('active');
-            document.body.classList.add('has-custom-bg');
-            if (settings.debug) debugLog('🖼️ Hintergrund hochgeladen!', 'info');
-        }
-
-
-        const coverDropzone = document.getElementById('cover-dropzone');
-        const coverFileInput = document.getElementById('cover-file-input');
-        const coverPreviewImg = document.getElementById('cover-preview-img');
-        const coverPreviewDiv = document.getElementById('cover-preview');
-
-        coverDropzone.addEventListener('click', () => coverFileInput.click());
-        coverDropzone.addEventListener('dragover', (e) => { e.preventDefault(); coverDropzone.classList.add('dragover'); });
-        coverDropzone.addEventListener('dragleave', () => coverDropzone.classList.remove('dragover'));
-        coverDropzone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            coverDropzone.classList.remove('dragover');
-            handleWindowFile(e.dataTransfer.files[0]);
-        });
-        coverFileInput.addEventListener('change', (e) => handleWindowFile(e.target.files[0]));
-
-        function handleWindowFile(file) {
-            if (!file) return;
-            const type = getFileType(file);
-            const url = URL.createObjectURL(file);
-
-            if (type === 'image') {
-                coverPreviewImg.src = url;
-                coverPreviewDiv.classList.add('active');
-            } else {
-                coverPreviewImg.src = '';
-                coverPreviewDiv.classList.remove('active');
-            }
-
-            createWindow(file.name, url, type, file);
-            if (settings.debug) debugLog(getFileIcon(type) + ' Window erstellt: ' + file.name + ' (' + type + ')', 'info');
-        }
-
-        // window system mit alle formaten! 
 
         function createWindow(title, contentUrl, type, file) {
             const id = windowIdCounter++;
@@ -403,72 +389,38 @@
             windowEl.className = 'Design-window';
             windowEl.id = 'window-' + id;
             windowEl.dataset.type = type;
-
             const x = 50 + Math.random() * (window.innerWidth - 350);
             const y = 50 + Math.random() * (window.innerHeight - 300);
-
             let width, height;
             switch(type) {
                 case 'image': width = 300 + Math.random() * 150; height = 220 + Math.random() * 100; break;
                 case 'video': width = 400 + Math.random() * 100; height = 280 + Math.random() * 80; break;
                 case 'audio': width = 320; height = 120; break;
-                case 'text':
-                case 'code': width = 450 + Math.random() * 100; height = 350 + Math.random() * 100; break;
+                case 'text': case 'code': width = 450 + Math.random() * 100; height = 350 + Math.random() * 100; break;
                 case 'pdf': width = 400; height = 550; break;
                 case 'office': width = 400; height = 500; break;
                 case 'archive': width = 300; height = 200; break;
                 case '3d': width = 400; height = 400; break;
                 default: width = 300 + Math.random() * 100; height = 200 + Math.random() * 80;
             }
-
-            windowEl.style.left = x + 'px';
-            windowEl.style.top = y + 'px';
-            windowEl.style.width = width + 'px';
-            windowEl.style.height = height + 'px';
+            windowEl.style.left = x + 'px'; windowEl.style.top = y + 'px';
+            windowEl.style.width = width + 'px'; windowEl.style.height = height + 'px';
             windowEl.style.zIndex = 100 + id;
-
             let contentHTML = '';
-
             switch(type) {
-                case 'image':
-                    contentHTML = '<img src="' + contentUrl + '" alt="' + title + '" draggable="false">';
-                    break;
-                case 'video':
-                    contentHTML = '<video src="' + contentUrl + '" controls autoplay loop muted style="width:100%;height:100%;object-fit:contain;background:#000;"></video>';
-                    break;
-                case 'audio':
-                    contentHTML = '<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg, #3e4a69, #5f6f96);gap:12px;"><div style="font-size:3rem;">🎵</div><span style="color:#c9d8ff;font-size:0.85rem;max-width:90%;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + title + '</span><audio src="' + contentUrl + '" controls style="width:90%;height:32px;"></audio></div>';
-                    break;
-                case 'text':
-                case 'code':
-                    contentHTML = '<div class="Window-text-content" id="text-content-' + id + '"></div>';
-                    fetch(contentUrl).then(r => r.text()).then(text => {
-                        const el = document.getElementById('text-content-' + id);
-                        if (el) el.textContent = text;
-                    });
-                    break;
-                case 'pdf':
-                    contentHTML = '<iframe src="' + contentUrl + '" style="width:100%;height:100%;border:none;" sandbox="allow-same-origin"></iframe>';
-                    break;
-                case 'office':
-                    contentHTML = '<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#3e4a69;gap:16px;padding:20px;text-align:center;"><div style="font-size:4rem;">📊</div><span style="color:#ffffff;font-size:1rem;font-weight:600;">' + title + '</span><span style="color:#8fa1cf;font-size:0.85rem;">Office-Dokument</span><span style="color:#a2bdff;font-size:0.75rem;opacity:0.7;">Größe: ' + formatFileSize(file.size) + '</span><a href="' + contentUrl + '" download="' + title + '" style="color:#a2bdff;text-decoration:none;padding:8px 16px;border:1px solid #a2bdff;border-radius:8px;font-size:0.8rem;margin-top:8px;">⬇️ Herunterladen</a></div>';
-                    break;
-                case 'archive':
-                    contentHTML = '<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#3e4a69;gap:12px;"><div style="font-size:3rem;">📦</div><span style="color:#ffffff;font-size:0.9rem;font-weight:600;">' + title + '</span><span style="color:#8fa1cf;font-size:0.8rem;">Archiv</span><span style="color:#a2bdff;font-size:0.75rem;opacity:0.7;">' + formatFileSize(file.size) + '</span><a href="' + contentUrl + '" download="' + title + '" style="color:#a2bdff;text-decoration:none;padding:6px 12px;border:1px solid #a2bdff;border-radius:8px;font-size:0.75rem;">⬇️ Download</a></div>';
-                    break;
-                case '3d':
-                    contentHTML = '<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#3e4a69;gap:12px;"><div style="font-size:3rem;">🎨</div><span style="color:#ffffff;font-size:0.9rem;font-weight:600;">' + title + '</span><span style="color:#8fa1cf;font-size:0.8rem;">3D-Modell</span><span style="color:#a2bdff;font-size:0.75rem;opacity:0.7;">' + formatFileSize(file.size) + '</span><a href="' + contentUrl + '" download="' + title + '" style="color:#a2bdff;text-decoration:none;padding:6px 12px;border:1px solid #a2bdff;border-radius:8px;font-size:0.75rem;">⬇️ Download</a></div>';
-                    break;
-                case 'font':
-                    contentHTML = '<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#3e4a69;gap:12px;"><div style="font-size:3rem;">🔤</div><span style="color:#ffffff;font-size:0.9rem;font-weight:600;">' + title + '</span><span style="color:#8fa1cf;font-size:0.8rem;">Schriftart</span><span style="color:#a2bdff;font-size:0.75rem;opacity:0.7;">' + formatFileSize(file.size) + '</span><a href="' + contentUrl + '" download="' + title + '" style="color:#a2bdff;text-decoration:none;padding:6px 12px;border:1px solid #a2bdff;border-radius:8px;font-size:0.75rem;">⬇️ Download</a></div>';
-                    break;
-                default:
-                    contentHTML = '<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#3e4a69;gap:12px;"><div style="font-size:3rem;">📎</div><span style="color:#ffffff;font-size:0.9rem;font-weight:600;">' + title + '</span><span style="color:#8fa1cf;font-size:0.8rem;">Unbekanntes Format</span><span style="color:#a2bdff;font-size:0.75rem;opacity:0.7;">' + formatFileSize(file.size) + '</span><a href="' + contentUrl + '" download="' + title + '" style="color:#a2bdff;text-decoration:none;padding:6px 12px;border:1px solid #a2bdff;border-radius:8px;font-size:0.75rem;">⬇️ Download</a></div>';
+                case 'image': contentHTML = '<img src="' + contentUrl + '" alt="' + title + '" draggable="false">'; break;
+                case 'video': contentHTML = '<video src="' + contentUrl + '" controls autoplay loop muted style="width:100%;height:100%;object-fit:contain;background:#000;"></video>'; break;
+                case 'audio': contentHTML = '<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg, #3e4a69, #5f6f96);gap:12px;"><div style="font-size:3rem;">🎵</div><span style="color:#c9d8ff;font-size:0.85rem;max-width:90%;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + title + '</span><audio src="' + contentUrl + '" controls style="width:90%;height:32px;"></audio></div>'; break;
+                case 'text': case 'code': contentHTML = '<div class="Window-text-content" id="text-content-' + id + '"></div>'; fetch(contentUrl).then(r => r.text()).then(text => { const el = document.getElementById('text-content-' + id); if (el) el.textContent = text; }); break;
+                case 'pdf': contentHTML = '<iframe src="' + contentUrl + '" style="width:100%;height:100%;border:none;" sandbox="allow-same-origin"></iframe>'; break;
+                case 'office': contentHTML = '<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#3e4a69;gap:16px;padding:20px;text-align:center;"><div style="font-size:4rem;">📊</div><span style="color:#ffffff;font-size:1rem;font-weight:600;">' + title + '</span><span style="color:#8fa1cf;font-size:0.85rem;">Office-Dokument</span><span style="color:#a2bdff;font-size:0.75rem;opacity:0.7;">Größe: ' + formatFileSize(file.size) + '</span><a href="' + contentUrl + '" download="' + title + '" style="color:#a2bdff;text-decoration:none;padding:8px 16px;border:1px solid #a2bdff;border-radius:8px;font-size:0.8rem;margin-top:8px;">⬇️ Herunterladen</a></div>'; break;
+                case 'archive': contentHTML = '<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#3e4a69;gap:12px;"><div style="font-size:3rem;">📦</div><span style="color:#ffffff;font-size:0.9rem;font-weight:600;">' + title + '</span><span style="color:#8fa1cf;font-size:0.8rem;">Archiv</span><span style="color:#a2bdff;font-size:0.75rem;opacity:0.7;">' + formatFileSize(file.size) + '</span><a href="' + contentUrl + '" download="' + title + '" style="color:#a2bdff;text-decoration:none;padding:6px 12px;border:1px solid #a2bdff;border-radius:8px;font-size:0.75rem;">⬇️ Download</a></div>'; break;
+                case '3d': contentHTML = '<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#3e4a69;gap:12px;"><div style="font-size:3rem;">🎨</div><span style="color:#ffffff;font-size:0.9rem;font-weight:600;">' + title + '</span><span style="color:#8fa1cf;font-size:0.8rem;">3D-Modell</span><span style="color:#a2bdff;font-size:0.75rem;opacity:0.7;">' + formatFileSize(file.size) + '</span><a href="' + contentUrl + '" download="' + title + '" style="color:#a2bdff;text-decoration:none;padding:6px 12px;border:1px solid #a2bdff;border-radius:8px;font-size:0.75rem;">⬇️ Download</a></div>'; break;
+                case 'font': contentHTML = '<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#3e4a69;gap:12px;"><div style="font-size:3rem;">🔤</div><span style="color:#ffffff;font-size:0.9rem;font-weight:600;">' + title + '</span><span style="color:#8fa1cf;font-size:0.8rem;">Schriftart</span><span style="color:#a2bdff;font-size:0.75rem;opacity:0.7;">' + formatFileSize(file.size) + '</span><a href="' + contentUrl + '" download="' + title + '" style="color:#a2bdff;text-decoration:none;padding:6px 12px;border:1px solid #a2bdff;border-radius:8px;font-size:0.75rem;">⬇️ Download</a></div>'; break;
+                default: contentHTML = '<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#3e4a69;gap:12px;"><div style="font-size:3rem;">📎</div><span style="color:#ffffff;font-size:0.9rem;font-weight:600;">' + title + '</span><span style="color:#8fa1cf;font-size:0.8rem;">Unbekanntes Format</span><span style="color:#a2bdff;font-size:0.75rem;opacity:0.7;">' + formatFileSize(file.size) + '</span><a href="' + contentUrl + '" download="' + title + '" style="color:#a2bdff;text-decoration:none;padding:6px 12px;border:1px solid #a2bdff;border-radius:8px;font-size:0.75rem;">⬇️ Download</a></div>';
             }
-
             const fileIcon = getFileIcon(type);
             const fileColor = getFileColor(type);
-
             windowEl.innerHTML = `
                 <div class="Window-titlebar" data-window-id="${id}" style="border-bottom-color: ${fileColor}40;">
                     <span class="Window-title">${fileIcon} ${title.substring(0, 25)}${title.length > 25 ? '...' : ''}</span>
@@ -477,23 +429,16 @@
                         <button class="Window-btn Window-btn-close" onclick="closeWindow(${id})"></button>
                     </div>
                 </div>
-                <div class="Window-content" data-type="${type}">
-                    ${contentHTML}
-                </div>
+                <div class="Window-content" data-type="${type}">${contentHTML}</div>
                 <div class="Window-resize" data-window-id="${id}"></div>
             `;
-
             windowContainer.appendChild(windowEl);
             windowContainer.classList.add('active');
-
             const titlebar = windowEl.querySelector('.Window-titlebar');
             titlebar.addEventListener('mousedown', (e) => startDrag(e, id));
-
             const resizeHandle = windowEl.querySelector('.Window-resize');
             resizeHandle.addEventListener('mousedown', (e) => startResize(e, id));
-
             windowEl.addEventListener('mousedown', () => bringToFront(id));
-
             windows.push({ id, element: windowEl, minimized: false, type, url: contentUrl, file });
             return id;
         }
@@ -516,11 +461,7 @@
             if (win.url && win.url.startsWith('blob:')) URL.revokeObjectURL(win.url);
             win.element.style.transform = 'scale(0.8)';
             win.element.style.opacity = '0';
-            setTimeout(() => {
-                win.element.remove();
-                windows = windows.filter(w => w.id !== id);
-                if (windows.length === 0) windowContainer.classList.remove('active');
-            }, 200);
+            setTimeout(() => { win.element.remove(); windows = windows.filter(w => w.id !== id); if (windows.length === 0) windowContainer.classList.remove('active'); }, 200);
         }
 
         function minimizeWindow(id) {
@@ -531,10 +472,8 @@
                 win.element.style.transform = 'scale(0.1) translateY(500px)';
                 win.element.style.opacity = '0';
                 win.element.style.pointerEvents = 'none';
-                const video = win.element.querySelector('video');
-                if (video) video.pause();
-                const audio = win.element.querySelector('audio');
-                if (audio) audio.pause();
+                const video = win.element.querySelector('video'); if (video) video.pause();
+                const audio = win.element.querySelector('audio'); if (audio) audio.pause();
             } else {
                 win.element.style.transform = 'scale(1) translateY(0)';
                 win.element.style.opacity = '1';
@@ -574,10 +513,7 @@
         }
 
         function stopDrag() {
-            if (draggedWindow) {
-                draggedWindow.element.classList.remove('dragging');
-                draggedWindow = null;
-            }
+            if (draggedWindow) { draggedWindow.element.classList.remove('dragging'); draggedWindow = null; }
             document.removeEventListener('mousemove', onDrag);
             document.removeEventListener('mouseup', stopDrag);
         }
@@ -587,10 +523,8 @@
             const win = windows.find(w => w.id === id);
             if (!win || win.minimized) return;
             resizedWindow = win;
-            resizeStartX = e.clientX;
-            resizeStartY = e.clientY;
-            resizeStartWidth = win.element.offsetWidth;
-            resizeStartHeight = win.element.offsetHeight;
+            resizeStartX = e.clientX; resizeStartY = e.clientY;
+            resizeStartWidth = win.element.offsetWidth; resizeStartHeight = win.element.offsetHeight;
             win.element.classList.add('resizing');
             bringToFront(id);
             document.addEventListener('mousemove', onResize);
@@ -606,64 +540,251 @@
         }
 
         function stopResize() {
-            if (resizedWindow) {
-                resizedWindow.element.classList.remove('resizing');
-                resizedWindow = null;
-            }
+            if (resizedWindow) { resizedWindow.element.classList.remove('resizing'); resizedWindow = null; }
             document.removeEventListener('mousemove', onResize);
             document.removeEventListener('mouseup', stopResize);
         }
 
-        // ═══════════════════════════════════════════════════════════════
-        //  KONFIGURATION & STATE
-        // ═══════════════════════════════════════════════════════════════
+        // ===== Design studio: Background type =====
+        function setBgType(type) {
+            bgType = type;
+            document.querySelectorAll('.Design-bg-type-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.type === type);
+            });
 
-        const songs = [
-            { title: "Good night lofi", artist: "Fassound", src: "Res/Musik/fassounds-good-night-lofi-cozy-chill-music-160166.mp3", cover: "Res/Bild/Cover/dreaming.jpg" },
-            { title: "Background music", artist: "Nastelbom", src: "/Res/Musik/nastelbom-background-music-463062.mp3", cover: "Res/Bild/Cover/dreaming.jpg" },
-            { title: "Space shuttle", artist: "The_mountain", src: "Res/Musik/the_mountain-space-shuttle-153639.mp3", cover: "Res/Bild/Cover/dreaming.jpg" },
-            { title: "Dark spectrometer", artist: "Samuelfijohans", src: "Res/Musik/samuelfjohanns-dark-spectrometer-11713.mp3", cover: "Res/Bild/Cover/dreaming.jpg" },
-        ];
+            if (type === 'image') {
+                bgFileInput.accept = 'image/*';
+                bgDropText.textContent = 'Bild hier reinziehen oder klicken';
+                bgPreviewImgContainer.style.display = 'none';
+                bgPreviewImgContainer.classList.remove('active');
+                bgPreviewVideoContainer.style.display = 'none';
+                bgPreviewVideoContainer.classList.remove('active');
+                bgVideoControls.style.display = 'none';
+                bgVideoElement.pause();
+                bgVideoElement.src = '';
+                bgVideoLayer.classList.remove('active');
+            } else {
+                bgFileInput.accept = 'video/*';
+                bgDropText.textContent = 'Video hier reinziehen oder klicken';
+                bgPreviewImgContainer.style.display = 'none';
+                bgPreviewImgContainer.classList.remove('active');
+                bgPreviewVideoContainer.style.display = 'none';
+                bgPreviewVideoContainer.classList.remove('active');
+                bgVideoControls.style.display = 'none';
+                bgVideoElement.pause();
+                bgVideoElement.src = '';
+                bgVideoLayer.classList.remove('active');
+                bgPreview.classList.remove('active');
+                bgPreview.style.backgroundImage = '';
+            }
+        }
 
-        let currentSongIndex = 0;
-        let isPlaying = false;
-        let isShuffle = false;
-        let repeatMode = 0;
-        let settings = { lights: false, fps: false, material: false, debug: false };
+        // ===== Design studio: hinterground handlung =====
+        function handleBgFile(file) {
+            if (!file) return;
+            const url = URL.createObjectURL(file);
 
-        const audio = document.getElementById('audio-player');
-        const playIcon = document.getElementById('play-icon');
-        const btnPlay = document.getElementById('btn-play');
-        const btnShuffle = document.getElementById('btn-shuffle');
-        const btnRepeat = document.getElementById('btn-repeat');
-        const progressBar = document.getElementById('Progressbar');
-        const progressFill = document.getElementById('Progressbar-fill');
-        const volumeBar = document.getElementById('volume-bar');
-        const volumeFill = document.getElementById('volume-fill');
-        const songTitle = document.getElementById('song-title');
-        const songArtist = document.getElementById('song-artist');
-        const coverImg = document.getElementById('cover-img');
-        const albumCover = document.getElementById('album-cover');
-        const aktivZeit = document.getElementById('aktiv-zeit');
-        const totalZeit = document.getElementById('total-zeit');
-        const navMusikTitle = document.getElementById('nav-musik-title');
-        const playlistBox = document.getElementById('playlist-box');
-        const navMusikBtn = document.getElementById('nav-musik-btn');
-        const dropzone = document.getElementById('dropzone');
-        const fileInput = document.getElementById('file-input');
-        const uploadListe = document.getElementById('upload-liste');
+            if (bgType === 'image') {
+                if (!file.type.startsWith('image/')) return;
+                bgPreviewImg.src = url;
+                bgPreviewImgContainer.style.display = 'block';
+                bgPreviewImgContainer.classList.add('active');
+                bgPreviewVideoContainer.style.display = 'none';
+                bgPreviewVideoContainer.classList.remove('active');
+                bgVideoControls.style.display = 'none';
 
-        const icons = {
-            play: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23ffffff'%3E%3Cpath d='M320-200v-560l440 280-440 280Z'/%3E%3C/svg%3E",
-            pause: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23ffffff'%3E%3Cpath d='M520-200v-560h240v560H520Zm-320 0v-560h240v560H200Z'/%3E%3C/svg%3E",
-            shuffle: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23ffffff'%3E%3Cpath d='M560-160v-80h104L537-367l57-57 126 126v-102h80v240H560Zm-344 0-56-56 504-504H560v-80h240v240h-80v-104L216-160Zm151-377L160-728l56-56 207 207-56 56Z'/%3E%3C/svg%3E",
-            shuffleOn: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23a2bdff'%3E%3Cpath d='M560-160v-80h104L537-367l57-57 126 126v-102h80v240H560Zm-344 0-56-56 504-504H560v-80h240v240h-80v-104L216-160Zm151-377L160-728l56-56 207 207-56 56Z'/%3E%3C/svg%3E",
-            repeat: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23ffffff'%3E%3Cpath d='M280-80 120-240l160-160 56 58-62 62h406v-160h80v240H274l62 62-56 58Zm-80-440v-240h486l-62-62 56-58 160 160-160 160-56-58 62-62H280v160h-80Z'/%3E%3C/svg%3E",
-            repeatOn: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23a2bdff'%3E%3Cpath d='M280-80 120-240l160-160 56 58-62 62h406v-160h80v240H274l62 62-56 58Zm-80-440v-240h486l-62-62 56-58 160 160-160 160-56-58 62-62H280v160h-80Z'/%3E%3C/svg%3E",
-            repeatOne: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23ff8e8e'%3E%3Cpath d='M280-80 120-240l160-160 56 58-62 62h406v-160h80v240H274l62 62-56 58Zm-80-440v-240h486l-62-62 56-58 160 160-160 160-56-58 62-62H280v160h-80Zm240-120v-80h80v80h-80Z'/%3E%3C/svg%3E",
-            music: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23ffffff'%3E%3Cpath d='M400-120q-66 0-113-47t-47-113q0-66 47-113t113-47q23 0 42.5 5.5T480-418v-422h240v160H560v400q0 66-47 113t-113 47Z'/%3E%3C/svg%3E"
-        };
+                bgPreview.style.backgroundImage = `url(${url})`;
+                bgPreview.classList.add('active');
+                document.body.classList.add('has-custom-bg');
 
+                bgVideoLayer.classList.remove('active');
+                bgVideoElement.pause();
+                bgVideoElement.src = '';
+
+                if (settings.debug) debugLog('🖼️ Hintergrund-Bild hochgeladen!', 'info');
+            } else {
+                if (!file.type.startsWith('video/')) return;
+                bgPreviewVideo.src = url;
+                bgPreviewVideoContainer.style.display = 'block';
+                bgPreviewVideoContainer.classList.add('active');
+                bgPreviewImgContainer.style.display = 'none';
+                bgPreviewImgContainer.classList.remove('active');
+                bgVideoControls.style.display = 'flex';
+
+                bgVideoElement.src = url;
+                bgVideoElement.loop = true;
+                bgVideoElement.muted = bgVideoMuted;
+                bgVideoElement.play().catch(() => {});
+                bgVideoLayer.classList.add('active');
+
+                bgPreview.classList.remove('active');
+                bgPreview.style.backgroundImage = '';
+                document.body.classList.add('has-custom-bg');
+
+                if (settings.debug) debugLog('🎬 Live-Hintergrund Video hochgeladen!', 'info');
+            }
+        }
+
+        function toggleBgVideoMute() {
+            bgVideoMuted = !bgVideoMuted;
+            bgVideoElement.muted = bgVideoMuted;
+            document.getElementById('bg-mute-btn').innerHTML = bgVideoMuted 
+                ? '<img src="Res/Bild/Icon/Design studio/volume_up_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg">'
+                : '<img src="Res/Bild/Icon/Design studio/volume_mute_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg">';
+        }
+
+        function toggleBgVideoPlay() {
+            bgVideoPlaying = !bgVideoPlaying;
+            if (bgVideoPlaying) {
+                bgVideoElement.play().catch(() => {});
+                document.getElementById('bg-play-btn').innerHTML = '<img src="Res/Bild/Icon/Design studio/play_arrow_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg">';
+            } else {
+                bgVideoElement.pause();
+                document.getElementById('bg-play-btn').innerHTML = '<img src="Res/Bild/Icon/Design studio/pause_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg">';
+            }
+        }
+
+        // ===== Desgin studio: Lokal font system =====
+        function loadLocalFont() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.ttf,.otf,.woff,.woff2,.eot';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const url = URL.createObjectURL(file);
+                const fontName = file.name.replace(/\.[^/.]+$/, "").replace(/\s+/g, '-');
+                const style = document.createElement('style');
+                style.textContent = `@font-face { font-family: '${fontName}'; src: url('${url}'); }`;
+                document.head.appendChild(style);
+                document.body.style.fontFamily = fontName + ", sans-serif";
+                if (settings.debug) debugLog('🔤 Schriftart geladen: ' + file.name, 'info');
+            };
+            input.click();
+        }
+
+        // ===== Design stduio: reset =====
+        function resetDesign() {
+            // Reset background
+            bgType = 'image';
+            setBgType('image');
+            bgPreviewImg.src = '';
+            bgPreviewImgContainer.classList.remove('active');
+            bgPreview.style.backgroundImage = '';
+            bgPreview.classList.remove('active');
+            bgVideoElement.pause();
+            bgVideoElement.src = '';
+            bgVideoLayer.classList.remove('active');
+            document.body.classList.remove('has-custom-bg');
+
+            // Reset font
+            document.body.style.fontFamily = '';
+
+            // Reset Material You
+            if (settings.material) {
+                toggleSetting('material');
+                document.getElementById('design-material-btn').classList.remove('active');
+            }
+
+            // Clear saved design
+            localStorage.removeItem('mayi-design');
+
+            // Feedback
+            const btn = event.target.closest('.Design-action-btn');
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<span class="Design-action-icon"><img src="Res/Bild/Icon/Design studio/verified_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></img></span><span>Zurückgesetzt!</span>';
+            setTimeout(() => btn.innerHTML = orig, 1200);
+
+            if (settings.debug) debugLog('🗑️ Design zurückgesetzt', 'info');
+        }
+
+        // ===== Design studio: Speicher =====
+        function saveDesign() {
+            const data = {
+                bgType: bgType,
+                bg: bgType === 'image' ? (bgPreviewImg.src || null) : (bgVideoElement.src || null),
+                material: settings.material,
+                font: document.body.style.fontFamily || ''
+            };
+            localStorage.setItem('mayi-design', JSON.stringify(data));
+            const btn = event.target.closest('.Design-action-btn');
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<span class="Design-action-icon"><img src="Res/Bild/Icon/Design studio/verified_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></img></span><span>Gespeichert!</span>';
+            setTimeout(() => btn.innerHTML = orig, 1200);
+            if (settings.debug) debugLog('💾 Design gespeichert', 'info');
+        }
+
+        function loadSavedDesign() {
+            const saved = localStorage.getItem('mayi-design');
+            if (!saved) return;
+            try {
+                const data = JSON.parse(saved);
+                if (data.bgType) setBgType(data.bgType);
+                if (data.bg) {
+                    if (data.bgType === 'image') {
+                        bgPreviewImg.src = data.bg;
+                        bgPreviewImgContainer.style.display = 'block';
+                        bgPreviewImgContainer.classList.add('active');
+                        bgPreview.style.backgroundImage = `url(${data.bg})`;
+                        bgPreview.classList.add('active');
+                        document.body.classList.add('has-custom-bg');
+                    } else if (data.bgType === 'video') {
+                        bgPreviewVideo.src = data.bg;
+                        bgPreviewVideoContainer.style.display = 'block';
+                        bgPreviewVideoContainer.classList.add('active');
+                        bgVideoControls.style.display = 'flex';
+                        bgVideoElement.src = data.bg;
+                        bgVideoElement.loop = true;
+                        bgVideoElement.muted = true;
+                        bgVideoElement.play().catch(() => {});
+                        bgVideoLayer.classList.add('active');
+                        document.body.classList.add('has-custom-bg');
+                    }
+                }
+                if (data.font) document.body.style.fontFamily = data.font;
+            } catch(e) {}
+        }
+
+        // ===== DESIGN STUDIO: EVENT LISTENERS =====
+        bgDropzone.addEventListener('click', () => bgFileInput.click());
+        bgDropzone.addEventListener('dragover', (e) => { e.preventDefault(); bgDropzone.classList.add('dragover'); });
+        bgDropzone.addEventListener('dragleave', () => bgDropzone.classList.remove('dragover'));
+        bgDropzone.addEventListener('drop', (e) => { e.preventDefault(); bgDropzone.classList.remove('dragover'); handleBgFile(e.dataTransfer.files[0]); });
+        bgFileInput.addEventListener('change', (e) => handleBgFile(e.target.files[0]));
+
+        const coverDropzone = document.getElementById('cover-dropzone');
+        const coverFileInput = document.getElementById('cover-file-input');
+        const coverPreviewImg = document.getElementById('cover-preview-img');
+        const coverPreviewDiv = document.getElementById('cover-preview');
+
+        coverDropzone.addEventListener('click', () => coverFileInput.click());
+        coverDropzone.addEventListener('dragover', (e) => { e.preventDefault(); coverDropzone.classList.add('dragover'); });
+        coverDropzone.addEventListener('dragleave', () => coverDropzone.classList.remove('dragover'));
+        coverDropzone.addEventListener('drop', (e) => { e.preventDefault(); coverDropzone.classList.remove('dragover'); handleWindowFile(e.dataTransfer.files[0]); });
+        coverFileInput.addEventListener('change', (e) => handleWindowFile(e.target.files[0]));
+
+        function handleWindowFile(file) {
+            if (!file) return;
+            const type = getFileType(file);
+            const url = URL.createObjectURL(file);
+            if (type === 'image') { coverPreviewImg.src = url; coverPreviewDiv.classList.add('active'); }
+            else { coverPreviewImg.src = ''; coverPreviewDiv.classList.remove('active'); }
+            createWindow(file.name, url, type, file);
+            if (settings.debug) debugLog(getFileIcon(type) + ' Window erstellt: ' + file.name, 'info');
+        }
+
+        function Designtoggle() {
+            document.querySelector('.Designoverlay').classList.toggle('Design-active');
+            document.querySelector('.Design-toggle').classList.toggle('active');
+        }
+
+        function toggleMaterialYou() {
+            toggleSetting('material');
+            const btn = document.getElementById('design-material-btn');
+            if (btn) btn.classList.toggle('active', settings.material);
+        }
+
+        // ===== MUSIC PLAYER =====
         function rgbToHsl(r, g, b) {
             r /= 255; g /= 255; b /= 255;
             const max = Math.max(r, g, b), min = Math.min(r, g, b);
@@ -686,8 +807,7 @@
             if (s === 0) { r = g = b = l; }
             else {
                 const hue2rgb = (p, q, t) => {
-                    if (t < 0) t += 1;
-                    if (t > 1) t -= 1;
+                    if (t < 0) t += 1; if (t > 1) t -= 1;
                     if (t < 1/6) return p + (q - p) * 6 * t;
                     if (t < 1/2) return q;
                     if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
@@ -709,9 +829,7 @@
         function extractColorsFromCover(imgSrc) {
             return new Promise((resolve) => {
                 const img = new Image();
-                if (imgSrc.startsWith('http') && !imgSrc.includes(window.location.host)) {
-                    img.crossOrigin = "Anonymous";
-                }
+                if (imgSrc.startsWith('http') && !imgSrc.includes(window.location.host)) img.crossOrigin = "Anonymous";
                 img.onload = () => {
                     try {
                         const canvas = document.createElement('canvas');
@@ -722,9 +840,7 @@
                         let r = 0, g = 0, b = 0, count = 0;
                         for (let i = 0; i < imageData.length; i += 4) {
                             const brightness = (imageData[i] + imageData[i+1] + imageData[i+2]) / 3;
-                            if (brightness > 20 && brightness < 240) {
-                                r += imageData[i]; g += imageData[i+1]; b += imageData[i+2]; count++;
-                            }
+                            if (brightness > 20 && brightness < 240) { r += imageData[i]; g += imageData[i+1]; b += imageData[i+2]; count++; }
                         }
                         if (count === 0) count = 1;
                         const primary = { r: Math.round(r/count), g: Math.round(g/count), b: Math.round(b/count) };
@@ -780,6 +896,7 @@
             audio.addEventListener('error', handleAudioError);
             document.addEventListener('keydown', handleKeydown);
             loadSettings();
+            loadSavedDesign();
             initDebug();
         }
 
@@ -890,14 +1007,27 @@
             if (!audio.duration) return;
             const percent = (audio.currentTime / audio.duration) * 100;
             progressFill.style.width = percent + '%';
+            if (panelProgressFill) panelProgressFill.style.width = percent + '%';
             aktivZeit.textContent = formatTime(audio.currentTime);
+            if (panelAktivZeit) panelAktivZeit.textContent = formatTime(audio.currentTime);
         }
 
-        function updateDuration() { totalZeit.textContent = formatTime(audio.duration || 0); }
+        function updateDuration() {
+            totalZeit.textContent = formatTime(audio.duration || 0);
+            if (panelTotalZeit) panelTotalZeit.textContent = formatTime(audio.duration || 0);
+        }
 
         function seek(event) {
             if (!audio.duration) return;
             const rect = progressBar.getBoundingClientRect();
+            const percent = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+            audio.currentTime = percent * audio.duration;
+            updateProgress();
+        }
+
+        function seekPanel(event) {
+            if (!audio.duration) return;
+            const rect = panelProgressBar.getBoundingClientRect();
             const percent = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
             audio.currentTime = percent * audio.duration;
             updateProgress();
@@ -928,6 +1058,7 @@
             });
         }
 
+        // Keybind shortcut
         function handleKeydown(e) {
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
             switch(e.code) {
@@ -937,26 +1068,20 @@
                 case 'ArrowUp': e.preventDefault(); audio.volume = Math.min(1, audio.volume + 0.1); updateVolumeVisual(audio.volume); break;
                 case 'ArrowDown': e.preventDefault(); audio.volume = Math.max(0, audio.volume - 0.1); updateVolumeVisual(audio.volume); break;
                 case 'KeyM': Musiktoggle(); break;
+                case 'KeyD': Designtoggle(); break;
                 case 'KeyS': Settingstoggle(); break;
             }
         }
 
-
+        // ===== UPLOAD =====
         dropzone.addEventListener('click', () => fileInput.click());
         dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
         dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
-        dropzone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropzone.classList.remove('dragover');
-            handleFiles(e.dataTransfer.files);
-        });
+        dropzone.addEventListener('drop', (e) => { e.preventDefault(); dropzone.classList.remove('dragover'); handleFiles(e.dataTransfer.files); });
         fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
 
         function handleFiles(files) {
-            Array.from(files).forEach(file => {
-                if (!file.type.startsWith('audio/')) return;
-                processAudioFile(file);
-            });
+            Array.from(files).forEach(file => { if (!file.type.startsWith('audio/')) return; processAudioFile(file); });
         }
 
         function processAudioFile(file) {
@@ -964,13 +1089,7 @@
             jsmediatags.read(file, {
                 onSuccess: (tag) => {
                     const tags = tag.tags;
-                    const newSong = {
-                        title: tags.title || file.name.replace(/\.[^/.]+$/, ""),
-                        artist: tags.artist || "Unbekannt",
-                        src: url,
-                        cover: null,
-                        isUpload: true
-                    };
+                    const newSong = { title: tags.title || file.name.replace(/\.[^/.]+$/, ""), artist: tags.artist || "Unbekannt", src: url, cover: null, isUpload: true };
                     if (tags.picture) {
                         const { data, format } = tags.picture;
                         const byteArray = new Uint8Array(data);
@@ -979,15 +1098,7 @@
                     }
                     addUploadedSong(newSong);
                 },
-                onError: () => {
-                    addUploadedSong({
-                        title: file.name.replace(/\.[^/.]+$/, ""),
-                        artist: "Unbekannt",
-                        src: url,
-                        cover: null,
-                        isUpload: true
-                    });
-                }
+                onError: () => { addUploadedSong({ title: file.name.replace(/\.[^/.]+$/, ""), artist: "Unbekannt", src: url, cover: null, isUpload: true }); }
             });
         }
 
@@ -995,28 +1106,19 @@
             songs.push(song);
             renderPlaylist();
             renderUploadListe();
-            if (songs.length === 1 || !isPlaying) {
-                currentSongIndex = songs.length - 1;
-                loadSong(currentSongIndex);
-                play();
-            }
+            if (songs.length === 1 || !isPlaying) { currentSongIndex = songs.length - 1; loadSong(currentSongIndex); play(); }
         }
 
         function renderUploadListe() {
             const uploads = songs.filter(s => s.isUpload);
             uploadListe.innerHTML = '';
-            if (uploads.length === 0) {
-                uploadListe.innerHTML = '<p class="Upload-leer">Noch keine Songs hochgeladen ( ͡° ͜ʖ ͡°)</p>';
-                return;
-            }
+            if (uploads.length === 0) { uploadListe.innerHTML = '<p class="Upload-leer">Noch keine Songs hochgeladen ( ͡° ͜ʖ ͡°)</p>'; return; }
             uploads.forEach((song) => {
                 const realIndex = songs.indexOf(song);
                 const item = document.createElement('div');
                 item.className = 'Upload-item';
                 item.innerHTML = `
-                    <div class="Upload-item-cover">
-                        ${song.cover ? '<img src="' + song.cover + '" alt="Cover">' : '<span>🎵</span>'}
-                    </div>
+                    <div class="Upload-item-cover">${song.cover ? '<img src="' + song.cover + '" alt="Cover">' : '<span>🎵</span>'}</div>
                     <div class="Upload-item-info">
                         <span class="Upload-item-title">${song.title}</span>
                         <span class="Upload-item-artist">${song.artist}</span>
@@ -1037,10 +1139,8 @@
             songs.splice(index, 1);
             if (currentSongIndex >= index && currentSongIndex > 0) currentSongIndex--;
             if (currentSongIndex >= songs.length) currentSongIndex = Math.max(0, songs.length - 1);
-            if (songs.length > 0) {
-                loadSong(currentSongIndex);
-                if (isPlaying) play();
-            } else {
+            if (songs.length > 0) { loadSong(currentSongIndex); if (isPlaying) play(); }
+            else {
                 pause(); audio.src = '';
                 songTitle.textContent = 'Wähle einen Song';
                 songArtist.textContent = '-';
@@ -1056,9 +1156,7 @@
             renderUploadListe();
         }
 
-        document.getElementById('Upload-overlay').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('Upload-overlay')) Uploadtoggle();
-        });
+        document.getElementById('Upload-overlay').addEventListener('click', (e) => { if (e.target === document.getElementById('Upload-overlay')) Uploadtoggle(); });
 
         (function() {
             const script = document.createElement('script');
@@ -1067,6 +1165,7 @@
             document.head.appendChild(script);
         })();
 
+        // ===== overlay toggles =====
         function closeWarung() { document.querySelector('.Warungoverlay').classList.toggle('Warung-active'); }
         function Settingstoggle() { document.querySelector('.Settingsoverlay').classList.toggle('Settings-active'); }
         function Musiktoggle() {
@@ -1074,39 +1173,50 @@
             navMusikBtn.classList.toggle('active');
         }
 
-        document.getElementById('Settings-overlay').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('Settings-overlay')) Settingstoggle();
-        });
+        document.getElementById('Settings-overlay').addEventListener('click', (e) => { if (e.target === document.getElementById('Settings-overlay')) Settingstoggle(); });
+        document.getElementById('Design-overlay').addEventListener('click', (e) => { if (e.target === document.getElementById('Design-overlay')) Designtoggle(); });
+        document.getElementById('Musik-overlay').addEventListener('click', (e) => { if (e.target === document.getElementById('Musik-overlay')) Musiktoggle(); });
 
-        document.getElementById('Design-overlay').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('Design-overlay')) Designtoggle();
-        });
+        // ===== Einstellungen =====
+        function selectSetting(key) {
+            currentSetting = key;
+            document.querySelectorAll('.Settings-sidebar-item').forEach(item => {
+                item.classList.toggle('active', item.dataset.setting === key);
+            });
+            const data = settingsData[key];
+            document.getElementById('panel-title').textContent = data.title;
+            document.getElementById('panel-desc').textContent = data.desc;
+            const actionDiv = document.getElementById('panel-action');
+            if (data.type === 'toggle') {
+                const isActive = settings[data.key];
+                actionDiv.innerHTML = `
+                    <div class="Settings-toggle-switch">
+                        <span>${isActive ? 'An' : 'Aus'}</span>
+                        <button class="Settings-switch ${isActive ? 'active' : ''}" onclick="toggleSettingFromPanel('${data.key}')"></button>
+                    </div>
+                `;
+            }
+        }
 
-        document.getElementById('Musik-overlay').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('Musik-overlay')) Musiktoggle();
-        });
-
-        // ═══════════════════════════════════════════════════════════════
-        //  EINSTELLUNGEN
-        // ═══════════════════════════════════════════════════════════════
+        function toggleSettingFromPanel(key) {
+            toggleSetting(key);
+            selectSetting(currentSetting);
+        }
 
         function toggleSetting(key) {
             settings[key] = !settings[key];
             const btn = document.getElementById('toggle-' + key);
-            btn.textContent = settings[key] ? 'An' : 'Aus';
-            btn.classList.toggle('active', settings[key]);
+            if (btn) { btn.textContent = settings[key] ? 'An' : 'Aus'; btn.classList.toggle('active', settings[key]); }
             localStorage.setItem('mayi-settings', JSON.stringify(settings));
             applySettings(key);
+            if (currentSetting === key) selectSetting(key);
         }
 
         function applySettings(key) {
             switch(key) {
                 case 'lights': document.body.classList.toggle('reduced-lights', settings.lights); break;
                 case 'fps': toggleFpsDisplay(); break;
-                case 'material':
-                    document.body.classList.toggle('material-you', settings.material);
-                    if (settings.material) applyMaterialYouColors();
-                    break;
+                case 'material': document.body.classList.toggle('material-you', settings.material); if (settings.material) applyMaterialYouColors(); break;
                 case 'debug': document.body.classList.toggle('debug-mode', settings.debug); break;
             }
         }
@@ -1117,35 +1227,22 @@
                 settings = JSON.parse(saved);
                 Object.keys(settings).forEach(key => {
                     const btn = document.getElementById('toggle-' + key);
-                    if (btn) {
-                        btn.textContent = settings[key] ? 'An' : 'Aus';
-                        btn.classList.toggle('active', settings[key]);
-                        applySettings(key);
-                    }
+                    if (btn) { btn.textContent = settings[key] ? 'An' : 'Aus'; btn.classList.toggle('active', settings[key]); applySettings(key); }
                 });
             }
         }
 
-        // ═══════════════════════════════════════════════════════════════
-        //  FPS DISPLAY
-        // ═══════════════════════════════════════════════════════════════
-
+        // ===== FPS =====
         let fpsDisplay = null;
         let fpsFrameCount = 0;
         let fpsLastTime = performance.now();
 
         function toggleFpsDisplay() {
             if (settings.fps) {
-                if (!fpsDisplay) {
-                    fpsDisplay = document.createElement('div');
-                    fpsDisplay.className = 'fps-display';
-                    document.body.appendChild(fpsDisplay);
-                }
+                if (!fpsDisplay) { fpsDisplay = document.createElement('div'); fpsDisplay.className = 'fps-display'; document.body.appendChild(fpsDisplay); }
                 fpsDisplay.style.display = 'block';
                 requestAnimationFrame(updateFps);
-            } else if (fpsDisplay) {
-                fpsDisplay.style.display = 'none';
-            }
+            } else if (fpsDisplay) { fpsDisplay.style.display = 'none'; }
         }
 
         function updateFps() {
@@ -1162,26 +1259,15 @@
             requestAnimationFrame(updateFps);
         }
 
-        // ═══════════════════════════════════════════════════════════════
-        //  DEBUG SYSTEM
-        // ═══════════════════════════════════════════════════════════════
-
+        // ===== DEBUG =====
         let debugPanelVisible = true;
         let debugLogs = [];
         const MAX_LOGS = 50;
 
         function initDebug() {
             const vizContainer = document.getElementById('debug-visualizer');
-            for (let i = 0; i < 20; i++) {
-                const bar = document.createElement('div');
-                bar.className = 'debug-viz-bar';
-                bar.style.height = '2px';
-                vizContainer.appendChild(bar);
-            }
-            document.getElementById('debug-engine').textContent =
-                navigator.userAgent.includes('Chrome') ? 'Blink (Chrome)' :
-                navigator.userAgent.includes('Firefox') ? 'Gecko (Firefox)' :
-                navigator.userAgent.includes('Safari') ? 'WebKit (Safari)' : 'Unknown';
+            for (let i = 0; i < 20; i++) { const bar = document.createElement('div'); bar.className = 'debug-viz-bar'; bar.style.height = '2px'; vizContainer.appendChild(bar); }
+            document.getElementById('debug-engine').textContent = navigator.userAgent.includes('Chrome') ? 'Blink (Chrome)' : navigator.userAgent.includes('Firefox') ? 'Gecko (Firefox)' : navigator.userAgent.includes('Safari') ? 'WebKit (Safari)' : 'Unknown';
             updateDebugBrowserInfo();
             window.addEventListener('resize', updateDebugBrowserInfo);
             window.addEventListener('online', () => debugLog('🌐 Online!', 'info'));
@@ -1234,10 +1320,7 @@
             document.getElementById('debug-progress-bar').style.width = progressPercent + '%';
             document.getElementById('debug-volume').textContent = Math.round(audio.volume * 100) + '%';
             document.getElementById('debug-volume-bar').style.width = (audio.volume * 100) + '%';
-            if (isPlaying) {
-                const bars = document.querySelectorAll('.debug-viz-bar');
-                bars.forEach(bar => { bar.style.height = (Math.random() * 36 + 2) + 'px'; });
-            }
+            if (isPlaying) { const bars = document.querySelectorAll('.debug-viz-bar'); bars.forEach(bar => { bar.style.height = (Math.random() * 36 + 2) + 'px'; }); }
             document.getElementById('debug-material').textContent = settings.material ? '✅ An' : '❌ Aus';
             if (settings.material) {
                 const primary = getComputedStyle(document.documentElement).getPropertyValue('--my-primary').trim() || '#a2bdff';
@@ -1255,9 +1338,7 @@
             entry.className = 'debug-log-entry';
             entry.innerHTML = '<span class="debug-log-time">' + time + '</span><span class="debug-log-' + type + '">' + message + '</span>';
             consoleEl.insertBefore(entry, consoleEl.firstChild);
-            while (consoleEl.children.length > MAX_LOGS) {
-                consoleEl.removeChild(consoleEl.lastChild);
-            }
+            while (consoleEl.children.length > MAX_LOGS) { consoleEl.removeChild(consoleEl.lastChild); }
         }
 
         function renderDebugSettings() {
@@ -1277,10 +1358,7 @@
             document.getElementById('debug-overlay').style.display = debugPanelVisible ? 'block' : 'none';
         }
 
-        // ═══════════════════════════════════════════════════════════════
-        //  START
-        // ═══════════════════════════════════════════════════════════════
-
+        // ===== INIT =====
         window.addEventListener('DOMContentLoaded', init);
     </script>
 </body>

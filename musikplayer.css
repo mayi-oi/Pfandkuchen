@@ -204,6 +204,32 @@ body.material-you .Warung-button .verstanden-button {
     color: var(--my-primary-dark);
 }
 
+body.material-you .Musik-panel-upload {
+    background: var(--my-primary);
+    color: var(--my-primary-dark);
+}
+
+body.material-you .Musik-panel-upload:hover {
+    background: var(--my-primary-dark);
+    color: var(--my-primary);
+    box-shadow: 0 0 14px var(--my-primary-dark);
+}
+
+body.material-you .Musik-panel-close:hover {
+    background: var(--my-primary);
+    color: var(--my-primary-dark);
+    box-shadow: 0 0 12px var(--my-primary);
+}
+
+body.material-you .Musik-right h4 {
+    color: var(--my-text);
+}
+
+body.material-you .Musik-panel-progress .Aktivzeit,
+body.material-you .Musik-panel-progress .Totalzeit {
+    color: var(--my-text-secondary);
+}
+
 ::-webkit-scrollbar {
     display: none;
 }
@@ -319,7 +345,6 @@ body.material-you .Warung-button .verstanden-button {
     pointer-events: none;
     opacity: 0;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 0 50px rgba(99, 115, 154, 0.5);
 }
 
 .Settingsoverlay.Settings-active {
@@ -339,33 +364,280 @@ body.material-you .Warung-button .verstanden-button {
     border-radius: 28px;
     padding: 32px 36px;
     width: 90%;
-    max-width: 520px;
+    max-width: 750px;
     max-height: 80vh;
     display: flex;
     flex-direction: column;
     color: #c9d8ff;
     transform: scale(0.95) translateY(-10px);
-    opacity: 1;
+    opacity: 0;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     box-shadow: 0 0 50px rgba(99, 115, 154, 0.5);
+    overflow: hidden;
 }
 
-.Settings-header h2 {
+/* Top Bar */
+.Settings-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+}
+
+.Settings-title-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.Settings-title-wrap h2 {
     margin: 0;
     font-size: 1.85rem;
     color: #ffffff;
     text-decoration: underline;
+    line-height: 1.2;
 }
 
-.Settings-box {
-    height: 470px;
-    margin-top: 14px;
-    padding: 18px;
+.Settings-uebersicht-label {
+    font-size: 1.1rem;
+    color: #c9d8ff;
+    text-decoration: underline;
+    margin: 0;
+    margin-top: 4px;
+}
+
+.Settings-topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.Settings-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #3e4a69;
     border-radius: 14px;
-    background-color: #3e4a69;
-    overflow-y: scroll;
+    padding: 10px 14px;
+    cursor: text;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
 }
 
+.Settings-search-bar:hover,
+.Settings-search-bar:focus-within {
+    border-color: #a2bdff;
+    box-shadow: 0 0 12px rgba(162, 189, 255, 0.3);
+}
+
+.Settings-search-bar span {
+    font-size: 0.85rem;
+    color: #8fa1cf;
+    white-space: nowrap;
+}
+
+.Settings-search-bar img {
+    width: 20px;
+    height: 20px;
+    opacity: 0.7;
+    transition: all 0.2s ease;
+}
+
+.Settings-search-bar:hover img {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.Settings-icon-btn {
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    background: #3e4a69;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    padding: 0;
+}
+
+.Settings-icon-btn:hover {
+    background: #a2bdff;
+    transform: scale(1.1);
+    box-shadow: 0 0 14px rgba(162, 189, 255, 0.5);
+}
+
+.Settings-icon-btn:hover img {
+    filter: brightness(0.3);
+}
+
+.Settings-icon-btn img {
+    width: 20px;
+    height: 20px;
+    transition: all 0.2s ease;
+}
+
+.Settings-icon-btn.close-btn:hover {
+    background: #ff8e8e;
+    box-shadow: 0 0 14px rgba(255, 142, 142, 0.5);
+}
+
+/* Body Layout */
+.Settings-body {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+    min-height: 0;
+    margin-top: 8px;
+}
+
+/* Left Sidebar */
+.Settings-sidebar {
+    width: 180px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    border-radius: 20px;
+    background: #3e4a69;
+    overflow-y: auto;
+}
+
+.Settings-sidebar-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 12px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-family: Google-sans;
+}
+
+.Settings-sidebar-item:hover {
+    background: rgba(162, 189, 255, 0.1);
+}
+
+.Settings-sidebar-item.active {
+    background: rgba(162, 189, 255, 0.2);
+}
+
+.Settings-sidebar-item span {
+    font-size: 0.9rem;
+    color: #ffffff;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.Settings-sidebar-indicator {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid #8fa1cf;
+    background: transparent;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+}
+
+.Settings-sidebar-item.active .Settings-sidebar-indicator {
+    background: #a2bdff;
+    border-color: #a2bdff;
+    box-shadow: 0 0 8px rgba(162, 189, 255, 0.5);
+}
+
+/* Right Panel */
+.Settings-panel {
+    flex: 1;
+    background: #3e4a69;
+    border-radius: 20px;
+    padding: 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.Settings-panel-title {
+    margin: 0 0 12px 0;
+    font-size: 1.5rem;
+    color: #ffffff;
+    text-decoration: underline;
+    line-height: 1.2;
+}
+
+.Settings-panel-desc {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #c9d8ff;
+    line-height: 1.5;
+}
+
+.Settings-panel-action {
+    margin-top: 20px;
+}
+
+/* Toggle Switch Style */
+.Settings-toggle-switch {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.Settings-toggle-switch span {
+    font-size: 1rem;
+    color: #c9d8ff;
+}
+
+.Settings-switch {
+    position: relative;
+    width: 50px;
+    height: 26px;
+    background: #647aaf;
+    border-radius: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    padding: 0;
+}
+
+.Settings-switch.active {
+    background: #a2bdff;
+    box-shadow: 0 0 10px rgba(162, 189, 255, 0.4);
+}
+
+.Settings-switch::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ffffff;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.Settings-switch.active::after {
+    left: 27px;
+}
+
+/* Link button in panel */
+.Settings-panel .link-button {
+    width: auto;
+    display: inline-block;
+    padding: 14px 24px;
+    margin-top: 16px;
+}
+
+/* Old styles kept for compatibility */
 .Settings-button {
     margin-top: 12px;
     margin-bottom: 12px;
@@ -421,6 +693,139 @@ body.material-you .Warung-button .verstanden-button {
     box-shadow: 0 0 18px #bacdff;
 }
 
+/* Material You overrides for new design */
+body.material-you .Settings-content {
+    background: var(--my-surface);
+    border-color: var(--my-accent);
+    box-shadow: 0 0 50px var(--my-primary);
+}
+
+body.material-you .Settingsoverlay.Settings-active {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+body.material-you .Settings-sidebar,
+body.material-you .Settings-panel,
+body.material-you .Settings-search-bar,
+body.material-you .Settings-icon-btn {
+    background: var(--my-surface-dark);
+}
+
+body.material-you .Settings-sidebar-item:hover {
+    background: rgba(162, 189, 255, 0.1);
+}
+
+body.material-you .Settings-sidebar-item.active {
+    background: rgba(162, 189, 255, 0.2);
+}
+
+body.material-you .Settings-sidebar-indicator {
+    border-color: var(--my-accent);
+}
+
+body.material-you .Settings-sidebar-item.active .Settings-sidebar-indicator {
+    background: var(--my-primary);
+    border-color: var(--my-primary);
+    box-shadow: 0 0 8px var(--my-primary);
+}
+
+body.material-you .Settings-switch {
+    background: var(--my-accent);
+}
+
+body.material-you .Settings-switch.active {
+    background: var(--my-primary);
+    box-shadow: 0 0 10px var(--my-primary);
+}
+
+body.material-you .Settings-icon-btn:hover {
+    background: var(--my-primary);
+}
+
+body.material-you .Settings-search-bar:hover,
+body.material-you .Settings-search-bar:focus-within {
+    border-color: var(--my-primary);
+    box-shadow: 0 0 12px var(--my-primary);
+}
+
+body.material-you .Settings-panel-title,
+body.material-you .Settings-title-wrap h2 {
+    color: var(--my-text);
+}
+
+body.material-you .Settings-panel-desc,
+body.material-you .Settings-uebersicht-label,
+body.material-you .Settings-toggle-switch span,
+body.material-you .Settings-search-bar span {
+    color: var(--my-text-secondary);
+}
+
+body.material-you .Settings-sidebar-item span {
+    color: var(--my-text);
+}
+
+body.material-you .link-button {
+    background: var(--my-surface);
+    color: var(--my-primary);
+}
+
+body.material-you .link-button:hover {
+    box-shadow: 0 0 14px var(--my-surface);
+}
+
+body.material-you .Buttontoggle {
+    background: var(--my-accent);
+    color: var(--my-text-secondary);
+}
+
+body.material-you .Buttontoggle.active {
+    background: var(--my-primary) !important;
+    color: var(--my-primary-dark) !important;
+    box-shadow: 0 0 14px var(--my-primary);
+}
+
+body.material-you .Settings-button {
+    background: var(--my-primary);
+}
+
+body.material-you .Settings-button h2,
+body.material-you .Settings-button p {
+    color: var(--my-primary-dark);
+}
+
+/* Responsive */
+@media (max-width: 680px) {
+    .Settings-content {
+        padding: 24px 20px;
+        max-width: 95%;
+    }
+    .Settings-body {
+        flex-direction: column;
+    }
+    .Settings-sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 8px;
+    }
+    .Settings-sidebar-item {
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    .Settings-topbar {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .Settings-topbar-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+
+/* ===== REDESIGNED DESIGN STUDIO ===== */
+
 .Designoverlay {
     z-index: 16000;
     position: fixed;
@@ -452,7 +857,7 @@ body.material-you .Warung-button .verstanden-button {
     border-radius: 28px;
     padding: 32px 36px;
     width: 90%;
-    max-width: 520px;
+    max-width: 750px;
     max-height: 85vh;
     display: flex;
     flex-direction: column;
@@ -464,76 +869,333 @@ body.material-you .Warung-button .verstanden-button {
     overflow-y: auto;
 }
 
+/* Header */
+.Design-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+
 .Design-header h2 {
-    margin: 0 0 20px 0;
+    margin: 0;
     font-size: 1.85rem;
     color: #ffffff;
     text-decoration: underline;
-    text-align: center;
+    line-height: 1.2;
 }
 
-.Design-upload-section {
-    margin-bottom: 20px;
+.Design-close-btn {
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
     background: #3e4a69;
-    border-radius: 14px;
-    padding: 16px;
-}
-
-.Design-upload-section h3 {
-    margin: 0 0 12px 0;
-    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    padding: 0;
     color: #ffffff;
+    font-size: 1.2rem;
+    font-family: Google-sans;
 }
 
-.Design-upload-section p {
-    margin: 0 0 12px 0;
+.Design-close-btn:hover {
+    background: #ff8e8e;
+    transform: scale(1.1);
+    box-shadow: 0 0 14px rgba(255, 142, 142, 0.5);
+}
+
+.Design-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.Design-icon-btn {
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    background: #3e4a69;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    padding: 0;
+}
+
+.Design-icon-btn:hover {
+    background: #a2bdff;
+    transform: scale(1.1);
+    box-shadow: 0 0 14px rgba(162, 189, 255, 0.5);
+}
+
+.Design-icon-btn:hover img {
+    filter: brightness(0.3);
+}
+
+.Design-icon-btn img {
+    width: 20px;
+    height: 20px;
+    transition: all 0.2s ease;
+}
+
+.Design-icon-btn.active {
+    background: #a2bdff;
+    box-shadow: 0 0 14px rgba(162, 189, 255, 0.5);
+}
+
+/* Grid Layout */
+.Design-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    flex: 1;
+    min-height: 0;
+}
+
+.Design-left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.Design-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Cards */
+.Design-card {
+    background: #3e4a69;
+    border-radius: 20px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.Design-card h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #ffffff;
+    text-decoration: underline;
+    line-height: 1.2;
+}
+
+.Design-card p {
+    margin: 0;
     font-size: 0.85rem;
     color: #a2bdff;
-    opacity: 0.8;
+    opacity: 0.9;
+    line-height: 1.4;
 }
 
+/* Upload Dropzone (dark) */
 .Design-dropzone {
-    border: 2px dashed #8fa1cf;
-    border-radius: 14px;
-    padding: 24px;
+    border: 2px dashed #5f6f96;
+    border-radius: 16px;
+    padding: 28px 20px;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    background: rgba(62, 74, 105, 0.3);
+    background: rgba(25, 30, 50, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
 }
 
 .Design-dropzone:hover {
     border-color: #a2bdff;
-    background: rgba(162, 189, 255, 0.1);
+    background: rgba(162, 189, 255, 0.08);
+    transform: scale(1.02);
 }
 
 .Design-dropzone.dragover {
     border-color: #a2bdff;
-    background: rgba(162, 189, 255, 0.2);
-    transform: scale(1.02);
+    background: rgba(162, 189, 255, 0.15);
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(162, 189, 255, 0.2);
 }
 
 .Design-dropzone img {
-    width: 36px; height: 36px;
-    margin-bottom: 8px;
-    opacity: 0.7;
+    width: 32px; height: 32px;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+.Design-dropzone:hover img {
+    opacity: 1;
+    transform: translateY(-2px);
 }
 
 .Design-dropzone p {
     margin: 0;
     font-size: 0.9rem;
-    color: #ffffff;
+    color: #c9d8ff;
+    opacity: 0.8;
 }
 
 .Design-dropzone input[type="file"] {
     display: none;
 }
 
-.Design-preview {
-    margin-top: 12px;
+
+
+/* ===== DESIGN STUDIO: BACKGROUND TYPE TOGGLE ===== */
+.Design-bg-toggle {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.Design-bg-type-btn {
+    flex: 1;
+    padding: 10px 14px;
+    border: 2px solid #5f6f96;
+    border-radius: 12px;
+    background: transparent;
+    color: #c9d8ff;
+    font-family: Google-sans;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.Design-bg-type-btn:hover {
+    border-color: #a2bdff;
+    background: rgba(162, 189, 255, 0.1);
+}
+
+.Design-bg-type-btn.active {
+    border-color: #a2bdff;
+    background: rgba(162, 189, 255, 0.2);
+    color: #ffffff;
+    box-shadow: 0 0 12px rgba(162, 189, 255, 0.3);
+}
+
+.Design-bg-type-btn span {
+    font-size: 1.1rem;
+}
+
+/* ===== DESIGN STUDIO: VIDEO PREVIEW ===== */
+#bg-preview-video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* ===== DESIGN STUDIO: VIDEO CONTROLS ===== */
+.Design-video-controls {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: rgba(25, 30, 50, 0.5);
+    border-radius: 12px;
+}
+
+.Design-video-btn {
+    width: 36px;
+    height: 36px;
+    border: none;
     border-radius: 10px;
+    background: #3e4a69;
+    color: #ffffff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Design-video-btn:hover {
+    background: #a2bdff;
+    transform: scale(1.1);
+}
+
+#bg-video-label {
+    font-size: 0.8rem;
+    color: #a2bdff;
+    margin-left: 4px;
+}
+
+/* ===== BACKGROUND VIDEO LAYER ===== */
+.Design-bg-video-layer {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
     overflow: hidden;
-    max-height: 150px;
+}
+
+.Design-bg-video-layer.active {
+    opacity: 1;
+}
+
+.Design-bg-video-layer video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Material You overrides for new elements */
+body.material-you .Design-bg-type-btn {
+    border-color: var(--my-accent);
+    color: var(--my-text-secondary);
+}
+
+body.material-you .Design-bg-type-btn:hover {
+    border-color: var(--my-primary);
+    background: rgba(162, 189, 255, 0.08);
+}
+
+body.material-you .Design-bg-type-btn.active {
+    border-color: var(--my-primary);
+    background: rgba(162, 189, 255, 0.15);
+    color: var(--my-text);
+    box-shadow: 0 0 12px var(--my-primary);
+}
+
+body.material-you .Design-video-controls {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+body.material-you .Design-video-btn {
+    background: var(--my-surface-dark);
+}
+
+body.material-you .Design-video-btn:hover {
+    background: var(--my-primary);
+}
+
+body.material-you #bg-video-label {
+    color: var(--my-primary);
+}
+
+/* Preview */
+.Design-preview {
+    margin-top: 8px;
+    border-radius: 12px;
+    overflow: hidden;
+    max-height: 120px;
     display: none;
 }
 
@@ -545,6 +1207,89 @@ body.material-you .Warung-button .verstanden-button {
 
 .Design-preview.active {
     display: block;
+}
+
+/* Action Buttons (right side) */
+.Design-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.Design-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border: none;
+    border-radius: 16px;
+    background: #3e4a69;
+    color: #ffffff;
+    font-family: Google-sans;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-align: left;
+    width: 100%;
+}
+
+.Design-action-btn:hover {
+    background: #4a5a7d;
+    transform: translateX(4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.Design-action-btn:active {
+    transform: translateX(2px) scale(0.98);
+}
+
+.Design-action-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(162, 189, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+/* Info card (Window system) */
+.Design-info-card {
+    background: #3e4a69;
+    border-radius: 20px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.Design-info-card h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.Design-info-card p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #a2bdff;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+.Design-info-card .Design-info-small {
+    font-size: 0.75rem;
+    color: #8fa1cf;
+    opacity: 0.7;
+    margin-top: 4px;
+}
+
+/* Old footer close button - kept for compatibility but hidden in new design */
+.Design-footer {
+    display: none;
 }
 
 .Design-schliessen {
@@ -566,6 +1311,117 @@ body.material-you .Warung-button .verstanden-button {
     color: #a2bdff;
     box-shadow: 0 0 14px #3e4b71;
 }
+
+.Design-action-btn-reset {
+    background: rgba(255, 142, 142, 0.15) !important;
+    border: 1px solid rgba(255, 142, 142, 0.3);
+}
+
+.Design-action-btn-reset:hover {
+    background: rgba(255, 142, 142, 0.3) !important;
+    box-shadow: 0 4px 16px rgba(255, 142, 142, 0.2) !important;
+}
+
+.Design-action-btn-reset .Design-action-icon {
+    background: rgba(255, 142, 142, 0.2);
+}
+
+body.material-you .Design-action-btn-reset {
+    background: rgba(255, 142, 142, 0.15) !important;
+    border-color: rgba(255, 142, 142, 0.3);
+}
+
+body.material-you .Design-action-btn-reset:hover {
+    background: rgba(255, 142, 142, 0.3) !important;
+}
+
+/* Material You overrides */
+body.material-you .Design-content {
+    background: var(--my-surface);
+    border-color: var(--my-accent);
+    box-shadow: 0 0 50px var(--my-primary);
+}
+
+body.material-you .Designoverlay.Design-active {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+body.material-you .Design-card,
+body.material-you .Design-info-card,
+body.material-you .Design-action-btn,
+body.material-you .Design-close-btn {
+    background: var(--my-surface-dark);
+}
+
+body.material-you .Design-action-btn:hover {
+    background: var(--my-surface);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+body.material-you .Design-dropzone {
+    border-color: var(--my-accent);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+body.material-you .Design-dropzone:hover {
+    border-color: var(--my-primary);
+    background: rgba(162, 189, 255, 0.08);
+}
+
+body.material-you .Design-dropzone.dragover {
+    border-color: var(--my-primary);
+    background: rgba(162, 189, 255, 0.12);
+    box-shadow: 0 0 20px var(--my-primary);
+}
+
+body.material-you .Design-action-icon {
+    background: rgba(162, 189, 255, 0.15);
+}
+
+body.material-you .Design-header h2,
+body.material-you .Design-card h3,
+body.material-you .Design-info-card h3 {
+    color: var(--my-text);
+}
+
+body.material-you .Design-card p,
+body.material-you .Design-info-card p,
+body.material-you .Design-dropzone p {
+    color: var(--my-text-secondary);
+}
+
+body.material-you .Design-info-card .Design-info-small {
+    color: var(--my-accent);
+}
+
+body.material-you .Design-close-btn:hover {
+    background: #ff8e8e;
+}
+
+body.material-you .Design-icon-btn {
+    background: var(--my-surface-dark);
+}
+
+body.material-you .Design-icon-btn:hover,
+body.material-you .Design-icon-btn.active {
+    background: var(--my-primary);
+    box-shadow: 0 0 14px var(--my-primary);
+}
+
+/* Responsive */
+@media (max-width: 680px) {
+    .Design-content {
+        padding: 24px 20px;
+        max-width: 95%;
+    }
+    .Design-grid {
+        grid-template-columns: 1fr;
+    }
+    .Design-header {
+        margin-bottom: 16px;
+    }
+}
+
 
 .Window-container {
     position: fixed;
@@ -691,7 +1547,6 @@ body.material-you .Warung-button .verstanden-button {
     background: linear-gradient(135deg, transparent 50%, rgba(162, 189, 255, 0.8) 50%);
 }
 
-/* Text/Code Window Content */
 .Window-text-content {
     width: 100%;
     height: 100%;
@@ -817,6 +1672,11 @@ body.has-custom-bg .Design-bg-preview {
     flex: 0.2;
     border-radius: 14px;
     background-color: #0000003b;
+    height: 8px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: flex 0.3s ease;
 }
 
 .Musik-PorgressBar-fill {
@@ -824,6 +1684,8 @@ body.has-custom-bg .Design-bg-preview {
     width: 0%;
     border-radius: 14px;
     background-color: #ffffff;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
 .Musiktitle {
@@ -867,7 +1729,7 @@ body.has-custom-bg .Design-bg-preview {
     border-radius: 28px;
     padding: 32px 36px;
     width: 90%;
-    max-width: 480px;
+    max-width: 900px;
     max-height: 90vh;
     display: flex;
     flex-direction: column;
@@ -879,12 +1741,110 @@ body.has-custom-bg .Design-bg-preview {
     overflow-y: auto;
 }
 
+.Musik-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+
 .Musik-header h2 {
-    margin: 0 0 20px 0;
+    margin: 0;
     font-size: 1.85rem;
     color: #ffffff;
     text-decoration: underline;
-    text-align: center;
+}
+
+.Musik-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.Musik-panel-upload {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 14px;
+    background-color: #bacdff;
+    color: #5f6f96;
+    font-family: Google-sans;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-weight: 600;
+}
+
+.Musik-panel-upload img {
+    width: 18px;
+    height: 18px;
+    filter: invert(0);
+}
+
+.Musik-panel-upload:hover {
+    padding: 10px 24px;
+    background-color: #3e4b71;
+    color: #a2bdff;
+    box-shadow: 0 0 14px #3e4b71;
+}
+
+.Musik-panel-upload:hover img {
+    filter: invert(0);
+}
+
+.Musik-panel-close {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255, 142, 142, 0.2);
+    color: #ff8e8e;
+    font-family: Google-sans;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.Musik-panel-close:hover {
+    background: #ff8e8e;
+    color: #6d3f3f;
+    box-shadow: 0 0 12px #ff8e8e;
+    transform: scale(1.1);
+}
+
+.Musik-body {
+    display: flex;
+    gap: 28px;
+    flex: 1;
+    min-height: 0;
+}
+
+.Musik-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.Musik-right {
+    width: 240px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.Musik-right h4 {
+    margin: 0 0 12px 0;
+    font-size: 1.1rem;
+    color: #ffffff;
+    opacity: 0.9;
 }
 
 .Musik-cover-wrap {
@@ -896,7 +1856,7 @@ body.has-custom-bg .Design-bg-preview {
 
 .Musik-cover {
     width: 100%;
-    max-width: 400px;
+    max-width: 750px;
     aspect-ratio: 16 / 9;
     border-radius: 20px;
     background: #3e4a69;
@@ -1059,7 +2019,7 @@ body.has-custom-bg .Design-bg-preview {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     padding: 0 8px;
 }
 
@@ -1087,19 +2047,36 @@ body.has-custom-bg .Design-bg-preview {
     transition: width 0.1s ease;
 }
 
-.Musik-playlist h4 {
-    margin: 0 0 12px 0;
-    font-size: 1.1rem;
-    color: #ffffff;
-    opacity: 0.9;
+.Musik-panel-progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 8px;
+    margin-top: 4px;
+}
+
+.Musik-panel-progress .Aktivzeit,
+.Musik-panel-progress .Totalzeit {
+    font-size: 0.8rem;
+    color: #c9d8ff;
+    opacity: 0.7;
+    min-width: 36px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+.Musik-panel-progress .Musik-PorgressBar {
+    flex: 1;
+    height: 6px;
 }
 
 .Musik-playlist-box {
-    max-height: 180px;
+    max-height: 100%;
     overflow-y: auto;
     border-radius: 14px;
     background: #3e4a69;
     padding: 8px;
+    flex: 1;
 }
 
 .Musik-playlist-item {
@@ -1171,30 +2148,6 @@ body.has-custom-bg .Design-bg-preview {
     background-color: #91b0ff !important;
     box-shadow: 0 0 18px #91b0ff;
     transform: rotate(12deg);
-}
-
-.Musik-PorgressBar {
-    flex: 0.2;
-    border-radius: 14px;
-    background-color: #0000003b;
-    height: 8px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: flex 0.3s ease;
-}
-
-.Musik-PorgressBar:hover {
-    flex: 0.35;
-}
-
-.Musik-PorgressBar-fill {
-    height: 100%;
-    width: 0%;
-    border-radius: 14px;
-    background-color: #ffffff;
-    transition: width 0.1s linear;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
 .Aktivzeit, .Totalzeit {
@@ -1419,6 +2372,7 @@ body.has-custom-bg .Design-bg-preview {
 }
 
 .Upload-schliessen {
+    width: 100%;
     padding: 14px 32px;
     border: none;
     border-radius: 14px;
@@ -1546,8 +2500,12 @@ body.debug-mode .debug-nav-stats { display: block; }
 .debug-setting-dot { width: 8px; height: 8px; border-radius: 50%; background: #3e4a69; transition: background 0.2s ease; }
 .debug-setting-dot.on { background: #a2bdff; box-shadow: 0 0 6px #a2bdff; }
 
-@media (max-width: 520px) {
-    .Musik-content { padding: 24px 20px; width: 95%; }
+@media (max-width: 680px) {
+    .Musik-content { padding: 24px 20px; width: 95%; max-width: 480px; }
+    .Musik-body { flex-direction: column; gap: 20px; }
+    .Musik-right { width: 100%; max-height: 200px; }
+    .Musik-header { flex-direction: column; gap: 12px; align-items: flex-start; }
+    .Musik-header-actions { width: 100%; justify-content: space-between; }
     .Musik-cover { width: 160px; height: 160px; }
     .Musik-controls { gap: 8px; }
     .Musik-btn-play { width: 56px !important; height: 56px !important; }
