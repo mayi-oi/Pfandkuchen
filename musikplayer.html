@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <title>Mayi.-web!</title>
+    <title>Mayi.-musikplayer!</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="Res/Bild/Logo/Haupt-logo.png">
     <link rel="stylesheet" href="musikplayer.css">
     <link rel="stylesheet" href="Res/Font/Font.css">
     <base target="_blank">
+<base target="_blank">
 <base target="_blank">
 </head>
 <body>
@@ -28,7 +29,7 @@
     <div class="Settingsoverlay" id="Settings-overlay">
         <div class="Settings-content">
             <div class="Settings-topbar">
-                <div class="Settings-title-wrap"><h2>Einstellungen ∑(O_O;)</h2><p class="Settings-uebersicht-label">version: 1.20</p></div>
+                <div class="Settings-title-wrap"><h2>Einstellungen ∑(O_O;)</h2><p class="Settings-uebersicht-label">version: 1.24</p></div>
                 <div class="Settings-topbar-actions">
                     <button class="Musik-panel-upload" onclick="window.open('https://github.com/mayi-oi/Pfandkuchen/releases', '_blank')"><img src="Res/Bild/Icon/description_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Upload"><span>Changelog ansehen!</span></button>
                     <button class="Settings-icon-btn" onclick="window.open('https://github.com/mayi-oi/Pfandkuchen', '_blank')" title="Github"><img src="Res/Bild/Icon/github-fill.svg" alt="Github"></button>
@@ -153,11 +154,25 @@
 
     <div class="debug-nav-stats" id="debug-nav-stats"><span id="debug-nav-fps">FPS: 0</span> | <span id="debug-nav-ram">RAM: 0MB</span></div>
 
+    <!-- Gamepad Hint Overlay -->
+    <div class="Gamepad-hint" id="gamepad-hint">
+        <span class="Gamepad-hint-icon"><img src="Res/Bild/Icon/stadia_controller_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></span>
+        <div>
+            <span class="Gamepad-hint-text">Gamepad verbunden!</span>
+            <span class="Gamepad-hint-sub">A=Play, B=Overlay, LB/RB=Prev/Next</span>
+        </div>
+    </div>
+
+    <!-- Easter Egg Message -->
+    <div class="Easter-egg-message" id="easter-egg-message">
+        🎮 KONAMI CODE!<br><small>Party-Modus aktiviert (15s)</small>
+    </div>
+
     <!-- Design studio redesign -->
     <div class="Designoverlay" id="Design-overlay">
         <div class="Design-content">
             <div class="Design-header">
-                <h2>Design Studio ◪_◪</h2>
+                <h2>Design Editor ◪_◪</h2>
                 <div class="Design-header-actions">
                     <button class="Design-icon-btn" id="design-material-btn" onclick="toggleMaterialYou()" title="Material You">
                         <img src="Res/Bild/Icon/Design studio/palette_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Material You">
@@ -208,7 +223,7 @@
                     </div>
 
                     <!-- Window Card -->
-                    <div class="Design-card">
+                    <div class="Design-card-window">
                         <h3>Window (Alle Formate!)</h3>
                         <p>Lade deine Bilder, Videos, GIFs und mehr!</p>
                         <div class="Design-dropzone" id="cover-dropzone">
@@ -249,12 +264,48 @@
         </div>
     </div>
 
+    
+
     <div class="Window-container" id="Window-container"></div>
 
     <!-- Background Layers -->
     <div class="Design-bg-preview" id="Design-bg-preview"></div>
     <div class="Design-bg-video-layer" id="Design-bg-video-layer">
         <video id="bg-video-element" loop muted playsinline></video>
+    </div>
+
+    <!-- Nav für touchscreen -->
+     <div class="Nav-touch">
+            <div class="Nav-touch-flexbox">
+                <button class="Musikplayer-toggle-touch" id="nav-musik-btn" onclick="Musiktoggle()"><img src="Res/Bild/Icon/music_note_2_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg">Musikplayer</button>
+                <button class="Design-toggle-touch" id="design-toggle-btn" onclick="Designtoggle()"><img src="Res/Bild/Icon/Touchscreen mode/design_services_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg">Design editor</button>
+                <button class="Einstellung-toggle" onclick="Settingstoggle()"><img src="Res/Bild/Icon/settings_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg">Einstellungen</button>
+            </div>
+     </div>
+
+        <!-- Dynamic Island - Musik Player -->
+    <div class="Dynamic-island" id="dynamic-island" onclick="toggleDynamicIsland(event)">
+        <button class="Dynamic-island-close" onclick="closeDynamicIsland(event)">✕</button>
+        <div class="Dynamic-island-cover" id="di-cover"><img src="Res/Bild/Icon/Musikplayer/music_note_2_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" id="di-cover-img" alt="Cover"></div>
+        <div class="Dynamic-island-info">
+            <span class="Dynamic-island-title" id="di-title"><span class="di-title-inner">Kein Song</span></span>
+            <span class="Dynamic-island-artist" id="di-artist">-</span>
+        </div>
+        <span class="Dynamic-island-time" id="di-time">0:00 | 0:00</span>
+        <div class="Dynamic-island-progress" id="di-progress" onclick="seekDynamicIsland(event)">
+            <div class="Dynamic-island-progress-fill" id="di-progress-fill"></div>
+        </div>
+        <div class="Dynamic-island-time-row">
+            <span id="di-aktiv">0:00</span>
+            <span id="di-total">0:00</span>
+        </div>
+        <div class="Dynamic-island-controls">
+            <button onclick="toggleShuffle(); event.stopPropagation();" title="Shuffle"><img src="Res/Bild/Icon/Musikplayer/shuffle_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" id="di-shuffle-img" alt="Shuffle"></button>
+            <button onclick="prevSong(); event.stopPropagation();" title="Zurück"><img src="Res/Bild/Icon/Musikplayer/skip_previous_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Zurück"></button>
+            <button class="Dynamic-island-play" id="di-play-btn" onclick="togglePlay(); event.stopPropagation();" title="Play/Pause"><img src="Res/Bild/Icon/Musikplayer/play_arrow_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24 (1).svg" id="di-play-icon" alt="Play"></button>
+            <button onclick="nextSong(); event.stopPropagation();" title="Weiter"><img src="Res/Bild/Icon/Musikplayer/skip_next_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Weiter"></button>
+            <button onclick="toggleRepeat(); event.stopPropagation();" title="Repeat"><img src="Res/Bild/Icon/Musikplayer/repeat_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" id="di-repeat-img" alt="Repeat"></button>
+        </div>
     </div>
 
     <div class="Nav-hauptbutton">
@@ -288,8 +339,250 @@
         let settings = { lights: false, fps: false, material: false, debug: false };
 
         // ===== state =====
+        const MaterialYou = {
+        canvas: null,
+        ctx: null,
+        isActive: false,
+        lastSrc: null,
+        pendingSrc: null,
+        abortController: null,
+
+        init() {
+            this.canvas = document.createElement('canvas');
+            this.canvas.width = 56;
+            this.canvas.height = 56;
+            this.ctx = this.canvas.getContext('2d', { willReadFrequently: true });
+        },
+
+        // Echtzeit-Farbextraktion mit quantisierter Palette
+        async extract(src) {
+            if (!src || src === this.lastSrc) return null;
+            this.pendingSrc = src;
+
+            // Vorherige Anfrage abbrechen
+            if (this.abortController) this.abortController.abort();
+            this.abortController = new AbortController();
+
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.crossOrigin = "anonymous";
+                img.decoding = "async";
+
+                const timeout = setTimeout(() => resolve(this._fallback()), 800);
+
+                img.onload = () => {
+                    clearTimeout(timeout);
+                    if (this.abortController.signal.aborted) return resolve(null);
+                    try {
+                        this.ctx.clearRect(0, 0, 56, 56);
+                        this.ctx.drawImage(img, 0, 0, 56, 56);
+                        const data = this.ctx.getImageData(0, 0, 56, 56).data;
+                        const colors = this._buildTheme(data);
+                        this.lastSrc = src;
+                        resolve(colors);
+                    } catch (e) {
+                        resolve(this._fallback());
+                    }
+                };
+                img.onerror = () => { clearTimeout(timeout); resolve(this._fallback()); };
+                img.src = src;
+            });
+        },
+
+        async extractFromVideo(videoEl) {
+            if (!videoEl || videoEl.videoWidth === 0) return null;
+            try {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d', { willReadFrequently: true });
+                canvas.width = 56;
+                canvas.height = 56;
+                ctx.drawImage(videoEl, 0, 0, 56, 56);
+                const data = ctx.getImageData(0, 0, 56, 56).data;
+                return this._buildTheme(data);
+            } catch (e) {
+                return null;
+            }
+        },
+
+        async updateDynamic() {
+            if (!this.isActive) return;
+            const song = songs[currentSongIndex];
+            const hasRealCover = song?.cover && !song.cover.includes('music_note');
+
+            // Wenn echtes Cover vorhanden → wie gewohnt
+            if (hasRealCover) {
+                this.update(song.cover);
+                return;
+            }
+
+            // === KEIN COVER → Hintergrund als "Secondary" Quelle nutzen! ===
+
+            // 1. Bild-Hintergrund?
+            if (bgType === 'image' && bgPreviewImg.src && 
+                bgPreviewImg.src !== window.location.href && 
+                !bgPreviewImg.src.includes('preview_24dp')) {
+                const colors = await this.extract(bgPreviewImg.src);
+                if (colors) { this.applyTheme(colors); return; }
+            }
+
+            // 2. Video-Hintergrund? (Live-Frame analysieren!)
+            if (bgType === 'video' && bgVideoElement.src && bgVideoElement.readyState >= 2) {
+                const colors = await this.extractFromVideo(bgVideoElement);
+                if (colors) { this.applyTheme(colors); return; }
+            }
+
+            // 3. Nichts davon → klassischer Fallback
+            this.applyTheme(this._fallback());
+        },
+
+        _buildTheme(data) {
+            const buckets = new Map();
+            let totalWeight = 0;
+
+            // Sample mit Gewichtung (Mitte = wichtiger)
+            for (let i = 0; i < data.length; i += 8) {
+                const x = (i / 4) % 56;
+                const y = Math.floor((i / 4) / 56);
+                const cx = 28, cy = 28;
+                const dist = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2);
+                const weight = Math.max(0.3, 1 - dist / 40); // Mitte stärker gewichten
+
+                const r = data[i], g = data[i + 1], b = data[i + 2], a = data[i + 3];
+                if (a < 100) continue;
+                if (r + g + b < 30) continue; // Zu dunkel ignorieren
+                if (r + g + b > 740) continue; // Zu hell ignorieren
+
+                const qr = Math.round(r / 20) * 20;
+                const qg = Math.round(g / 20) * 20;
+                const qb = Math.round(b / 20) * 20;
+                const key = `${qr},${qg},${qb}`;
+
+                const current = buckets.get(key) || { r: 0, g: 0, b: 0, count: 0, weight: 0 };
+                current.r += r * weight;
+                current.g += g * weight;
+                current.b += b * weight;
+                current.count += weight;
+                current.weight += weight;
+                buckets.set(key, current);
+            }
+
+            if (buckets.size === 0) return this._fallback();
+
+            // Nach Häufigkeit sortieren
+            const sorted = Array.from(buckets.values())
+                .sort((a, b) => b.weight - a.weight)
+                .slice(0, 6);
+
+            // Durchschnitt der Top-Farben
+            const primary = {
+                r: Math.round(sorted[0].r / sorted[0].count),
+                g: Math.round(sorted[0].g / sorted[0].count),
+                b: Math.round(sorted[0].b / sorted[0].count)
+            };
+
+            const hsl = this._rgbToHsl(primary.r, primary.g, primary.b);
+
+            // Harmonisches Theme generieren
+            return {
+                primary: this._hslToHex(hsl.h, Math.min(hsl.s * 1.15, 0.9), 0.74),
+                primaryDark: this._hslToHex(hsl.h, Math.min(hsl.s * 0.85, 0.65), 0.20),
+                surface: this._hslToHex(hsl.h, Math.min(hsl.s * 0.40, 0.30), 0.40),
+                surfaceDark: this._hslToHex(hsl.h, Math.min(hsl.s * 0.30, 0.22), 0.16),
+                accent: this._hslToHex((hsl.h + 0.06) % 1, Math.min(hsl.s * 0.75, 0.55), 0.62),
+                text: '#ffffff',
+                textSecondary: this._hslToHex(hsl.h, Math.min(hsl.s * 0.25, 0.20), 0.80)
+            };
+        },
+
+        _rgbToHsl(r, g, b) {
+            r /= 255; g /= 255; b /= 255;
+            const max = Math.max(r, g, b), min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+            if (max !== min) {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+                    case g: h = ((b - r) / d + 2) / 6; break;
+                    case b: h = ((r - g) / d + 4) / 6; break;
+                }
+            }
+            return { h: h || 0, s: s || 0, l };
+        },
+
+        _hslToRgb(h, s, l) {
+            let r, g, b;
+            if (s === 0) { r = g = b = l; }
+            else {
+                const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                const p = 2 * l - q;
+                const f = (t) => {
+                    if (t < 0) t += 1; if (t > 1) t -= 1;
+                    if (t < 1 / 6) return p + (q - p) * 6 * t;
+                    if (t < 1 / 2) return q;
+                    if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+                    return p;
+                };
+                r = f(h + 1 / 3); g = f(h); b = f(h - 1 / 3);
+            }
+            return { r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255) };
+        },
+
+        _hslToHex(h, s, l) {
+            const rgb = this._hslToRgb(h, s, l);
+            return '#' + [rgb.r, rgb.g, rgb.b].map(x => x.toString(16).padStart(2, '0')).join('');
+        },
+
+        _fallback() {
+            return {
+                primary: '#a2bdff', primaryDark: '#3e4b71',
+                surface: '#5f6f96', surfaceDark: '#3e4a69',
+                accent: '#8fa1cf', text: '#ffffff', textSecondary: '#c9d8ff'
+            };
+        },
+
+        applyTheme(colors) {
+            if (!colors) return;
+            const root = document.documentElement;
+            root.style.setProperty('--my-primary', colors.primary);
+            root.style.setProperty('--my-primary-dark', colors.primaryDark);
+            root.style.setProperty('--my-surface', colors.surface);
+            root.style.setProperty('--my-surface-dark', colors.surfaceDark);
+            root.style.setProperty('--my-accent', colors.accent);
+            root.style.setProperty('--my-text', colors.text);
+            root.style.setProperty('--my-text-secondary', colors.textSecondary);
+        },
+
+        async update(src) {
+            if (!this.isActive || !src) return;
+            const colors = await this.extract(src);
+            if (colors) this.applyTheme(colors);
+        },
+
+        enable() {
+            this.isActive = true;
+            document.documentElement.classList.add('material-you');
+            document.body.classList.add('material-you');
+            const song = songs[currentSongIndex];
+            if (song?.cover) this.update(song.cover);
+        },
+
+        disable() {
+            this.isActive = false;
+            document.documentElement.classList.remove('material-you');
+            document.body.classList.remove('material-you');
+            this.applyTheme(this._fallback());
+            this.lastSrc = null;
+        },
+
+        toggle() {
+            this.isActive ? this.disable() : this.enable();
+        }
+    };
+
+        // ===== state =====
         let currentSongIndex = 0, isPlaying = false, isShuffle = false, repeatMode = 0;
-        let bgType = 'image'; // 'image' or 'video'
+        let bgType = 'image';
         let bgVideoMuted = true;
         let bgVideoPlaying = true;
 
@@ -552,6 +845,10 @@
                 btn.classList.toggle('active', btn.dataset.type === type);
             });
 
+            if (settings.material && (!songs[currentSongIndex]?.cover || songs[currentSongIndex].cover.includes('music_note'))) {
+                MaterialYou.updateDynamic();
+            }
+
             if (type === 'image') {
                 bgFileInput.accept = 'image/*';
                 bgDropText.textContent = 'Bild hier reinziehen oder klicken';
@@ -623,6 +920,25 @@
 
                 if (settings.debug) debugLog('🎬 Live-Hintergrund Video hochgeladen!', 'info');
             }
+
+            if (settings.material && (!songs[currentSongIndex]?.cover || songs[currentSongIndex].cover.includes('music_note'))) {
+                MaterialYou.updateDynamic();
+            }
+
+            if (settings.material && (!songs[currentSongIndex]?.cover || songs[currentSongIndex].cover.includes('music_note'))) {
+                const onVideoReady = () => {
+                    MaterialYou.updateDynamic();
+                    bgVideoElement.removeEventListener('loadeddata', onVideoReady);
+                };
+
+                setInterval(() => {
+                    if (bgVideoElement.readyState >= 2 && !document.hidden) {
+                        MaterialYou.updateDynamic();
+                    }
+                }, 3000);
+
+                bgVideoElement.addEventListener('loadeddata', onVideoReady);
+            }
         }
 
         function toggleBgVideoMute() {
@@ -686,6 +1002,16 @@
                 document.getElementById('design-material-btn').classList.remove('active');
             }
 
+                if (settings.material) {
+                    const song = songs[currentSongIndex];
+                    const hasRealCover = song?.cover && !song.cover.includes('music_note');
+                    if (hasRealCover) {
+                        MaterialYou.update(song.cover);
+                    } else {
+                        MaterialYou.applyTheme(MaterialYou._fallback());
+                    }
+                }
+
             // Clear saved design
             localStorage.removeItem('mayi-design');
 
@@ -699,50 +1025,190 @@
         }
 
         // ===== Design studio: Speicher =====
-        function saveDesign() {
-            const data = {
-                bgType: bgType,
-                bg: bgType === 'image' ? (bgPreviewImg.src || null) : (bgVideoElement.src || null),
-                material: settings.material,
-                font: document.body.style.fontFamily || ''
-            };
-            localStorage.setItem('mayi-design', JSON.stringify(data));
+        const Storage = {
+            KEY: 'mayi-v2',
+            VERSION: 2,
+
+            _read() {
+                try {
+                    const raw = localStorage.getItem(this.KEY);
+                    if (!raw) return null;
+                    const data = JSON.parse(raw);
+                    if (data._v !== this.VERSION) return this._migrate(data);
+                    return data;
+                } catch (e) {
+                    console.warn('Storage read failed:', e);
+                    return null;
+                }
+            },
+
+            _write(data) {
+                try {
+                    localStorage.setItem(this.KEY, JSON.stringify({ ...data, _v: this.VERSION, _t: Date.now() }));
+                    return true;
+                } catch (e) {
+                    console.warn('Storage write failed:', e);
+                    return false;
+                }
+            },
+
+            _migrate(old) {
+                // Migration von v1 (altes Format)
+                const migrated = { settings: {}, design: {} };
+                if (old.settings) migrated.settings = old.settings;
+                if (old.material !== undefined) migrated.settings.material = old.material;
+                if (old.lights !== undefined) migrated.settings.lights = old.lights;
+                if (old.fps !== undefined) migrated.settings.fps = old.fps;
+                if (old.debug !== undefined) migrated.settings.debug = old.debug;
+                if (old.bgType) migrated.design.bgType = old.bgType;
+                if (old.bg) migrated.design.bgUrl = old.bg;
+                if (old.font) migrated.design.font = old.font;
+                this._write(migrated);
+                return migrated;
+            },
+
+            getSettings() {
+                const data = this._read();
+                return data?.settings || {};
+            },
+
+            setSettings(settings) {
+                const data = this._read() || {};
+                data.settings = { ...data.settings, ...settings };
+                return this._write(data);
+            },
+
+            getDesign() {
+                const data = this._read();
+                return data?.design || {};
+            },
+
+            setDesign(design) {
+                const data = this._read() || {};
+                data.design = { ...data.design, ...design };
+                return this._write(data);
+            },
+
+            clear() {
+                localStorage.removeItem(this.KEY);
+                // Alte Keys auch aufräumen
+                localStorage.removeItem('mayi-settings');
+                localStorage.removeItem('mayi-design');
+            }
+        };
+
+// ===== Design studio: Speicher (alt) =====
+    function saveDesign() {
+        const design = {
+            bgType: bgType,
+            bgUrl: bgType === 'image' ? (bgPreviewImg.src || null) : (bgVideoElement.src || null),
+            material: settings.material,
+            font: document.body.style.fontFamily || ''
+        };
+        Storage.setDesign(design);
+        
+        const btn = event.target.closest('.Design-action-btn');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<span class="Design-action-icon"><img src="Res/Bild/Icon/Design studio/verified_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></span><span>Gespeichert!</span>';
+        setTimeout(() => btn.innerHTML = orig, 1200);
+        if (settings.debug) debugLog('💾 Design gespeichert', 'info');
+    }
+
+        function resetDesign() {
+            // Reset background
+            bgType = 'image';
+            setBgType('image');
+            bgPreviewImg.src = '';
+            bgPreviewImgContainer.classList.remove('active');
+            bgPreview.style.backgroundImage = '';
+            bgPreview.classList.remove('active');
+            bgVideoElement.pause();
+            bgVideoElement.src = '';
+            bgVideoLayer.classList.remove('active');
+            document.body.classList.remove('has-custom-bg');
+
+            // Reset font
+            document.body.style.fontFamily = '';
+
+            // Reset Material You
+            if (settings.material) {
+                toggleSetting('material');
+                document.getElementById('design-material-btn').classList.remove('active');
+            }
+
+            // Clear storage
+            Storage.clear();
+
+            // Feedback
             const btn = event.target.closest('.Design-action-btn');
             const orig = btn.innerHTML;
-            btn.innerHTML = '<span class="Design-action-icon"><img src="Res/Bild/Icon/Design studio/verified_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></img></span><span>Gespeichert!</span>';
+            btn.innerHTML = '<span class="Design-action-icon"><img src="Res/Bild/Icon/Design studio/verified_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></span><span>Zurückgesetzt!</span>';
             setTimeout(() => btn.innerHTML = orig, 1200);
-            if (settings.debug) debugLog('💾 Design gespeichert', 'info');
+
+            if (settings.debug) debugLog('🗑️ Design zurückgesetzt', 'info');
         }
 
         function loadSavedDesign() {
-            const saved = localStorage.getItem('mayi-design');
-            if (!saved) return;
+            const design = Storage.getDesign();
+            if (!design || Object.keys(design).length === 0) return;
+
             try {
-                const data = JSON.parse(saved);
-                if (data.bgType) setBgType(data.bgType);
-                if (data.bg) {
-                    if (data.bgType === 'image') {
-                        bgPreviewImg.src = data.bg;
-                        bgPreviewImgContainer.style.display = 'block';
-                        bgPreviewImgContainer.classList.add('active');
-                        bgPreview.style.backgroundImage = `url(${data.bg})`;
-                        bgPreview.classList.add('active');
-                        document.body.classList.add('has-custom-bg');
-                    } else if (data.bgType === 'video') {
-                        bgPreviewVideo.src = data.bg;
-                        bgPreviewVideoContainer.style.display = 'block';
-                        bgPreviewVideoContainer.classList.add('active');
-                        bgVideoControls.style.display = 'flex';
-                        bgVideoElement.src = data.bg;
-                        bgVideoElement.loop = true;
-                        bgVideoElement.muted = true;
-                        bgVideoElement.play().catch(() => {});
-                        bgVideoLayer.classList.add('active');
-                        document.body.classList.add('has-custom-bg');
+                if (design.bgType) {
+                    setBgType(design.bgType);
+                    if (design.bgUrl) {
+                        if (design.bgType === 'image') {
+                            bgPreviewImg.src = design.bgUrl;
+                            bgPreviewImgContainer.style.display = 'block';
+                            bgPreviewImgContainer.classList.add('active');
+                            bgPreview.style.backgroundImage = `url(${design.bgUrl})`;
+                            bgPreview.classList.add('active');
+                            document.body.classList.add('has-custom-bg');
+                        } else if (design.bgType === 'video') {
+                            bgPreviewVideo.src = design.bgUrl;
+                            bgPreviewVideoContainer.style.display = 'block';
+                            bgPreviewVideoContainer.classList.add('active');
+                            bgVideoControls.style.display = 'flex';
+                            bgVideoElement.src = design.bgUrl;
+                            bgVideoElement.loop = true;
+                            bgVideoElement.muted = true;
+                            bgVideoElement.play().catch(() => {});
+                            bgVideoLayer.classList.add('active');
+                            document.body.classList.add('has-custom-bg');
+                        }
                     }
                 }
-                if (data.font) document.body.style.fontFamily = data.font;
-            } catch(e) {}
+                if (design.font) document.body.style.fontFamily = design.font;
+            } catch (e) {
+                console.warn('Failed to load saved design:', e);
+            }
+        }
+
+        // ===== Einstellungen (neu) =====
+        function loadSettings() {
+            const saved = Storage.getSettings();
+            if (saved && Object.keys(saved).length > 0) {
+                settings = { ...settings, ...saved };
+                Object.keys(settings).forEach(key => {
+                    const btn = document.getElementById('toggle-' + key);
+                    if (btn) {
+                        btn.textContent = settings[key] ? 'An' : 'Aus';
+                        btn.classList.toggle('active', settings[key]);
+                    }
+                    applySettings(key);
+                });
+            }
+        }
+
+        function toggleSetting(key) {
+            settings[key] = !settings[key];
+            const btn = document.getElementById('toggle-' + key);
+            if (btn) {
+                btn.textContent = settings[key] ? 'An' : 'Aus';
+                btn.classList.toggle('active', settings[key]);
+            }
+            Storage.setSettings(settings);
+            applySettings(key);
+            if (currentSetting === key) selectSetting(key);
         }
 
         // ===== DESIGN STUDIO: EVENT LISTENERS =====
@@ -886,6 +1352,7 @@
         }
 
         function init() {
+            MaterialYou.init();
             renderPlaylist();
             loadSong(currentSongIndex);
             audio.volume = 0.7;
@@ -925,10 +1392,28 @@
             songArtist.textContent = song.artist;
             navMusikTitle.textContent = song.title;
             albumCover.setAttribute('data-title', song.title);
-            const img = new Image();
-            img.onload = () => { coverImg.src = song.cover; applyMaterialYouColors(); };
-            img.onerror = () => { coverImg.src = icons.music; };
-            img.src = song.cover;
+
+            const hasRealCover = song?.cover && !song.cover.includes('music_note');
+
+            if (hasRealCover) {
+                const img = new Image();
+                img.onload = () => {
+                    coverImg.src = song.cover;
+                    // ECHTZEIT: Material You vom Cover
+                    if (settings.material) MaterialYou.update(song.cover);
+                };
+                img.onerror = () => { 
+                    coverImg.src = icons.music; 
+                    // Kein Cover-Bild ladenbar → Hintergrund nutzen!
+                    if (settings.material) MaterialYou.updateDynamic();
+                };
+                img.src = song.cover;
+            } else {
+                // Kein Cover vorhanden → sofort Hintergrund analysieren
+                coverImg.src = icons.music;
+                if (settings.material) MaterialYou.updateDynamic();
+            }
+
             updatePlaylistActive();
         }
 
@@ -1068,6 +1553,7 @@
                 case 'ArrowUp': e.preventDefault(); audio.volume = Math.min(1, audio.volume + 0.1); updateVolumeVisual(audio.volume); break;
                 case 'ArrowDown': e.preventDefault(); audio.volume = Math.max(0, audio.volume - 0.1); updateVolumeVisual(audio.volume); break;
                 case 'KeyM': Musiktoggle(); break;
+                case 'KeyH': Uploadtoggle(); break;
                 case 'KeyD': Designtoggle(); break;
                 case 'KeyS': Settingstoggle(); break;
             }
@@ -1203,32 +1689,15 @@
             selectSetting(currentSetting);
         }
 
-        function toggleSetting(key) {
-            settings[key] = !settings[key];
-            const btn = document.getElementById('toggle-' + key);
-            if (btn) { btn.textContent = settings[key] ? 'An' : 'Aus'; btn.classList.toggle('active', settings[key]); }
-            localStorage.setItem('mayi-settings', JSON.stringify(settings));
-            applySettings(key);
-            if (currentSetting === key) selectSetting(key);
-        }
-
         function applySettings(key) {
             switch(key) {
                 case 'lights': document.body.classList.toggle('reduced-lights', settings.lights); break;
                 case 'fps': toggleFpsDisplay(); break;
-                case 'material': document.body.classList.toggle('material-you', settings.material); if (settings.material) applyMaterialYouColors(); break;
+                case 'material':
+                    if (settings.material) MaterialYou.enable();
+                    else MaterialYou.disable();
+                    break;
                 case 'debug': document.body.classList.toggle('debug-mode', settings.debug); break;
-            }
-        }
-
-        function loadSettings() {
-            const saved = localStorage.getItem('mayi-settings');
-            if (saved) {
-                settings = JSON.parse(saved);
-                Object.keys(settings).forEach(key => {
-                    const btn = document.getElementById('toggle-' + key);
-                    if (btn) { btn.textContent = settings[key] ? 'An' : 'Aus'; btn.classList.toggle('active', settings[key]); applySettings(key); }
-                });
             }
         }
 
@@ -1358,7 +1827,314 @@
             document.getElementById('debug-overlay').style.display = debugPanelVisible ? 'block' : 'none';
         }
 
-        // ===== INIT =====
+        // ===== DYNAMIC ISLAND =====
+        const dynamicIsland = document.getElementById('dynamic-island');
+        const diCover = document.getElementById('di-cover-img');
+        const diTitle = document.getElementById('di-title');
+        const diArtist = document.getElementById('di-artist');
+        const diTime = document.getElementById('di-time');
+        const diProgress = document.getElementById('di-progress');
+        const diProgressFill = document.getElementById('di-progress-fill');
+        const diAktiv = document.getElementById('di-aktiv');
+        const diTotal = document.getElementById('di-total');
+        const diPlayBtn = document.getElementById('di-play-btn');
+        const diPlayIcon = document.getElementById('di-play-icon');
+        const diShuffleImg = document.getElementById('di-shuffle-img');
+        const diRepeatImg = document.getElementById('di-repeat-img');
+
+        function toggleDynamicIsland(e) {
+            if (e && e.target.closest('.Dynamic-island-close')) return;
+            if (e && e.target.closest('.Dynamic-island-controls')) return;
+            if (e && e.target.closest('.Dynamic-island-progress')) return;
+            dynamicIsland.classList.toggle('expanded');
+        }
+
+        function closeDynamicIsland(e) {
+            e.stopPropagation();
+            dynamicIsland.classList.remove('expanded');
+        }
+
+        function seekDynamicIsland(e) {
+            e.stopPropagation();
+            if (!audio.duration) return;
+            const rect = diProgress.getBoundingClientRect();
+            const percent = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+            audio.currentTime = percent * audio.duration;
+        }
+
+        function updateDynamicIsland() {
+            if (!songs[currentSongIndex]) return;
+            const song = songs[currentSongIndex];
+            diArtist.textContent = song.artist;
+
+            const titleInner = document.querySelector('#di-title .di-title-inner');
+            if (titleInner && titleInner.textContent !== song.title) {
+                titleInner.textContent = song.title;
+                requestAnimationFrame(() => {
+                    const title = document.getElementById('di-title');
+                    if (title && title.scrollWidth > title.clientWidth + 4) {
+                        title.classList.add('scroll');
+                    } else if (title) {
+                        title.classList.remove('scroll');
+                    }
+                });
+            }
+
+            const img = new Image();
+            img.onload = () => { diCover.src = song.cover; };
+            img.onerror = () => { diCover.src = icons.music; };
+            img.src = song.cover;
+
+            diTime.textContent = formatTime(audio.currentTime) + ' | ' + formatTime(audio.duration || 0);
+            if (diAktiv) diAktiv.textContent = formatTime(audio.currentTime);
+            if (diTotal) diTotal.textContent = formatTime(audio.duration || 0);
+
+            const percent = audio.duration ? (audio.currentTime / audio.duration * 100) : 0;
+            diProgressFill.style.width = percent + '%';
+
+            diPlayIcon.src = isPlaying ? icons.pause : icons.play;
+            diShuffleImg.src = isShuffle ? icons.shuffleOn : icons.shuffle;
+            if (repeatMode === 0) diRepeatImg.src = icons.repeat;
+            else if (repeatMode === 1) diRepeatImg.src = icons.repeatOn;
+            else diRepeatImg.src = icons.repeatOne;
+        }
+
+        // Hook into existing functions
+        const origLoadSong = loadSong;
+        loadSong = function(index) {
+            origLoadSong(index);
+            updateDynamicIsland();
+        };
+
+        const origPlay = play;
+        play = function() {
+            origPlay();
+            updateDynamicIsland();
+        };
+
+        const origPause = pause;
+        pause = function() {
+            origPause();
+            updateDynamicIsland();
+        };
+
+        const origToggleShuffle = toggleShuffle;
+        toggleShuffle = function() {
+            origToggleShuffle();
+            updateDynamicIsland();
+        };
+
+        const origToggleRepeat = toggleRepeat;
+        toggleRepeat = function() {
+            origToggleRepeat();
+            updateDynamicIsland();
+        };
+
+        const origUpdateProgress = updateProgress;
+        updateProgress = function() {
+            origUpdateProgress();
+            updateDynamicIsland();
+        };
+
+        let gamepadIndex = null;
+        let lastButtonStates = [];
+        let konamiSequence = [];
+        const konamiCode = [12, 12, 13, 13, 14, 15, 14, 15, 1, 0]; // D-Pad: UUDDLRLR, B, A
+        let easterEggActive = false;
+        let easterEggTimeout = null;
+        const gamepadFeedbackEl = document.createElement('div');
+        gamepadFeedbackEl.className = 'Gamepad-feedback';
+        document.body.appendChild(gamepadFeedbackEl);
+
+        const gamepadHintEl = document.getElementById('gamepad-hint');
+        const easterEggMsgEl = document.getElementById('easter-egg-message');
+
+        const gamepadButtonLabels = {
+            0: 'A', 1: 'B', 2: 'X', 3: 'Y',
+            4: 'LB', 5: 'RB', 6: 'LT', 7: 'RT',
+            8: 'Select', 9: 'Start',
+            12: '↑', 13: '↓', 14: '←', 15: '→'
+        };
+
+        window.addEventListener('gamepadconnected', (e) => {
+            gamepadIndex = e.gamepad.index;
+            if (settings.debug) debugLog('🎮 Gamepad verbunden: ' + e.gamepad.id, 'info');
+            showGamepadHint('Gamepad verbunden! :D', 'A=Play, B=Overlay, LB/RB=Prev/Next');
+            updateGamepadDebugStatus(true);
+            gamepadLoop();
+        });
+
+        window.addEventListener('gamepaddisconnected', (e) => {
+            if (gamepadIndex === e.gamepad.index) {
+                gamepadIndex = null;
+                if (settings.debug) debugLog('🎮 Gamepad getrennt', 'info');
+                showGamepadHint('Gamepad getrennt... :(', '');
+                updateGamepadDebugStatus(false);
+            }
+        });
+
+        function updateGamepadDebugStatus(connected) {
+            const statusEl = document.getElementById('debug-gamepad');
+            if (statusEl) {
+                statusEl.textContent = connected ? '✅ Verbunden' : '❌ Nicht verbunden';
+                statusEl.className = 'debug-value ' + (connected ? 'good' : 'error');
+            }
+            const dotEl = document.getElementById('debug-gamepad-dot');
+            if (dotEl) dotEl.classList.toggle('connected', connected);
+        }
+
+        function showGamepadHint(title, sub) {
+            if (!gamepadHintEl) return;
+            gamepadHintEl.querySelector('.Gamepad-hint-text').textContent = title;
+            gamepadHintEl.querySelector('.Gamepad-hint-sub').textContent = sub;
+            gamepadHintEl.classList.add('visible');
+            setTimeout(() => gamepadHintEl.classList.remove('visible'), 3000);
+        }
+
+        function showGamepadFeedback(symbol) {
+            gamepadFeedbackEl.textContent = symbol;
+            gamepadFeedbackEl.classList.add('active');
+            setTimeout(() => gamepadFeedbackEl.classList.remove('active'), 150);
+        }
+
+        function gamepadLoop() {
+            if (gamepadIndex === null) return;
+            const gp = navigator.getGamepads()[gamepadIndex];
+            if (!gp) return;
+
+            // Left stick Y for volume
+            const leftStickY = gp.axes[1];
+            if (Math.abs(leftStickY) > 0.3) {
+                audio.volume = Math.max(0, Math.min(1, audio.volume - leftStickY * 0.015));
+                updateVolumeVisual(audio.volume);
+            }
+
+            // Check buttons
+            for (let i = 0; i < gp.buttons.length; i++) {
+                const pressed = gp.buttons[i].pressed;
+                if (pressed && !lastButtonStates[i]) {
+                    handleGamepadButton(i);
+                }
+                lastButtonStates[i] = pressed;
+            }
+
+            requestAnimationFrame(gamepadLoop);
+        }
+
+        function handleGamepadButton(btn) {
+            // Konami code check
+            konamiSequence.push(btn);
+            if (konamiSequence.length > 10) konamiSequence.shift();
+
+            if (konamiSequence.length === 10 && konamiSequence.every((v, i) => v === konamiCode[i])) {
+                activateEasterEgg();
+                konamiSequence = [];
+                return;
+            }
+
+            const label = gamepadButtonLabels[btn] || 'Btn' + btn;
+            showGamepadFeedback(label);
+
+            switch(btn) {
+                case 0: // A / Cross
+                    togglePlay();
+                    break;
+                case 1: // B / Circle
+                    if (document.getElementById('Musik-overlay').classList.contains('Musik-active')) {
+                        Musiktoggle();
+                    } else if (document.getElementById('dynamic-island').classList.contains('expanded')) {
+                        closeDynamicIsland({stopPropagation: () => {}});
+                    } else {
+                        toggleDynamicIsland();
+                    }
+                    break;
+                case 2: // X / Square
+                    toggleShuffle();
+                    break;
+                case 3: // Y / Triangle
+                    toggleRepeat();
+                    break;
+                case 4: // LB
+                    prevSong();
+                    break;
+                case 5: // RB
+                    nextSong();
+                    break;
+                case 6: // LT
+                    audio.volume = Math.max(0, audio.volume - 0.05);
+                    updateVolumeVisual(audio.volume);
+                    break;
+                case 7: // RT
+                    audio.volume = Math.min(1, audio.volume + 0.05);
+                    updateVolumeVisual(audio.volume);
+                    break;
+                case 8: // Select / Share
+                    Settingstoggle();
+                    break;
+                case 9: // Start / Menu
+                    Musiktoggle();
+                    break;
+                case 12: // D-Pad Up
+                    if (currentSongIndex > 0) {
+                        currentSongIndex--;
+                        loadSong(currentSongIndex);
+                        if (isPlaying) play();
+                    }
+                    break;
+                case 13: // D-Pad Down
+                    if (currentSongIndex < songs.length - 1) {
+                        currentSongIndex++;
+                        loadSong(currentSongIndex);
+                        if (isPlaying) play();
+                    }
+                    break;
+                case 14: // D-Pad Left
+                    if (audio.currentTime > 5) audio.currentTime -= 5;
+                    else prevSong();
+                    break;
+                case 15: // D-Pad Right
+                    audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 5);
+                    break;
+            }
+        }
+
+        function activateEasterEgg() {
+            easterEggActive = !easterEggActive;
+            document.body.classList.toggle('easter-egg-mode', easterEggActive);
+
+            if (easterEggActive) {
+                if (easterEggMsgEl) {
+                    easterEggMsgEl.classList.add('active');
+                    setTimeout(() => easterEggMsgEl.classList.remove('active'), 4000);
+                }
+                if (settings.debug) debugLog('warum... egal ist Party-Modus!', 'info');
+                showGamepadHint('WAS HAST DU GETAN!!!!', 'Party-Modus aktiviert!');
+
+                // Auto-disable after 15 seconds for sanity
+                if (easterEggTimeout) clearTimeout(easterEggTimeout);
+                easterEggTimeout = setTimeout(() => {
+                    if (easterEggActive) activateEasterEgg();
+                }, 15000);
+            } else {
+                if (easterEggTimeout) clearTimeout(easterEggTimeout);
+                if (settings.debug) debugLog('Party-Modus deaktiviert', 'info');
+            }
+        }
+
+        // Check for already connected gamepads on load
+        if (navigator.getGamepads) {
+            const gamepads = navigator.getGamepads();
+            for (let i = 0; i < gamepads.length; i++) {
+                if (gamepads[i]) {
+                    gamepadIndex = i;
+                    updateGamepadDebugStatus(true);
+                    gamepadLoop();
+                    break;
+                }
+            }
+        }
+
+// ===== INIT =====
         window.addEventListener('DOMContentLoaded', init);
     </script>
 </body>

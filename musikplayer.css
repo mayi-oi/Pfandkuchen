@@ -7,11 +7,15 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
-body.material-you {
-    transition: background-color 0.8s ease, color 0.8s ease;
-}
+@property --my-primary { syntax: '<color>'; initial-value: #a2bdff; inherits: true; }
+@property --my-primary-dark { syntax: '<color>'; initial-value: #3e4b71; inherits: true; }
+@property --my-surface { syntax: '<color>'; initial-value: #5f6f96; inherits: true; }
+@property --my-surface-dark { syntax: '<color>'; initial-value: #3e4a69; inherits: true; }
+@property --my-accent { syntax: '<color>'; initial-value: #8fa1cf; inherits: true; }
+@property --my-text { syntax: '<color>'; initial-value: #ffffff; inherits: true; }
+@property --my-text-secondary { syntax: '<color>'; initial-value: #c9d8ff; inherits: true; }
 
-body.material-you {
+:root {
     --my-primary: #a2bdff;
     --my-primary-dark: #3e4b71;
     --my-surface: #5f6f96;
@@ -19,6 +23,17 @@ body.material-you {
     --my-accent: #8fa1cf;
     --my-text: #ffffff;
     --my-text-secondary: #c9d8ff;
+    transition: --my-primary 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                --my-primary-dark 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                --my-surface 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                --my-surface-dark 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                --my-accent 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                --my-text 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                --my-text-secondary 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.material-you {
+    transition: background-color 0.8s ease, color 0.8s ease;
 }
 
 body.material-you {
@@ -513,7 +528,6 @@ body.material-you .Musik-panel-progress .Totalzeit {
     padding: 14px 12px;
     border-radius: 14px;
     cursor: pointer;
-    transition: all 0.25s ease;
     background: transparent;
     border: none;
     width: 100%;
@@ -972,7 +986,7 @@ body.material-you .Settings-button p {
 }
 
 /* Cards */
-.Design-card {
+.Design-card, .Design-card-window {
     background: #3e4a69;
     border-radius: 20px;
     padding: 24px;
@@ -981,7 +995,7 @@ body.material-you .Settings-button p {
     gap: 16px;
 }
 
-.Design-card h3 {
+.Design-card h3, .Design-card-window h3 {
     margin: 0;
     font-size: 1.1rem;
     color: #ffffff;
@@ -989,7 +1003,7 @@ body.material-you .Settings-button p {
     line-height: 1.2;
 }
 
-.Design-card p {
+.Design-card p, .Design-card-window p {
     margin: 0;
     font-size: 0.85rem;
     color: #a2bdff;
@@ -1335,6 +1349,8 @@ body.material-you .Design-action-btn-reset:hover {
     background: rgba(255, 142, 142, 0.3) !important;
 }
 
+
+
 /* Material You overrides */
 body.material-you .Design-content {
     background: var(--my-surface);
@@ -1347,6 +1363,7 @@ body.material-you .Designoverlay.Design-active {
 }
 
 body.material-you .Design-card,
+body.material-you .Design-card-window,
 body.material-you .Design-info-card,
 body.material-you .Design-action-btn,
 body.material-you .Design-close-btn {
@@ -1379,12 +1396,12 @@ body.material-you .Design-action-icon {
 }
 
 body.material-you .Design-header h2,
-body.material-you .Design-card h3,
+body.material-you .Design-card h3, .Design-card-window h3
 body.material-you .Design-info-card h3 {
     color: var(--my-text);
 }
 
-body.material-you .Design-card p,
+body.material-you .Design-card p, .Design-card-window p,
 body.material-you .Design-info-card p,
 body.material-you .Design-dropzone p {
     color: var(--my-text-secondary);
@@ -1626,6 +1643,88 @@ body.has-custom-bg .Design-bg-preview {
     transform: rotate(12deg);
 }
 
+body.material-you .Nav-touch {
+    background-image: linear-gradient(to top, var(--my-accent), transparent);
+}
+
+body.material-you .Nav-touch-flexbox button {
+    color: var(--my-text);
+}
+
+body.material-you .Nav-touch-flexbox button:hover {
+    color: var(--my-text);
+    background: var(--my-accent);
+}
+
+/* Bottom Navigation Bar */
+.Nav-touch {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+    background-image: linear-gradient(to top, #404966, transparent);
+    border-top: none;
+    z-index: 1008;
+    opacity: 0;
+    transition: opacity 0.12s ease;
+}
+
+.Nav-touch-flexbox {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.Nav-touch-flexbox button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    border: none;
+    background: transparent;
+    font-family: Google-sans;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: #8fa1cf;
+    cursor: pointer;
+    padding: 6px 16px;
+    border-radius: 12px;
+    transition: all 0.25s ease;
+    min-width: 72px;
+}
+
+.Nav-touch-flexbox button:hover {
+    color: #ffffff;
+    background: rgba(162, 189, 255, 0.1);
+}
+
+.Nav-touch-flexbox button.active {
+    color: #a2bdff;
+    background: rgba(162, 189, 255, 0.15);
+}
+
+.Nav-touch-flexbox button img {
+    width: 24px;
+    height: 24px;
+    opacity: 0.7;
+    transition: all 0.25s ease;
+}
+
+.Nav-touch-flexbox button:hover img {
+    opacity: 1;
+    rotate: 12deg;
+    transform: scale(1.1);
+}
+
+.Nav-touch-flexbox button.active img {
+    opacity: 1;
+}
+
+/* Desktop Navigation (top-left) */
 .Nav-hauptbutton {
     top: 0;
     left: 0;
@@ -1633,7 +1732,6 @@ body.has-custom-bg .Design-bg-preview {
     position: fixed;
     padding: 20px 16px 16px;
     cursor: default;
-    font-family: Google-sans;
     z-index: 1008;
 }
 
@@ -1657,6 +1755,304 @@ body.has-custom-bg .Design-bg-preview {
     transform: rotate(12deg);
     background-color: #91b0ff;
     box-shadow: 0 0 18px #91b0ff;
+}
+
+/* ===== DYNAMIC ISLAND - Musik Player ===== */
+
+.Dynamic-island {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1010;
+    background: #3e4a69;
+    border-radius: 28px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 280px;
+    max-width: 120vw;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: 2px solid rgba(143, 161, 207, 0.2);
+    backdrop-filter: blur(12px);
+    overflow: hidden;
+    height: 52px;
+    box-sizing: border-box;
+}
+
+.Dynamic-island:hover {
+    border-color: rgb(202, 217, 255);
+}
+
+.Dynamic-island.expanded {
+    top: 10px;
+    padding: 20px 24px;
+    border-radius: 32px;
+    min-width: 320px;
+    max-width: 380px;
+    height: auto;
+    flex-direction: column;
+    gap: 16px;
+    cursor: default;
+}
+
+.Dynamic-island-cover {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.Dynamic-island.expanded .Dynamic-island-cover {
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+}
+
+.Dynamic-island-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.Dynamic-island-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+    transition: all 0.2s ease;
+}
+
+.Dynamic-island.expanded .Dynamic-island-info {
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+}
+
+.Dynamic-island-title {
+    font-size: 0.85rem;
+    color: #ffffff;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 160px;
+    transition: all 0.2s ease;
+    display: block;
+    position: relative;
+}
+
+.di-title-inner {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.Dynamic-island-title.scroll .di-title-inner {
+    animation: di-marquee 18s linear infinite;
+}
+
+@keyframes di-marquee {
+    0% { transform: translateX(-100%);}
+    50% { transform: translateX(0);}
+    100% { transform: translateX(100%);}
+}
+
+.Dynamic-island.expanded .Dynamic-island-title {
+    font-size: 1.1rem;
+    max-width: 100%;
+}
+
+.Dynamic-island-artist {
+    font-size: 0.7rem;
+    color: #8fa1cf;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 140px;
+    transition: all 0.2s ease;
+}
+
+.Dynamic-island.expanded .Dynamic-island-artist {
+    font-size: 0.85rem;
+    max-width: 100%;
+}
+
+.Dynamic-island-time {
+    font-size: 0.75rem;
+    color: #a2bdff;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.Dynamic-island.expanded .Dynamic-island-time {
+    display: none;
+}
+
+.Dynamic-island-progress {
+    width: 100%;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+    display: none;
+    cursor: pointer;
+}
+
+.Dynamic-island.expanded .Dynamic-island-progress {
+    display: block;
+}
+
+.Dynamic-island-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #a2bdff;
+    border-radius: 10px;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 6px rgba(162, 189, 255, 0.4);
+}
+
+.Dynamic-island-controls {
+    display: none;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+}
+
+.Dynamic-island-upload {
+    display: none;
+}
+
+.Dynamic-island.expanded .Dynamic-island-controls {
+    display: flex;
+}
+
+.Dynamic-island-controls button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 8px;
+    color: #c9d8ff;
+}
+
+.Dynamic-island-controls button:hover {
+    transform: scale(1.15);
+    background: rgba(162, 189, 255, 0.15);
+}
+
+.Dynamic-island-controls button img {
+    width: 22px;
+    height: 22px;
+    opacity: 0.9;
+}
+
+.Dynamic-island-play {
+    width: 52px !important;
+    height: 52px !important;
+    background: #a2bdff !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+}
+
+.Dynamic-island-play:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 4px 16px rgba(162, 189, 255, 0.4);
+}
+
+.Dynamic-island-play img {
+    width: 26px !important;
+    height: 26px !important;
+    filter: invert(0) !important;
+}
+
+.Dynamic-island-time-row {
+    display: none;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 0.7rem;
+    color: #8fa1cf;
+    font-variant-numeric: tabular-nums;
+}
+
+.Dynamic-island.expanded .Dynamic-island-time-row {
+    display: flex;
+}
+
+.Dynamic-island-close {
+    display: none;
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 142, 142, 0.2);
+    color: #ff8e8e;
+    cursor: pointer;
+    font-size: 0.9rem;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.Dynamic-island-close:hover {
+    background: #ff8e8e;
+    color: #6d3f3f;
+    transform: scale(1.1);
+}
+
+.Dynamic-island.expanded .Dynamic-island-close {
+    display: flex;
+}
+
+/* Hide on desktop */
+@media (min-width: 681px) {
+    .Dynamic-island {
+        display: none !important;
+    }
+}
+
+/* Material You overrides */
+body.material-you .Dynamic-island {
+    background: var(--my-surface-dark);
+    border-color: var(--my-accent);
+}
+
+body.material-you .Dynamic-island-title {
+    color: var(--my-primary);
+}
+
+body.material-you .Dynamic-island-artist {
+    color: var(--my-text-secondary);
+}
+
+body.material-you .Dynamic-island-time {
+    color: var(--my-primary);
+}
+
+body.material-you .Dynamic-island-progress-fill {
+    background: var(--my-primary);
+    box-shadow: 0 0 6px var(--my-primary);
+}
+
+body.material-you .Dynamic-island-play {
+    background: var(--my-primary) !important;
+}
+
+body.material-you .Dynamic-island-controls button:hover {
+    background: rgba(162, 189, 255, 0.15);
 }
 
 .Musik-progress-wrap {
@@ -2086,7 +2482,6 @@ body.has-custom-bg .Design-bg-preview {
     padding: 10px 14px;
     border-radius: 12px;
     cursor: pointer;
-    transition: all 0.2s ease;
     margin-bottom: 4px;
 }
 
@@ -2096,7 +2491,6 @@ body.has-custom-bg .Design-bg-preview {
 
 .Musik-playlist-item:hover {
     background: rgba(162, 189, 255, 0.15);
-    transform: translateX(4px);
 }
 
 .Musik-playlist-item.active {
@@ -2164,6 +2558,8 @@ body.has-custom-bg .Design-bg-preview {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
     background-color: #42537d00;
     display: flex;
     align-items: center;
@@ -2174,6 +2570,8 @@ body.has-custom-bg .Design-bg-preview {
 }
 
 .Uploadoverlay.Upload-active {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     background: rgba(25, 30, 50, 0.355);
     opacity: 1;
     pointer-events: all;
@@ -2510,6 +2908,20 @@ body.debug-mode .debug-nav-stats { display: block; }
     .Musik-controls { gap: 8px; }
     .Musik-btn-play { width: 56px !important; height: 56px !important; }
     .Settings-content { padding: 24px 20px; }
+
+    .Nav-hauptbutton, .Musik-progress-wrap {
+        display: none;
+    }
+
+    .Nav-touch, .Touch-einstellungen {
+        opacity: 1;
+        transition: opacity 0.12s ease;
+        display: block;
+    }
+
+    .Design-info-card, .Design-card-window {
+        display: none;
+    }
 }
 
 .Musik-playlist-box::-webkit-scrollbar {
@@ -2524,4 +2936,230 @@ body.debug-mode .debug-nav-stats { display: block; }
 .Musik-playlist-box::-webkit-scrollbar-thumb {
     background: #8fa1cf;
     border-radius: 4px;
+}
+
+/* ===== GAMEPAD SUPPORT STYLES ===== */
+
+.Gamepad-hint {
+    position: fixed;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(62, 74, 105, 0.9);
+    border: 2px solid #a2bdff;
+    border-radius: 16px;
+    padding: 12px 20px;
+    color: #c9d8ff;
+    font-size: 0.85rem;
+    z-index: 20001;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 20px rgba(162, 189, 255, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.Gamepad-hint.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.Gamepad-hint-icon {
+    font-size: 1.4rem;
+}
+
+.Gamepad-hint-text {
+    font-weight: 600;
+}
+
+.Gamepad-hint-sub {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    margin-left: 4px;
+}
+
+body.material-you .Gamepad-hint {
+    background: var(--my-surface-dark);
+    border-color: var(--my-primary);
+    color: var(--my-text-secondary);
+    box-shadow: 0 0 20px var(--my-primary);
+}
+
+/* Gamepad button press visual feedback overlay */
+.Gamepad-feedback {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(162, 189, 255, 0.3);
+    border: 3px solid #a2bdff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-family: Google-sans;
+    font-size: 2rem;
+    z-index: 20002;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.15s ease;
+    backdrop-filter: blur(4px);
+}
+
+.Gamepad-feedback.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
+body.material-you .Gamepad-feedback {
+    border-color: var(--my-primary);
+    background: rgba(162, 189, 255, 0.2);
+}
+
+/* ===== EASTER EGG - PARTY MODE ===== */
+
+body.easter-egg-mode {
+    animation: easterEggRainbow 2s linear infinite;
+}
+
+@keyframes easterEggRainbow {
+    0% { filter: hue-rotate(0deg) saturate(1.5); }
+    50% { filter: hue-rotate(180deg) saturate(2); }
+    100% { filter: hue-rotate(360deg) saturate(1.5); }
+}
+
+body.easter-egg-mode .Musik-cover,
+body.easter-egg-mode .Dynamic-island-cover {
+    animation: easterEggSpin 1.5s linear infinite !important;
+}
+
+@keyframes easterEggSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+body.easter-egg-mode .Musik-content,
+body.easter-egg-mode .Settings-content,
+body.easter-egg-mode .Upload-content,
+body.easter-egg-mode .Design-content {
+    animation: easterEggWobble 0.6s ease-in-out infinite;
+}
+
+@keyframes easterEggWobble {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(-3deg) scale(1.02); }
+    50% { transform: rotate(0deg) scale(1); }
+    75% { transform: rotate(3deg) scale(1.02); }
+}
+
+body.easter-egg-mode .Nav-flexbutton button {
+    animation: easterEggBounce 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes easterEggBounce {
+    from { transform: translateY(0) rotate(12deg); }
+    to { transform: translateY(-8px) rotate(12deg); }
+}
+
+body.easter-egg-mode .Window-titlebar {
+    animation: easterEggGlitch 0.3s ease-in-out infinite;
+}
+
+@keyframes easterEggGlitch {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-2px); }
+    40% { transform: translateX(2px); }
+    60% { transform: translateX(-1px); }
+    80% { transform: translateX(1px); }
+}
+
+/* Secret message overlay */
+.Easter-egg-message {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    z-index: 30001;
+    background: linear-gradient(135deg, #ff8e8e, #a2bdff, #91b0ff);
+    background-size: 200% 200%;
+    border-radius: 24px;
+    padding: 24px 40px;
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    box-shadow: 0 0 60px rgba(162, 189, 255, 0.6);
+    pointer-events: none;
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: easterEggGradient 1s ease infinite;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.Easter-egg-message.active {
+    transform: translateX(-50%) scale(1);
+}
+
+@keyframes easterEggGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.Easter-egg-message small {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-top: 8px;
+    opacity: 0.9;
+}
+
+body.easter-egg-mode .debug-viz-bar {
+    animation: easterEggViz 0.2s ease-in-out infinite alternate;
+}
+
+@keyframes easterEggViz {
+    from { opacity: 0.5; }
+    to { opacity: 1; }
+}
+
+/* Gamepad connected indicator in debug */
+.debug-gamepad-status {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #3e4a69;
+    margin-left: 6px;
+    transition: all 0.3s ease;
+}
+
+.debug-gamepad-status.connected {
+    background: #a2bdff;
+    box-shadow: 0 0 8px #a2bdff;
+}
+
+body.material-you .debug-gamepad-status.connected {
+    background: var(--my-primary);
+    box-shadow: 0 0 8px var(--my-primary);
+}
+
+/* Reduced lights override for easter egg */
+body.reduced-lights.easter-egg-mode {
+    animation: none;
+}
+body.reduced-lights.easter-egg-mode .Musik-cover,
+body.reduced-lights.easter-egg-mode .Dynamic-island-cover {
+    animation: none !important;
+}
+body.reduced-lights.easter-egg-mode .Musik-content,
+body.reduced-lights.easter-egg-mode .Settings-content,
+body.reduced-lights.easter-egg-mode .Upload-content,
+body.reduced-lights.easter-egg-mode .Design-content {
+    animation: none;
 }
