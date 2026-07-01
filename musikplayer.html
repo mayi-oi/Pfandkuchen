@@ -7,6 +7,7 @@
     <link rel="icon" href="Res/Bild/Logo/Haupt-logo.png">
     <link rel="stylesheet" href="musikplayer.css">
     <link rel="stylesheet" href="Res/Font/Font.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <base target="_blank">
 <base target="_blank">
 <base target="_blank">
@@ -29,7 +30,7 @@
     <div class="Settingsoverlay" id="Settings-overlay">
         <div class="Settings-content">
             <div class="Settings-topbar">
-                <div class="Settings-title-wrap"><h2>Einstellungen ∑(O_O;)</h2><p class="Settings-uebersicht-label">version: 1.24</p></div>
+                <div class="Settings-title-wrap"><h2>Einstellungen ∑(O_O;)</h2><p class="Settings-uebersicht-label">version: 1.25</p></div>
                 <div class="Settings-topbar-actions">
                     <button class="Musik-panel-upload" onclick="window.open('https://github.com/mayi-oi/Pfandkuchen/releases', '_blank')"><img src="Res/Bild/Icon/description_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Upload"><span>Changelog ansehen!</span></button>
                     <button class="Settings-icon-btn" onclick="window.open('https://github.com/mayi-oi/Pfandkuchen', '_blank')" title="Github"><img src="Res/Bild/Icon/github-fill.svg" alt="Github"></button>
@@ -51,9 +52,27 @@
                     </div>
                 </div>
             </div>
+            <!-- Mobile Settings Body -->
+            <div class="Settings-mobile" id="settings-mobile">
+                <button class="Settings-mobile-changelog" onclick="window.open('https://github.com/mayi-oi/Pfandkuchen/releases', '_blank')">
+                    <span>Changelog ansehen!</span>
+                    <img src="Res/Bild/Icon/description_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Changelog">
+                </button>
+                
+                <div class="Settings-mobile-dropdown" id="settings-mobile-dropdown">
+                    <button class="Settings-mobile-dropdown-trigger" onclick="toggleMobileSettingsDropdown()">
+                        <span id="mobile-dropdown-label">Einstellungen</span>
+                        <svg class="Settings-mobile-chevron" width="24" height="24" viewBox="0 -960 960 960" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" fill="#ffffff"/>
+                        </svg>
+                    </button>
+                    <div class="Settings-mobile-dropdown-menu" id="settings-mobile-menu"></div>
+                </div>
+            </div>
         </div>
     </div>
 
+    
     <!-- Musik player overlay -->
     <div class="Musikoverlay" id="Musik-overlay">
         <div class="Musik-content">
@@ -91,6 +110,7 @@
         </div>
     </div>
 
+    <!-- Uploadoverlay -->
     <div class="Uploadoverlay" id="Upload-overlay">
         <div class="Upload-content">
             <div class="Upload-header"><h2>Musik hochladen (*ﾉ・ω・)ﾉ♫</h2></div>
@@ -104,6 +124,72 @@
                 <div class="Upload-liste" id="upload-liste"><p class="Upload-leer">Noch keine Songs hochgeladen ( ͡° ͜ʖ ͡°)</p></div>
             </div>
             <div class="Upload-footer"><button class="Upload-schliessen" onclick="Uploadtoggle()">Schließen</button></div>
+        </div>
+    </div>
+
+    <!-- osu!overlay -->
+    <div class="osuoverlay" id="osu-overlay">
+        <div class="osu-content">
+
+            <!-- Header -->
+            <div class="osu-header">
+                <h2>osu! hochladen (つ º - º ç)</h2>
+                <button class="osu-close-btn" onclick="osutoggle()" title="Schließen">✕</button>
+            </div>
+
+            <!-- Body: 2-Spalten-Grid -->
+            <div class="osu-grid">
+
+                <!-- LINKS: Canvas / Kein Beatmap Zustand -->
+                <div class="osu-left">
+                    <!-- Canvas (sichtbar wenn Beatmap geladen) -->
+                    <div class="osu-canvas-wrap" id="osu-canvas-wrap" style="display:none;">
+                        <canvas id="osu-canvas" width="1024" height="768"></canvas>
+                        <div class="osu-stats">
+                            <span id="osu-combo">0x</span>
+                            <span id="osu-accuracy">100.00%</span>
+                        </div>
+                    </div>
+
+                    <!-- Leerer Zustand (sichtbar wenn kein Beatmap) -->
+                    <div class="osu-empty-state" id="osu-empty-state">
+                        <p>Kein beatmap :(</p>
+                    </div>
+
+                    <!-- Beatmap Info Box (unter Canvas/Empty) -->
+                    <div class="osu-beatmap-info" id="osu-beatmap-info">
+                        <div class="osu-meta">
+                            <h3 id="osu-title">Beatmap name</h3>
+                            <p id="osu-artist">Musikkünstler</p>
+                            <p id="osu-diff">Schwierigkeit: <span>-</span></p>
+                        </div>
+                        <div class="osu-controls">
+                            <button class="osu-btn" id="osu-play-btn" onclick="osuPlayer.play()">▶ Play</button>
+                            <button class="osu-btn osu-btn-stop" onclick="osuPlayer.stop()">⏹ Stop</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RECHTS: Dropzone + Playlist -->
+                <div class="osu-right">
+                    <!-- Dropzone -->
+                    <div class="osu-dropzone" id="osu-dropzone">
+                        <img src="Res/Bild/Icon/Musikplayer/upload_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg" alt="Upload">
+                        <p class="osu-drop-text">Ziehe den .osz hier!</p>
+                        <p class="osu-drop-sub">Klicke oder ziehen den mehrere Dateien hier!</p>
+                        <input type="file" id="osu-file-input" accept=".osz" multiple>
+                    </div>
+
+                    <!-- Playlist -->
+                    <div class="osu-playlist-wrap">
+                        <h3 class="osu-playlist-title">Deine playlist</h3>
+                        <div class="Upload-liste" id="osu-upload-liste">
+                            <p class="osu-playlist-leer">wirklich leer hier...</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 
@@ -260,6 +346,13 @@
                         </button>
                     </div>
                 </div>
+                <!-- Mobile Preview (nur sichtbar auf Mobile) -->
+                <div class="Design-mobile-preview" id="design-mobile-preview">
+                    <h3>Preview ( ͡° ͜ʖ ͡°)</h3>
+                    <div class="Design-mobile-preview-box" id="mobile-preview-box">
+                        <span class="preview-placeholder">Noch kein Hintergrund...</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -278,6 +371,7 @@
      <div class="Nav-touch">
             <div class="Nav-touch-flexbox">
                 <button class="Musikplayer-toggle-touch" id="nav-musik-btn" onclick="Musiktoggle()"><img src="Res/Bild/Icon/music_note_2_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg">Musikplayer</button>
+                <!-- <button class="osu-toggle-touch" id="nav-musik-btn" onclick="osutoggle()"><img src="Res/Bild/Icon/Musikplayer/AddText_10-31-05.27.49.png">osu!</button> -->
                 <button class="Design-toggle-touch" id="design-toggle-btn" onclick="Designtoggle()"><img src="Res/Bild/Icon/Touchscreen mode/design_services_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg">Design editor</button>
                 <button class="Einstellung-toggle" onclick="Settingstoggle()"><img src="Res/Bild/Icon/settings_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg">Einstellungen</button>
             </div>
@@ -310,7 +404,7 @@
 
     <div class="Nav-hauptbutton">
         <div class="Nav-flexbutton">
-            <button class="leave-toggle" onclick="window.location.href='index.html'"><img src="Res/Bild/Icon/close_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></button>
+            <button class="leave-toggle" onclick="window.location.href='index.html'"><img src="Res/Bild/Icon/home_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></button>
             <button class="Musikplayer-toggle" id="nav-musik-btn" onclick="Musiktoggle()"><img src="Res/Bild/Icon/music_note_2_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></button>
             <button class="Design-toggle" id="design-toggle-btn" onclick="Designtoggle()"><img src="Res/Bild/Icon/brush_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></button>
             <button class="Einstellung-toggle" onclick="Settingstoggle()"><img src="Res/Bild/Icon/settings_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg"></button>
@@ -323,10 +417,36 @@
             </div>
             <span class="Totalzeit" id="total-zeit">0:00</span>
         </div>
+        <div class="haupttitle"><h2 onclick="Menütoggle()">Mayi.-musikplayer!*</h2></div>
+    </div>
+
+    <div class="Menuoverlay" id="Menu-overlay">
+        <div class="Menucontent">
+            <div class="Menuheader"><h2>Wechsel den andere ort!</h2></div>
+            <div class="Menubody">
+                <div class="Menu-card" onclick="window.location.href='index.html'">
+                    <h2>Hauptseite!*</h2>
+                    <p style="color: #ffffff;">Den hauptseite und alles nur einen Ort!</p>
+                </div>
+                <div class="Menu-card-aktiv">
+                    <h2>Musikplayer!*</h2>
+                    <p style="color: #ffffff;">Mehr als musikplayer mit Material You!</p>
+                </div>
+                <div class="Menu-card" onclick="window.location.href='Phishing.html'">
+                    <h2>Phishing!*</h2>
+                    <p style="color: #ffffff;">Ohhhh... free passwort..</p>
+                </div>
+                <div class="Menu-card" onclick="window.location.href='portfoilo.html'">
+                    <h2>Portfoilo!*</h2>
+                    <p style="color: #ffffff;">Niemand kann finde mein persönliches infomation!</p>
+                </div>
+            </div>
+        <p>Tippen igenwo oder druck "i" zu Schließen!</p>
     </div>
 
     <audio id="audio-player" preload="metadata"></audio>
 
+    <!-- <script src="js/osu!player.js"></script> -->
     <script>
         // ===== Einstellungen daten =====
         const settingsData = {
@@ -935,7 +1055,7 @@
                     if (bgVideoElement.readyState >= 2 && !document.hidden) {
                         MaterialYou.updateDynamic();
                     }
-                }, 3000);
+                }, 500);
 
                 bgVideoElement.addEventListener('loadeddata', onVideoReady);
             }
@@ -1363,6 +1483,8 @@
             audio.addEventListener('error', handleAudioError);
             document.addEventListener('keydown', handleKeydown);
             loadSettings();
+            renderMobileSettings();
+            initMobileSettings();
             loadSavedDesign();
             initDebug();
         }
@@ -1384,6 +1506,43 @@
                 playlistBox.appendChild(item);
             });
         }
+
+        function updateMobilePreview() {
+            const box = document.getElementById('mobile-preview-box');
+            if (!box) return;
+            
+            if (bgType === 'image' && bgPreviewImg.src && 
+                !bgPreviewImg.src.includes('preview_24dp') && 
+                bgPreviewImg.src !== window.location.href) {
+                box.innerHTML = `<img src="${bgPreviewImg.src}" alt="Preview">`;
+            } else if (bgType === 'video' && bgVideoElement.src) {
+                box.innerHTML = `<video src="${bgVideoElement.src}" loop muted playsinline autoplay></video>`;
+            } else {
+                box.innerHTML = '<span class="preview-placeholder">Noch kein Hintergrund...</span>';
+            }
+        }
+
+        // Override handleBgFile to also update mobile preview
+        const origHandleBgFile = handleBgFile;
+        handleBgFile = function(file) {
+            origHandleBgFile(file);
+            updateMobilePreview();
+        };
+
+        // Override setBgType to also update mobile preview
+        const origSetBgType = setBgType;
+        setBgType = function(type) {
+            origSetBgType(type);
+            updateMobilePreview();
+        };
+
+        // Override resetDesign to also clear mobile preview
+        const origResetDesign = resetDesign;
+        resetDesign = function() {
+            origResetDesign();
+            const box = document.getElementById('mobile-preview-box');
+            if (box) box.innerHTML = '<span class="preview-placeholder">Noch kein Hintergrund...</span>';
+        };
 
         function loadSong(index) {
             const song = songs[index];
@@ -1556,6 +1715,8 @@
                 case 'KeyH': Uploadtoggle(); break;
                 case 'KeyD': Designtoggle(); break;
                 case 'KeyS': Settingstoggle(); break;
+                case 'KeyO': osutoggle(); break;
+                case 'KeyI' : Menütoggle(); break;
             }
         }
 
@@ -1658,10 +1819,14 @@
             document.querySelector('.Musikoverlay').classList.toggle('Musik-active');
             navMusikBtn.classList.toggle('active');
         }
+        function osutoggle() { document.querySelector('.osuoverlay').classList.toggle('osu-active'); }
+        function Menütoggle() { document.querySelector('.Menuoverlay').classList.toggle('Menu-active'); }
 
+        document.getElementById('Menu-overlay').addEventListener('click', (e) => { if (e.target === document.getElementById('Menu-overlay')) Menütoggle(); });
         document.getElementById('Settings-overlay').addEventListener('click', (e) => { if (e.target === document.getElementById('Settings-overlay')) Settingstoggle(); });
         document.getElementById('Design-overlay').addEventListener('click', (e) => { if (e.target === document.getElementById('Design-overlay')) Designtoggle(); });
         document.getElementById('Musik-overlay').addEventListener('click', (e) => { if (e.target === document.getElementById('Musik-overlay')) Musiktoggle(); });
+        document.getElementById('osu-overlay').addEventListener('click', (e) => { if (e.target === document.getElementById('osu-overlay')) osutoggle(); });
 
         // ===== Einstellungen =====
         function selectSetting(key) {
@@ -2132,6 +2297,50 @@
                     break;
                 }
             }
+        }
+
+        function initMobileSettings() {
+            renderMobileSettings();
+        }
+
+        function renderMobileSettings() {
+            const menu = document.getElementById('settings-mobile-menu');
+            if (!menu) return;
+            
+            const settingNames = {
+                lights: 'Wenig flashing',
+                fps: 'Fps und Ram',
+                material: 'Material you',
+                debug: 'Debug console'
+            };
+            
+            menu.innerHTML = '';
+            Object.keys(settingNames).forEach(key => {
+                const item = document.createElement('button');
+                item.className = 'Settings-mobile-item' + (settings[key] ? ' active' : '');
+                item.onclick = () => toggleMobileSetting(key);
+                item.innerHTML = `
+                    <span>${settingNames[key]}</span>
+                    <div class="Settings-mobile-indicator"></div>
+                `;
+                menu.appendChild(item);
+            });
+            
+            const activeCount = Object.values(settings).filter(v => v).length;
+            const label = document.getElementById('mobile-dropdown-label');
+            if (label) {
+                label.textContent = activeCount > 0 ? (activeCount + ' aktiv') : 'Einstellungen';
+            }
+        }
+
+        function toggleMobileSetting(key) {
+            toggleSetting(key);
+            renderMobileSettings();
+        }
+
+        function toggleMobileSettingsDropdown() {
+            const dropdown = document.getElementById('settings-mobile-dropdown');
+            if (dropdown) dropdown.classList.toggle('open');
         }
 
 // ===== INIT =====

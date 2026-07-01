@@ -301,6 +301,20 @@ body.material-you .Musik-panel-progress .Totalzeit {
     font-size: 1.8rem;
 }
 
+@media (max-width: 768px) {
+    .Warung-header {
+        font-size: 1.4rem;
+    }
+
+    .Warung-text {
+        font-size: 1.1rem;
+    }
+
+    .Warung-button {
+        display: grid;
+    }
+}
+
 .Warung-button {
     display: flex;
     justify-content: center;
@@ -837,6 +851,225 @@ body.material-you .Settings-button p {
     }
 }
 
+/* Einstellugen mobilen */
+.Settings-mobile {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 4px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.Settings-mobile-changelog {
+    width: 100%;
+    padding: 18px 24px;
+    border: none;
+    border-radius: 20px;
+    background-color: #bacdff;
+    color: #5f6f96;
+    font-family: Google-sans;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.Settings-mobile-changelog:hover {
+    padding: 18px 28px;
+    box-shadow: 0 0 18px #bacdff;
+}
+
+.Settings-mobile-changelog img {
+    width: 24px;
+    height: 24px;
+    opacity: 0.8;
+}
+
+.Settings-mobile-dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.Settings-mobile-dropdown-trigger {
+    width: 100%;
+    padding: 18px 20px;
+    border: none;
+    border-radius: 20px;
+    background: #3e4a69;
+    color: #ffffff;
+    font-family: Google-sans;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.Settings-mobile-dropdown-trigger:hover {
+    background: #4a5a7d;
+}
+
+.Settings-mobile-chevron {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+    opacity: 0.7;
+}
+
+.Settings-mobile-dropdown.open .Settings-mobile-chevron {
+    transform: rotate(180deg);
+}
+
+.Settings-mobile-dropdown-menu {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    background: #3e4a69;
+    border-radius: 20px;
+    padding: 12px;
+    animation: slideDown 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.Settings-mobile-dropdown.open .Settings-mobile-dropdown-menu {
+    display: flex;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.Settings-mobile-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 14px;
+    border-radius: 16px;
+    background: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-family: Google-sans;
+    cursor: pointer;
+}
+
+.Settings-mobile-item:hover {
+    background: rgba(162, 189, 255, 0.1);
+}
+
+.Settings-mobile-item.active {
+    background: rgba(162, 189, 255, 0.15);
+}
+
+.Settings-mobile-item span {
+    font-size: 1rem;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.Settings-mobile-item.active span {
+    text-decoration: underline;
+}
+
+.Settings-mobile-indicator {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid #8fa1cf;
+    background: transparent;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+}
+
+.Settings-mobile-item.active .Settings-mobile-indicator {
+    background: #a2bdff;
+    border-color: #a2bdff;
+    box-shadow: 0 0 8px rgba(162, 189, 255, 0.5);
+}
+
+/* Material You overrides for mobile settings */
+body.material-you .Settings-mobile-changelog {
+    background: var(--my-primary);
+    color: var(--my-primary-dark);
+}
+
+body.material-you .Settings-mobile-changelog:hover {
+    box-shadow: 0 0 18px var(--my-primary);
+}
+
+body.material-you .Settings-mobile-dropdown-trigger,
+body.material-you .Settings-mobile-dropdown-menu {
+    background: var(--my-surface-dark);
+}
+
+body.material-you .Settings-mobile-dropdown-trigger:hover {
+    background: var(--my-surface);
+}
+
+body.material-you .Settings-mobile-item:hover {
+    background: rgba(162, 189, 255, 0.08);
+}
+
+body.material-you .Settings-mobile-item.active {
+    background: rgba(162, 189, 255, 0.12);
+}
+
+body.material-you .Settings-mobile-indicator {
+    border-color: var(--my-accent);
+}
+
+body.material-you .Settings-mobile-item.active .Settings-mobile-indicator {
+    background: var(--my-primary);
+    border-color: var(--my-primary);
+    box-shadow: 0 0 8px var(--my-primary);
+}
+
+@media (max-width: 680px) {
+    .Settingsoverlay {
+        align-items: flex-end;
+    }
+    
+    .Settings-content {
+        position: fixed;
+        bottom: 0;
+        width: 90%;
+        max-width: 100%;
+        border-radius: 28px 28px 0 0;
+        padding: 24px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+        max-height: 90vh;
+        transform: translateY(100%);
+        transition: transform 0.35s ease, opacity 0.25s ease;
+    }
+    
+    .Settingsoverlay.Settings-active .Settings-content {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    .Settings-body {
+        display: none;
+    }
+    
+    .Settings-mobile {
+        display: flex;
+    }
+    
+    .Settings-topbar {
+        margin-bottom: 16px;
+    }
+    
+    .Settings-topbar-actions .Musik-panel-upload {
+        display: none;
+    }
+}
 
 /* ===== REDESIGNED DESIGN STUDIO ===== */
 
@@ -1425,20 +1658,219 @@ body.material-you .Design-icon-btn.active {
     box-shadow: 0 0 14px var(--my-primary);
 }
 
-/* Responsive */
 @media (max-width: 680px) {
+    .Designoverlay {
+        align-items: flex-end;
+    }
+    
     .Design-content {
-        padding: 24px 20px;
-        max-width: 95%;
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%) translateY(100%);
+        width: 90%;
+        max-width: 100%;
+        border-radius: 28px 28px 0 0;
+        padding: 24px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+        max-height: 85vh;
+        transition: transform 0.32s ease, opacity 0.2s ease;
     }
+    
+    .Designoverlay.Design-active .Design-content {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+    
     .Design-grid {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
     }
-    .Design-header {
-        margin-bottom: 16px;
+    
+    .Design-left, .Design-right {
+        gap: 16px;
+    }
+    
+    /* Hide desktop-only elements on mobile */
+    .Design-card-window,
+    .Design-info-card {
+        display: none;
+    }
+    
+    /* Mobile Preview Card (oben) */
+    .Design-mobile-preview {
+        display: block;
+        background: #3e4a69;
+        border-radius: 20px;
+        padding: 20px;
+        margin-bottom: 4px;
+    }
+    
+    .Design-mobile-preview h3 {
+        margin: 0 0 12px 0;
+        font-size: 1.1rem;
+        color: #ffffff;
+        text-decoration: underline;
+    }
+    
+    .Design-mobile-preview-box {
+        width: 100%;
+        height: 140px;
+        border-radius: 16px;
+        background: rgba(25, 30, 50, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    
+    .Design-mobile-preview-box img,
+    .Design-mobile-preview-box video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 16px;
+    }
+    
+    .Design-mobile-preview-box .preview-placeholder {
+        color: #8fa1cf;
+        font-size: 0.9rem;
+    }
+    
+    /* BG Type Toggle Mobile */
+    .Design-bg-toggle {
+        margin-bottom: 0;
+    }
+    
+    .Design-bg-type-btn {
+        padding: 14px 16px;
+        font-size: 1rem;
+    }
+    
+    .Design-bg-type-btn img {
+        width: 24px;
+        height: 24px;
+    }
+    
+    /* Hintergrund Card */
+    .Design-card {
+        padding: 20px;
+        gap: 14px;
+    }
+    
+    .Design-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .Design-card p {
+        font-size: 0.9rem;
+    }
+    
+    /* Dropzone Mobile */
+    .Design-dropzone {
+        padding: 24px 16px;
+    }
+    
+    .Design-dropzone img {
+        width: 28px;
+        height: 28px;
+    }
+    
+    /* Mobile Actions Grid */
+    .Design-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+    
+    .Design-action-btn {
+        padding: 14px 12px;
+        font-size: 0.9rem;
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+        border-radius: 16px;
+    }
+    
+    .Design-action-btn:hover {
+        transform: translateY(-2px);
+    }
+    
+    .Design-action-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .Design-action-icon img {
+        width: 18px;
+        height: 18px;
+    }
+    
+    /* Reset Button - full width, pink */
+    .Design-action-btn-reset {
+        grid-column: 1 / -1;
+        background: rgba(255, 142, 142, 0.2) !important;
+        border: 2px solid rgba(255, 142, 142, 0.4);
+        color: #ff8e8e;
+        flex-direction: row;
+        justify-content: center;
+        padding: 16px;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    
+    .Design-action-btn-reset:hover {
+        background: rgba(255, 142, 142, 0.35) !important;
+        box-shadow: 0 4px 16px rgba(255, 142, 142, 0.3) !important;
+    }
+    
+    .Design-action-btn-reset .Design-action-icon {
+        background: rgba(255, 142, 142, 0.25);
+        width: 28px;
+        height: 28px;
+    }
+    
+    /* Video controls mobile */
+    .Design-video-controls {
+        padding: 6px 10px;
+    }
+    
+    .Design-video-btn {
+        width: 32px;
+        height: 32px;
+    }
+    
+    /* Hide preview containers by default, show mobile version */
+    #bg-preview-img-container,
+    #bg-preview-video-container {
+        display: none !important;
     }
 }
 
+/* Desktop: hide mobile preview */
+@media (min-width: 681px) {
+    .Design-mobile-preview {
+        display: none;
+    }
+}
+
+/* Material You overrides for mobile design */
+body.material-you .Design-mobile-preview {
+    background: var(--my-surface-dark);
+}
+
+body.material-you .Design-mobile-preview-box {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+body.material-you .Design-action-btn-reset {
+    background: rgba(255, 142, 142, 0.15) !important;
+    border-color: rgba(255, 142, 142, 0.3);
+}
+
+body.material-you .Design-action-btn-reset:hover {
+    background: rgba(255, 142, 142, 0.3) !important;
+}
 
 .Window-container {
     position: fixed;
@@ -1745,7 +2177,7 @@ body.material-you .Nav-touch-flexbox button:hover {
     border: none;
     border-radius: 100%;
     opacity: 0.4;
-    background-color: #3e4b712b;
+    background-color: #00000033;
     transition: all 0.25s ease;
     cursor: pointer;
 }
@@ -1753,8 +2185,8 @@ body.material-you .Nav-touch-flexbox button:hover {
 .Nav-flexbutton button:hover {
     opacity: 1;
     transform: rotate(12deg);
-    background-color: #91b0ff;
-    box-shadow: 0 0 18px #91b0ff;
+    background-color: #89bcff51;
+    box-shadow: 0 0 18px #89bcff51;
 }
 
 /* ===== DYNAMIC ISLAND - Musik Player ===== */
@@ -1771,7 +2203,7 @@ body.material-you .Nav-touch-flexbox button:hover {
     display: flex;
     align-items: center;
     gap: 12px;
-    min-width: 280px;
+    min-width: 240px;
     max-width: 120vw;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -2053,6 +2485,132 @@ body.material-you .Dynamic-island-play {
 
 body.material-you .Dynamic-island-controls button:hover {
     background: rgba(162, 189, 255, 0.15);
+}
+
+.haupttitle {
+    margin-top: -50px;
+    display: flex;
+    padding-right: 42px;
+    justify-content: right;
+    align-content: right;
+}
+
+body.material-you .haupttitle h2 {
+    color: var(--my-text-secondary);
+}
+
+.haupttitle h2 {
+    opacity: 0.1;
+    padding: 12px 24px;
+    border-radius: 14px;
+    color: #ffffff;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.haupttitle h2:hover {
+    transform: scale(1.02);
+    padding: 12px 24px;
+    background-color: #00000041;
+    opacity: 1;
+}
+
+.Menuoverlay {
+    z-index: 16000;
+    position: fixed;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.38s ease, opacity 0.15s ease;
+}
+
+.Menuoverlay.Menu-active {
+    opacity: 1;
+    transform: translateY(0%);
+    pointer-events: all;
+}
+
+body.material-you .Menucontent {
+    background-color: var(--my-surface);
+    color: var(--my-text);
+}
+
+body.material-you .Menubody {
+    background-color: var(--my-surface-dark);
+}
+
+body.material-you .Menucontent:hover {
+    background-image: linear-gradient(to top, var(--my-accent), transparent);
+    box-shadow: 0 0 68px var(--my-accent);
+    backdrop-filter: blur(0px);
+}
+
+body.material-you .Menu-card:hover {
+    border: solid 2px var(--my-primary-dark);
+    background-color: var(--my-accent);
+}
+
+body.material-you .Menu-card-aktiv {
+    border: solid 2px var(--my-surface);
+    background-color: var(--my-surface-dark);
+}
+
+.Menucontent {
+    padding: 12px 38px;
+    backdrop-filter: blur(2px);
+    background-image: linear-gradient(to top, #4a5a7d44, transparent);
+    background-color: #4a5a7d31;
+    color: #ffffff;
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+    box-shadow: 0 0 0px #4a5a7d00;
+    box-sizing: border-box;
+    transition: all 1s ease;
+}
+
+.Menucontent:hover {
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 68px #354059;
+}
+
+.Menuheader {
+    text-decoration: underline;
+}
+
+.Menubody {
+    padding: 18px 28px;
+    border-radius: 14px;
+    background-color: #3e4a696d;
+}
+
+.Menu-card h2, .Menu-card-aktiv h2 {
+    text-decoration: underline;
+}
+
+.Menu-card {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: solid 2px #91b0ff00;
+    background-color: #647aaf00;
+    line-height: 0.5;
+    cursor: pointer;
+}
+
+.Menu-card:hover {
+    border: solid 2px #91b0ff;
+    background-color: #647aaf;
+}
+
+.Menu-card-aktiv {
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: solid 2px #647aaf;
+    background-color: #91b0ff;
+    line-height: 0.5;
 }
 
 .Musik-progress-wrap {
@@ -2558,8 +3116,6 @@ body.material-you .Dynamic-island-controls button:hover {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    backdrop-filter: blur(0px);
-    -webkit-backdrop-filter: blur(0px);
     background-color: #42537d00;
     display: flex;
     align-items: center;
@@ -2570,8 +3126,6 @@ body.material-you .Dynamic-island-controls button:hover {
 }
 
 .Uploadoverlay.Upload-active {
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     background: rgba(25, 30, 50, 0.355);
     opacity: 1;
     pointer-events: all;
@@ -2609,7 +3163,7 @@ body.material-you .Dynamic-island-controls button:hover {
 
 .Upload-body { flex: 1; overflow-y: auto; }
 
-.Upload-dropzone {
+.Upload-dropzone, .osu-dropzone {
     border: 3px dashed #8fa1cf;
     border-radius: 20px;
     padding: 40px 24px;
@@ -2645,14 +3199,14 @@ body.material-you .Dynamic-island-controls button:hover {
     opacity: 1;
 }
 
-.Upload-drop-text {
+.Upload-drop-text, .osu-drop-text {
     margin: 0;
     font-size: 1.1rem;
     color: #ffffff;
     font-weight: 500;
 }
 
-.Upload-drop-sub {
+.Upload-drop-sub, .osu-drop-sub {
     margin: 6px 0 0 0;
     font-size: 0.85rem;
     color: #a2bdff;
@@ -2800,6 +3354,361 @@ body.material-you .Dynamic-island-controls button:hover {
     background-color: #a2bdff !important;
     color: #3e4b71 !important;
     box-shadow: 0 0 14px #a2bdff;
+}
+
+@media (max-width: 680px) {
+    .Musikoverlay {
+        align-items: flex-end;
+    }
+    
+    .Musik-content {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%) translateY(100%);
+        width: 90%;
+        max-width: 90%;
+        border-radius: 28px 28px 0 0;
+        padding: 24px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+        max-height: 85vh;
+        transition: transform 0.32s ease, opacity 0.2s ease;
+    }
+    
+    .Musikoverlay.Musik-active .Musik-content {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+
+    .Upload-content, .osu-content {
+        position: fixed;
+        bottom: 0;
+        width: 90%;
+        max-width: 100%;
+        border-radius: 28px 28px 0 0;
+        padding: 24px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+        max-height: 90vh;
+        transform: translateY(100%);
+        transition: transform 0.35s ease, opacity 0.25s ease;
+    }
+    
+    .Uploadoverlay.Upload-active .Upload-content, .osuoverlay.osu-active .osu-content {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* osu! Overlay Styles */
+.osuoverlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background-color: rgba(25, 30, 50, 0.355);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.osuoverlay.osu-active { opacity: 1; pointer-events: all; }
+
+.osu-content {
+    width: 90%;
+    max-width: 960px;
+    max-height: 88vh;
+    border: 2px solid var(--my-primary, #91b0ff);
+    background: var(--my-surface, #5f6f96);
+    border-radius: 28px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+    transform: scale(0.96) translateY(-8px);
+    opacity: 0;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.osuoverlay.osu-active .osu-content {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+/* Header */
+.osu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 28px 18px;
+}
+.osu-header h2 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.6rem;
+    text-decoration: underline;
+}
+.osu-close-btn {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: var(--my-surface-dark, #3e4a69);
+    color: #fff;
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s ease;
+}
+.osu-close-btn:hover {
+    background: #ff8e8e;
+    transform: scale(1.1);
+}
+
+/* 2-Spalten-Grid */
+.osu-grid {
+    display: grid;
+    grid-template-columns: 1fr 0.65fr;
+    gap: 16px;
+    padding: 0 20px 24px;
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+}
+
+/* LINKE SPALTE */
+.osu-left {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 0;
+}
+
+/* Leerer Zustand */
+.osu-empty-state {
+    background: var(--my-surface-dark, #3e4a69);
+    border-radius: 18px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+}
+.osu-empty-state p {
+    margin: 0;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+/* Canvas Wrap */
+.osu-canvas-wrap {
+    background: var(--my-surface-dark, #3e4a69);
+    border-radius: 18px;
+    overflow: hidden;
+    flex: 1;
+    position: relative;
+    min-height: 220px;
+    cursor: pointer;
+}
+#osu-canvas {
+    width: 100%; height: 100%;
+    display: block;
+    object-fit: contain;
+}
+.osu-stats {
+    position: absolute; top: 12px; left: 16px; right: 16px;
+    display: flex; justify-content: space-between;
+    font-size: 1.1rem; font-weight: 700; color: #fff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    pointer-events: none;
+}
+
+/* Beatmap Info Box */
+.osu-beatmap-info {
+    background: var(--my-surface-dark, #3e4a69);
+    border-radius: 18px;
+    padding: 18px 20px;
+}
+.osu-meta h3 {
+    margin: 0 0 2px 0;
+    color: #fff;
+    font-size: 1.15rem;
+}
+.osu-meta p {
+    margin: 0 0 6px 0;
+    color: var(--my-text-secondary, #c9d8ff);
+    font-size: 0.9rem;
+}
+.osu-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+.osu-btn {
+    background: var(--my-primary, #a2bdff);
+    color: #1a1a2e;
+    border: none;
+    border-radius: 12px;
+    padding: 9px 22px;
+    font-weight: 700;
+    font-family: Google-sans;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.osu-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 14px var(--my-primary, #a2bdff);
+}
+.osu-btn-stop { background: #ff8e8e; color: #fff; }
+.osu-btn-stop:hover { box-shadow: 0 0 14px #ff8e8e; }
+
+/* Diff-Chips */
+.osu-diff-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 8px;
+}
+.osu-diff-chip {
+    padding: 3px 12px;
+    border-radius: 999px;
+    border: 1.5px solid var(--my-primary, #a2bdff);
+    background: transparent;
+    color: var(--my-primary, #a2bdff);
+    font-size: 11px;
+    font-family: Google-sans;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+}
+.osu-diff-chip:hover {
+    background: var(--my-primary, #a2bdff);
+    color: #1a1f2e;
+}
+.osu-diff-chip.active {
+    background: var(--my-primary, #a2bdff);
+    color: #1a1f2e;
+    font-weight: bold;
+}
+
+/* RECHTE SPALTE */
+.osu-right {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 0;
+}
+
+/* Dropzone */
+.osu-dropzone {
+    background: var(--my-surface-dark, #3e4a69);
+    border-radius: 18px;
+    padding: 32px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px dashed transparent;
+}
+.osu-dropzone:hover, .osu-dropzone.dragover {
+    border-color: var(--my-primary, #a2bdff);
+    background: rgba(162, 189, 255, 0.12);
+    transform: scale(1.01);
+}
+.osu-dropzone img { width: 42px; opacity: 0.85; margin-bottom: 10px; }
+.osu-drop-text { color: #fff; font-size: 1rem; margin: 0; font-weight: 600; }
+.osu-drop-sub { color: var(--my-text-secondary, #c9d8ff); font-size: 0.78rem; margin-top: 6px; }
+#osu-file-input { display: none; }
+
+/* Playlist */
+.osu-playlist-wrap {
+    background: var(--my-surface-dark, #3e4a69);
+    border-radius: 18px;
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+    min-height: 18px;
+}
+.osu-playlist-title {
+    margin: 0;
+    color: #fff;
+    font-size: 1rem;
+    text-decoration: underline;
+}
+#osu-upload-liste {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.osu-playlist-leer {
+    color: var(--my-text-secondary, #c9d8ff);
+    text-align: center;
+    font-size: 0.9rem;
+    margin: auto;
+    opacity: 0.7;
+}
+
+/* Fullscreen */
+#osu-canvas-wrap:fullscreen {
+    display: flex; align-items: center; justify-content: center;
+    background: #000; width: 100vw; height: 100vh;
+    border-radius: 0;
+}
+#osu-canvas-wrap:fullscreen #osu-canvas {
+    max-width: 100vw; max-height: 100vh;
+    width: auto; height: auto;
+    aspect-ratio: 16 / 9;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .osu-content { 
+        position: fixed;
+        bottom: 0;
+        transform: translateY(100%);
+        width: 90%;
+        max-width: 100%;
+        border-radius: 28px 28px 0 0;
+        padding: 24px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+        max-height: 85vh;
+        transition: transform 0.32s ease, opacity 0.2s ease;
+     }
+    
+     .osu-grid {
+        grid-template-columns: 1fr;  /* Spalten → Zeilen */
+        overflow-y: auto;
+        gap: 12px;
+        padding: 0 14px 20px;
+    }
+
+    /* Auf Mobil: Reihenfolge anpassen */
+    .osu-left {
+        order: 2;  /* Canvas/Info kommt NACH der Dropzone */
+    }
+    .osu-right {
+        order: 1;  /* Dropzone + Playlist zuerst */
+    }
+
+    /* Empty state kleiner */
+    .osu-empty-state {
+        min-height: 120px;
+    }
+    .osu-empty-state p {
+        font-size: 1.1rem;
+    }
+
+    /* Beatmap-Info kompakter */
+    .osu-beatmap-info {
+        padding: 14px 16px;
+    }
+
+    /* Playlist auf Mobil: fixe Höhe damit sie nicht ins Unendliche wächst */
+    .osu-playlist-wrap {
+        max-height: 200px;
+    }
+
+    /* Canvas */
+    .osu-canvas-wrap {
+        min-height: 180px;
+    }
 }
 
 .fps-display {
