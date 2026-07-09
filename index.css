@@ -902,6 +902,13 @@ body {
     color: #ffffff;
 }
 
+.os-tag {
+    padding: 8px 18px;
+    border-radius: 12px;
+    background-color: #473340;
+    color: #ffafcf;
+}
+
 .osu-tag {
     padding: 8px 18px;
     border-radius: 12px;
