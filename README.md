@@ -2,7 +2,7 @@
 
 ## Pfandkuchen
 Herzlich willkommen zur Pfandkuchen!
-<br> Das ist ein verbessert version von [pancakes web!](https://github.com/mayi-oi/pancake-web)
+<br> Das ist ein verbessert version von [pancakes web!](https://github.com/mayi-oi/pancake-web) und [alt Mayi-web Projekt!](https://github.com/mayi-oi/mayi.-oi_website)
 
 ## Copy and paste zur dein coolen konsole allem zeit!
 `git clone https://github.com/mayi-oi/Pfandkuchen`
